@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sổ tay ngữ pháp N3-N2</title>
+<style>
+  :root { color-scheme: light; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #faf9f7;
+    color: #2d2a26;
+    padding: 24px;
+  }
+  h1 { font-size: 22px; margin: 0 0 4px; }
+  .subtitle { color: #78716c; font-size: 13px; margin-bottom: 20px; }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    border-bottom: 2px solid #e7e2da;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 10px 18px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #78716c;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+  }
+  .tab-btn.active {
+    color: #b45309;
+    border-bottom: 2px solid #b45309;
+  }
+  .tab-btn:hover:not(.active) { color: #44403c; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .group-card {
+    background: #fff;
+    border: 1px solid #e7e2da;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+  }
+  .group-card h2 {
+    font-size: 15px;
+    margin: 0 0 4px;
+    color: #1c1917;
+  }
+  .group-card .rule {
+    font-size: 12.5px;
+    color: #78716c;
+    margin: 0 0 12px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 7px 10px;
+    border-bottom: 1px solid #f0ece4;
+  }
+  th {
+    background: #f5f1ea;
+    font-weight: 600;
+    color: #57534e;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td.form-name { font-weight: 600; color: #92400e; white-space: nowrap; }
+  td.jp { font-size: 15px; }
+  tr:last-child td { border-bottom: none; }
+  .note {
+    background: #fef3e2;
+    border-left: 3px solid #d97706;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #57534e;
+    margin-top: 10px;
+  }
+  .furigana { font-size: 11px; color: #a8a29e; }
+
+  .cat-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #57534e;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin: 0 0 8px;
+  }
+  td.pattern { font-weight: 600; color: #92400e; white-space: nowrap; }
+  td.example { font-size: 13.5px; line-height: 1.5; }
+  .example .jp-line { font-size: 15px; }
+  .example .vn-line { color: #78716c; font-size: 12.5px; }
+
+  .keigo-term {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px dashed #d97706;
+    padding: 1px 2px;
+  }
+  .keigo-term:hover { background: #fef3e2; }
+  .keigo-popover {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 20;
+    background: #1c1917;
+    color: #fff;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 12.5px;
+    white-space: normal;
+    width: 240px;
+    margin-top: 6px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    text-align: left;
+  }
+  .keigo-term:hover .keigo-popover, .keigo-term.open .keigo-popover { display: block; }
+  .popover-jp { font-size: 14px; margin-bottom: 4px; line-height: 1.4; }
+  .popover-vn { color: #d6d3d1; font-size: 12px; line-height: 1.4; }
+
+  .dokkai-item {
+    border: 1px solid #e7e2da;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .dokkai-header {
+    padding: 14px 18px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    background: #f5f1ea;
+    color: #1c1917;
+  }
+  .dokkai-header:hover { background: #efe9df; }
+  .dokkai-arrow { transition: transform 0.2s; color: #b45309; font-size: 12px; }
+  .dokkai-item.open .dokkai-arrow { transform: rotate(90deg); }
+  .dokkai-body { display: none; padding: 18px; }
+  .dokkai-item.open .dokkai-body { display: block; }
+
+  .passage-box {
+    background: #fafaf9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px 18px;
+    white-space: pre-line;
+    font-size: 15.5px;
+    line-height: 2;
+    margin-bottom: 14px;
+  }
+  .question-box { margin-bottom: 14px; }
+  .q-text { font-weight: 600; font-size: 14px; margin: 0 0 8px; }
+  .choices { list-style: none; padding: 0; margin: 0; font-size: 14px; }
+  .choices li {
+    padding: 7px 10px;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  .choices li:hover { background: #f5f1ea; }
+  .choices.answered li { cursor: default; }
+  .choices.answered li:hover { background: inherit; }
+  .choices li::before { content: attr(data-num); color: #a8a29e; font-weight: 600; }
+  .choices.answered li.correct-choice { background: #dcfce7; color: #166534; font-weight: 600; }
+  .choices.answered li.chosen-wrong { background: #fee2e2; color: #991b1b; font-weight: 600; }
+  .answer-tag { display: none; font-size: 11px; background: #16a34a; color: #fff; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
+  .choices.answered li.correct-choice .answer-tag { display: inline-block; }
+  .wrong-tag { display: inline-block; font-size: 11px; background: #dc2626; color: #fff; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
+  .feedback-line { font-size: 13px; font-weight: 600; margin-top: 8px; }
+  .feedback-line.ok { color: #166534; }
+  .feedback-line.no { color: #991b1b; }
+  .retry-btn {
+    display: none;
+    margin-top: 8px;
+    font-size: 12.5px;
+    background: #fff;
+    border: 1px solid #d6d3d1;
+    color: #57534e;
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .retry-btn:hover { background: #f5f1ea; }
+  .choices.answered ~ .retry-btn { display: inline-block; }
+  .explain-box, .translate-box, .tip-box {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #44403c;
+    background: #fef9f0;
+    border-left: 3px solid #d97706;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+  }
+  .explain-box { display: none; }
+  .choices.answered ~ .explain-box { display: block; }
+  .translate-box { background: #eff6ff; border-left-color: #2563eb; }
+  .tip-box { background: #f5f3ff; border-left-color: #7c3aed; }
+  .box-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 4px; }
+</style>
+</head>
+<body>
+
+<h1>Sổ tay ngữ pháp tiếng Nhật N3 → N2</h1>
+<div class="subtitle">Tài liệu ôn tập cá nhân — sẽ được cập nhật thêm theo thời gian</div>
+
+<div class="tabs">
+  <button class="tab-btn active" data-tab="chia-the">Chia thể động từ</button>
+  <button class="tab-btn" data-tab="it-brse">Ngữ pháp hay dùng trong IT/BrSE</button>
+  <button class="tab-btn" data-tab="keigo">Kính ngữ & Khiêm nhường ngữ (IT)</button>
+  <button class="tab-btn" data-tab="so-sanh">Mẫu so sánh</button>
+  <button class="tab-btn" data-tab="cho-nhan">あげる・もらう・くれる</button>
+  <button class="tab-btn" data-tab="dokkai">Đọc hiểu N3 (55+)</button>
+</div>
+
+<div id="chia-the" class="tab-panel active">
+
+  <div class="group-card">
+    <h2>Nhóm 1 (Godan / u-verb) — ví dụ: 書く (かく, viết)</h2>
+    <p class="rule">Quy tắc chung: đổi âm cuối theo hàng (あ/い/う/え/お) tương ứng với từng thể.</p>
+    <table>
+      <tr><th>Thể</th><th>Cách chia</th><th>Ví dụ (書く)</th><th>Nghĩa</th></tr>
+      <tr><td class="form-name">Thể て</td><td>く→いて / ぐ→いで / う・つ・る→って / ぬ・ぶ・む→んで / す→して</td><td class="jp">書いて</td><td>viết (và...)</td></tr>
+      <tr><td class="form-name">Thể ない (phủ định)</td><td>đổi hàng う → hàng あ + ない (riêng う→わない)</td><td class="jp">書かない</td><td>không viết</td></tr>
+      <tr><td class="form-name">Thể khả năng</td><td>đổi hàng う → hàng え + る</td><td class="jp">書ける</td><td>có thể viết</td></tr>
+      <tr><td class="form-name">Thể bị động</td><td>đổi hàng う → hàng あ + れる</td><td class="jp">書かれる</td><td>bị/được viết</td></tr>
+      <tr><td class="form-name">Thể sai khiến</td><td>đổi hàng う → hàng あ + せる</td><td class="jp">書かせる</td><td>bắt/cho viết</td></tr>
+      <tr><td class="form-name">Thể sai khiến bị động</td><td>đổi hàng う → hàng あ + せられる (rút gọn: される)</td><td class="jp">書かせられる（書かされる）</td><td>bị bắt viết</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <h2>Nhóm 2 (Ichidan / ru-verb) — ví dụ: 食べる (たべる, ăn)</h2>
+    <p class="rule">Quy tắc chung: bỏ る ở cuối, thêm đuôi tương ứng.</p>
+    <table>
+      <tr><th>Thể</th><th>Cách chia</th><th>Ví dụ (食べる)</th><th>Nghĩa</th></tr>
+      <tr><td class="form-name">Thể て</td><td>bỏ る + て</td><td class="jp">食べて</td><td>ăn (và...)</td></tr>
+      <tr><td class="form-name">Thể ない (phủ định)</td><td>bỏ る + ない</td><td class="jp">食べない</td><td>không ăn</td></tr>
+      <tr><td class="form-name">Thể khả năng</td><td>bỏ る + られる</td><td class="jp">食べられる</td><td>có thể ăn</td></tr>
+      <tr><td class="form-name">Thể bị động</td><td>bỏ る + られる (giống thể khả năng)</td><td class="jp">食べられる</td><td>bị/được ăn</td></tr>
+      <tr><td class="form-name">Thể sai khiến</td><td>bỏ る + させる</td><td class="jp">食べさせる</td><td>bắt/cho ăn</td></tr>
+      <tr><td class="form-name">Thể sai khiến bị động</td><td>bỏ る + させられる</td><td class="jp">食べさせられる</td><td>bị bắt ăn</td></tr>
+    </table>
+    <div class="note">Lưu ý: ở nhóm 2, thể khả năng và thể bị động có hình thức giống hệt nhau (られる) — phải dựa vào ngữ cảnh câu để phân biệt.</div>
+  </div>
+
+  <div class="group-card">
+    <h2>Nhóm 3 (Bất quy tắc) — する (làm) và 来る (くる, đến)</h2>
+    <table>
+      <tr><th>Thể</th><th>する</th><th>来る (くる)</th></tr>
+      <tr><td class="form-name">Thể て</td><td class="jp">して</td><td class="jp">来て <span class="furigana">(きて)</span></td></tr>
+      <tr><td class="form-name">Thể ない (phủ định)</td><td class="jp">しない</td><td class="jp">来ない <span class="furigana">(こない)</span></td></tr>
+      <tr><td class="form-name">Thể khả năng</td><td class="jp">できる</td><td class="jp">来られる <span class="furigana">(こられる)</span></td></tr>
+      <tr><td class="form-name">Thể bị động</td><td class="jp">される</td><td class="jp">来られる <span class="furigana">(こられる)</span></td></tr>
+      <tr><td class="form-name">Thể sai khiến</td><td class="jp">させる</td><td class="jp">来させる <span class="furigana">(こさせる)</span></td></tr>
+      <tr><td class="form-name">Thể sai khiến bị động</td><td class="jp">させられる</td><td class="jp">来させられる <span class="furigana">(こさせられる)</span></td></tr>
+    </table>
+    <div class="note">する ở thể khả năng là bất quy tắc hoàn toàn: できる (không phải される cho nghĩa "có thể làm" — される chỉ dùng cho bị động).</div>
+  </div>
+
+  <div class="note">
+    <strong>Mẹo phân biệt nhanh:</strong> Thể khả năng và Thể bị động của Nhóm 1 chia khác nhau (える vs あれる), nhưng Nhóm 2 và する/来る thì hai thể này trùng hình thức — phải dựa vào ngữ cảnh (có ngữ cảnh "bị/được" hay "có khả năng") để phân biệt.
+  </div>
+
+</div>
+
+<div id="it-brse" class="tab-panel">
+
+  <div class="group-card">
+    <p class="cat-title">Báo cáo công việc / trạng thái hệ thống</p>
+    <table>
+      <tr><th>Mẫu</th><th>Ví dụ thực tế</th></tr>
+      <tr>
+        <td class="pattern">~ておく</td>
+        <td class="example"><div class="jp-line">テスト環境を準備しておきました。</div><div class="vn-line">Tôi đã chuẩn bị sẵn môi trường test.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~てある</td>
+        <td class="example"><div class="jp-line">サーバーの設定はもう変更してあります。</div><div class="vn-line">Cấu hình server đã được thay đổi sẵn.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~てしまう</td>
+        <td class="example"><div class="jp-line">本番環境に誤ってデプロイしてしまいました。</div><div class="vn-line">Tôi đã lỡ deploy nhầm lên production.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~ことになる</td>
+        <td class="example"><div class="jp-line">来週から新機能をリリースすることになりました。</div><div class="vn-line">Đã được quyết định là tuần sau sẽ release tính năng mới.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Giải trình lý do / nguyên nhân</p>
+    <table>
+      <tr><th>Mẫu</th><th>Ví dụ thực tế</th></tr>
+      <tr>
+        <td class="pattern">~ので</td>
+        <td class="example"><div class="jp-line">サーバーが落ちたので、対応に時間がかかりました。</div><div class="vn-line">Vì server sập nên mất nhiều thời gian xử lý.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~によって</td>
+        <td class="example"><div class="jp-line">設定によって動作が変わります。</div><div class="vn-line">Hành vi thay đổi tùy theo cấu hình.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~のに</td>
+        <td class="example"><div class="jp-line">テストは通ったのに、本番では動きません。</div><div class="vn-line">Test đã pass mà production lại không chạy.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Debug / suy đoán lỗi</p>
+    <table>
+      <tr><th>Mẫu</th><th>Ví dụ thực tế</th></tr>
+      <tr>
+        <td class="pattern">~はずだ</td>
+        <td class="example"><div class="jp-line">このコードは正常に動くはずですが、エラーが出ています。</div><div class="vn-line">Về lý thuyết code này phải chạy đúng, nhưng lại lỗi.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~かもしれない</td>
+        <td class="example"><div class="jp-line">メモリ不足が原因かもしれません。</div><div class="vn-line">Có thể nguyên nhân là do thiếu bộ nhớ.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~という</td>
+        <td class="example"><div class="jp-line">NullPointerExceptionというエラーが発生しました。</div><div class="vn-line">Đã xảy ra lỗi tên NullPointerException.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Yêu cầu / spec / tài liệu kỹ thuật</p>
+    <table>
+      <tr><th>Mẫu</th><th>Ví dụ thực tế</th></tr>
+      <tr>
+        <td class="pattern">~場合</td>
+        <td class="example"><div class="jp-line">エラーが発生した場合、自動的にリトライします。</div><div class="vn-line">Trong trường hợp xảy ra lỗi, hệ thống tự động retry.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~ように</td>
+        <td class="example"><div class="jp-line">バグが再発しないように、テストコードを追加しました。</div><div class="vn-line">Để bug không tái diễn, tôi đã thêm test code.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~かどうか</td>
+        <td class="example"><div class="jp-line">この機能が必要かどうか確認してください。</div><div class="vn-line">Vui lòng xác nhận tính năng này có cần thiết hay không.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~必要がある</td>
+        <td class="example"><div class="jp-line">本番デプロイ前にレビューする必要があります。</div><div class="vn-line">Cần review trước khi deploy lên production.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Giao tiếp lịch sự với khách hàng / PM</p>
+    <table>
+      <tr><th>Mẫu</th><th>Ví dụ thực tế</th></tr>
+      <tr>
+        <td class="pattern">~ていただけませんか</td>
+        <td class="example"><div class="jp-line">仕様書を確認していただけませんか。</div><div class="vn-line">Anh/chị xác nhận giúp tài liệu đặc tả được không ạ?</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~とのことです</td>
+        <td class="example"><div class="jp-line">お客様の話によると、来月まで納品してほしいとのことです。</div><div class="vn-line">Theo khách hàng, họ muốn giao hàng trước tháng sau.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~べきだ</td>
+        <td class="example"><div class="jp-line">このロジックはもっとシンプルにするべきです。</div><div class="vn-line">Logic này nên được đơn giản hóa hơn (dùng khi code review).</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Ghi chú:</strong> ~ておく、~てしまう、~ので、~場合、~とのことです là 5 mẫu gặp gần như hàng ngày khi viết 日報 (báo cáo hằng ngày) hoặc trao đổi với PM/khách hàng Nhật.
+  </div>
+
+</div>
+
+<div id="keigo" class="tab-panel">
+
+  <div class="group-card">
+    <p class="cat-title">3 loại kính ngữ trong tiếng Nhật</p>
+    <table>
+      <tr><th>Loại</th><th>Dùng khi nào</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">尊敬語<br><span class="furigana">(そんけいご)</span><br>Kính ngữ</td>
+        <td>Nói về hành động của <b>người khác</b> (cấp trên, khách hàng) để thể hiện sự tôn trọng</td>
+        <td class="example"><div class="jp-line">部長がいらっしゃいました。</div><div class="vn-line">Trưởng phòng đã đến.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">謙譲語<br><span class="furigana">(けんじょうご)</span><br>Khiêm nhường ngữ</td>
+        <td>Nói về hành động của <b>bản thân/phía mình</b> để hạ thấp mình, đề cao đối phương</td>
+        <td class="example"><div class="jp-line">私が参ります。</div><div class="vn-line">Tôi sẽ đến (khiêm nhường).</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">丁寧語<br><span class="furigana">(ていねいご)</span><br>Lịch sự ngữ</td>
+        <td>Cách nói lịch sự cơ bản です/ます, dùng với bất kỳ ai trong giao tiếp trang trọng</td>
+        <td class="example"><div class="jp-line">明日、会議があります。</div><div class="vn-line">Ngày mai có cuộc họp.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Động từ đặc biệt (bất quy tắc) — hay dùng nhất</p>
+    <p class="rule">Rê chuột vào một từ để xem ví dụ, đưa chuột ra ngoài để ẩn đi.</p>
+    <table>
+      <tr><th>Nghĩa gốc</th><th>尊敬語 (nói về người khác)</th><th>謙譲語 (nói về bản thân)</th></tr>
+      <tr>
+        <td>する (làm)</td>
+        <td class="jp"><span class="keigo-term" data-jp="部長(ぶちょう)は明日(あした)、会議(かいぎ)で挨拶(あいさつ)をなさるそうです。" data-vn="Nghe nói ngày mai trưởng phòng sẽ phát biểu trong cuộc họp.">なさる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="私(わたし)がご説明(せつめい)いたします。" data-vn="Tôi xin phép giải thích ạ.">いたす</span></td>
+      </tr>
+      <tr>
+        <td>行く／来る (đi/đến)</td>
+        <td class="jp"><span class="keigo-term" data-jp="明日(あした)、こちらにいらっしゃいますか。" data-vn="Ngày mai anh/chị có đến đây không ạ?">いらっしゃる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="ただいま参(まい)ります。少々(しょうしょう)お待(ま)ちください。" data-vn="Tôi đến ngay đây ạ. Xin vui lòng đợi một chút.">参る</span> / <span class="keigo-term" data-jp="明日(あした)午後(ごご)2時(じ)に御社(おんしゃ)に伺(うかが)います。" data-vn="Ngày mai 2 giờ chiều tôi sẽ đến thăm quý công ty.">伺う</span></td>
+      </tr>
+      <tr>
+        <td>いる (ở, có mặt)</td>
+        <td class="jp"><span class="keigo-term" data-jp="社長(しゃちょう)は会議室(かいぎしつ)にいらっしゃいます。" data-vn="Giám đốc đang ở trong phòng họp ạ.">いらっしゃる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="只今(ただいま)、席(せき)を外(はず)しております。" data-vn="Hiện tại tôi đang không có mặt tại chỗ.">おる</span></td>
+      </tr>
+      <tr>
+        <td>言う (nói)</td>
+        <td class="jp"><span class="keigo-term" data-jp="部長(ぶちょう)がおっしゃった通(とお)りに進(すす)めます。" data-vn="Tôi sẽ tiến hành đúng như trưởng phòng đã nói.">おっしゃる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="私(わたし)は田中(たなか)と申(もう)します。" data-vn="Tôi tên là Tanaka ạ.">申す</span> / <span class="keigo-term" data-jp="お礼(れい)を申(もう)し上(あ)げます。" data-vn="Tôi xin gửi lời cảm ơn.">申し上げる</span></td>
+      </tr>
+      <tr>
+        <td>見る (xem)</td>
+        <td class="jp"><span class="keigo-term" data-jp="こちらの資料(しりょう)をご覧(らん)になってください。" data-vn="Xin mời anh/chị xem tài liệu này ạ.">ご覧になる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="資料(しりょう)を拝見(はいけん)しました。" data-vn="Tôi đã xem tài liệu rồi ạ.">拝見する</span></td>
+      </tr>
+      <tr>
+        <td>食べる／飲む (ăn/uống)</td>
+        <td class="jp"><span class="keigo-term" data-jp="どうぞ、召(め)し上(あ)がってください。" data-vn="Xin mời anh/chị dùng ạ.">召し上がる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="お茶(ちゃ)をいただきます。" data-vn="Tôi xin phép dùng trà ạ.">いただく</span></td>
+      </tr>
+      <tr>
+        <td>知っている (biết)</td>
+        <td class="jp"><span class="keigo-term" data-jp="この件(けん)についてご存知(ぞんじ)ですか。" data-vn="Anh/chị có biết về việc này không ạ?">ご存知だ</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="その件(けん)については存(ぞん)じております。" data-vn="Tôi đã biết về việc đó rồi ạ.">存じる</span> / <span class="keigo-term" data-jp="お名前(なまえ)は存(ぞん)じ上(あ)げております。" data-vn="Tôi đã biết tên của anh/chị rồi ạ.">存じ上げる</span></td>
+      </tr>
+      <tr>
+        <td>会う (gặp)</td>
+        <td class="jp"><span class="keigo-term" data-jp="社長(しゃちょう)にお会(あ)いになりましたか。" data-vn="Anh/chị đã gặp giám đốc chưa ạ?">お会いになる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="はじめてお目(め)にかかります。" data-vn="Rất hân hạnh được gặp anh/chị lần đầu ạ.">お目にかかる</span></td>
+      </tr>
+      <tr>
+        <td>聞く (nghe/hỏi)</td>
+        <td class="jp"><span class="keigo-term" data-jp="その話(はなし)をお聞(き)きになりましたか。" data-vn="Anh/chị đã nghe chuyện đó chưa ạ?">お聞きになる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="ご都合(つごう)を伺(うかが)ってもよろしいでしょうか。" data-vn="Tôi xin phép hỏi lịch trình của anh/chị được không ạ?">伺う</span> / <span class="keigo-term" data-jp="貴重(きちょう)なお話(はなし)を拝聴(はいちょう)しました。" data-vn="Tôi đã được lắng nghe câu chuyện quý báu.">拝聴する</span></td>
+      </tr>
+      <tr>
+        <td>くれる／あげる (cho)</td>
+        <td class="jp"><span class="keigo-term" data-jp="部長(ぶちょう)が資料(しりょう)をくださいました。" data-vn="Trưởng phòng đã cho tôi tài liệu.">くださる</span></td>
+        <td class="jp"><span class="keigo-term" data-jp="資料(しりょう)を差(さ)し上(あ)げます。" data-vn="Tôi xin gửi tặng tài liệu ạ.">差し上げる</span></td>
+      </tr>
+      <tr>
+        <td>もらう (nhận)</td>
+        <td>—</td>
+        <td class="jp"><span class="keigo-term" data-jp="お土産(みやげ)をいただきました。" data-vn="Tôi đã nhận được quà ạ.">いただく</span></td>
+      </tr>
+      <tr>
+        <td>わかる (hiểu, đồng ý)</td>
+        <td>—</td>
+        <td class="jp"><span class="keigo-term" data-jp="承知(しょうち)いたしました。すぐに対応(たいおう)いたします。" data-vn="Tôi đã hiểu rõ ạ. Tôi sẽ xử lý ngay.">承知する</span> / <span class="keigo-term" data-jp="かしこまりました。" data-vn="Vâng, tôi đã rõ ạ.">かしこまる</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Công thức chung (khi động từ không có dạng đặc biệt)</p>
+    <table>
+      <tr><th>Loại</th><th>Công thức</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">尊敬語</td>
+        <td>お + Vます(bỏ ます) + になる<br>ご + N(する) + になる</td>
+        <td class="example"><div class="jp-line">お読みになる／ご利用になる</div><div class="vn-line">đọc / sử dụng (kính ngữ)</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">尊敬語 (đơn giản hơn)</td>
+        <td>V thể bị động (れる/られる)</td>
+        <td class="example"><div class="jp-line">部長は明日、大阪に行かれます。</div><div class="vn-line">Trưởng phòng ngày mai sẽ đi Osaka.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">謙譲語</td>
+        <td>お + Vます(bỏ ます) + する／いたす<br>ご + N(する) + する／いたす</td>
+        <td class="example"><div class="jp-line">お持ちします／ご案内いたします</div><div class="vn-line">tôi mang giúp / tôi hướng dẫn (khiêm nhường)</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Biến thể ứng dụng trong môi trường IT/BrSE</p>
+    <table>
+      <tr><th>Tình huống</th><th>Câu mẫu</th></tr>
+      <tr>
+        <td>Mở đầu email/họp</td>
+        <td class="example"><div class="jp-line">いつもお世話になっております。〇〇社の〇〇です。</div><div class="vn-line">Cảm ơn quý công ty đã luôn hỗ trợ. Tôi là 〇〇 của công ty 〇〇.</div></td>
+      </tr>
+      <tr>
+        <td>Gửi tài liệu (謙譲語)</td>
+        <td class="example"><div class="jp-line">仕様書を添付にてお送りいたします。</div><div class="vn-line">Tôi xin gửi kèm tài liệu đặc tả trong file đính kèm.</div></td>
+      </tr>
+      <tr>
+        <td>Nhờ xác nhận (謙譲語 + nhờ vả)</td>
+        <td class="example"><div class="jp-line">ご確認いただけますでしょうか。</div><div class="vn-line">Anh/chị có thể vui lòng xác nhận giúp được không ạ?</div></td>
+      </tr>
+      <tr>
+        <td>Hỏi khách hàng đã xem chưa (尊敬語)</td>
+        <td class="example"><div class="jp-line">こちらの資料はもうご覧になりましたか。</div><div class="vn-line">Anh/chị đã xem tài liệu này chưa ạ?</div></td>
+      </tr>
+      <tr>
+        <td>Báo cáo đã sửa xong (謙譲語)</td>
+        <td class="example"><div class="jp-line">ご指摘いただいた不具合を修正いたしました。</div><div class="vn-line">Tôi đã sửa xong lỗi mà anh/chị đã chỉ ra.</div></td>
+      </tr>
+      <tr>
+        <td>Xin lỗi vì trễ hạn/lỗi</td>
+        <td class="example"><div class="jp-line">ご迷惑をおかけし、誠に申し訳ございません。</div><div class="vn-line">Thành thật xin lỗi vì đã gây phiền phức cho quý vị.</div></td>
+      </tr>
+      <tr>
+        <td>Nhận thông tin, xác nhận đã hiểu (謙譲語)</td>
+        <td class="example"><div class="jp-line">承知いたしました。対応いたします。</div><div class="vn-line">Tôi đã hiểu rõ. Tôi sẽ xử lý.</div></td>
+      </tr>
+      <tr>
+        <td>Hỏi ý kiến trong họp (尊敬語)</td>
+        <td class="example"><div class="jp-line">この件について、どう思われますか。</div><div class="vn-line">Về việc này, anh/chị nghĩ sao ạ?</div></td>
+      </tr>
+      <tr>
+        <td>Kết thúc email nhờ việc</td>
+        <td class="example"><div class="jp-line">お忙しいところ恐縮ですが、よろしくお願いいたします。</div><div class="vn-line">Xin lỗi vì đã làm phiền lúc anh/chị đang bận, mong anh/chị giúp đỡ.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Từ xưng hô công ty/đối tác thường dùng</p>
+    <table>
+      <tr><th>Từ</th><th>Ý nghĩa</th></tr>
+      <tr><td class="jp">弊社 <span class="furigana">(へいしゃ)</span></td><td>Công ty chúng tôi (khiêm nhường, dùng khi nói với khách hàng)</td></tr>
+      <tr><td class="jp">御社／貴社 <span class="furigana">(おんしゃ／きしゃ)</span></td><td>Quý công ty (kính ngữ, dùng khi nói/viết về công ty đối tác — 御社: nói, 貴社: viết)</td></tr>
+      <tr><td class="jp">〜様 <span class="furigana">(さま)</span></td><td>Kính ngữ gắn sau tên người (trang trọng hơn さん)</td></tr>
+      <tr><td class="jp">〜御中 <span class="furigana">(おんちゅう)</span></td><td>Kính ngữ gắn sau tên công ty/phòng ban khi gửi thư, không dùng với tên người</td></tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Mẹo dùng trong IT/BrSE:</strong> Khi báo cáo với khách hàng Nhật, luôn dùng 謙譲語 cho hành động của mình (お送りします、いたします、対応いたします) và 尊敬語 khi hỏi/nhắc đến hành động của khách hàng (ご確認になる、ご覧になる). Email luôn mở đầu bằng お世話になっております và kết thúc bằng よろしくお願いいたします.
+  </div>
+
+</div>
+
+<div id="so-sanh" class="tab-panel">
+
+  <div class="group-card">
+    <p class="cat-title">So sánh hơn / kém</p>
+    <table>
+      <tr><th>Mẫu</th><th>Cấu trúc</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">~ほど…ない</td>
+        <td>A は B ほど〜ない<br>(A không bằng B)</td>
+        <td class="example"><div class="jp-line">今年は去年ほど寒くないですね。</div><div class="vn-line">Năm nay không lạnh bằng năm ngoái nhỉ.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~に比べて</td>
+        <td>N に比べて〜<br>(so với N thì...)</td>
+        <td class="example"><div class="jp-line">昨日に比べて今日は少し寒いです。</div><div class="vn-line">So với hôm qua thì hôm nay lạnh hơn một chút.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~割に</td>
+        <td>V/A普通形 + 割に<br>(so với..., mặc dù... thì lại...)</td>
+        <td class="example"><div class="jp-line">彼は勉強していなかった割に、テストの点が良かった。</div><div class="vn-line">Dù không học bài nhưng điểm kiểm tra của anh ấy lại tốt (so với dự đoán).</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Càng...càng / So sánh nhất</p>
+    <table>
+      <tr><th>Mẫu</th><th>Cấu trúc</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">~ば〜ほど</td>
+        <td>Vば + Vる + ほど<br>(càng... càng...)</td>
+        <td class="example"><div class="jp-line">日本語は話せば話すほど早く上達する。</div><div class="vn-line">Tiếng Nhật càng nói nhiều thì càng tiến bộ nhanh.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~ほど…はない</td>
+        <td>N ほど〜はない<br>(không gì... bằng N — so sánh nhất)</td>
+        <td class="example"><div class="jp-line">1日中寝ることほど幸せな事は無い。</div><div class="vn-line">Không gì hạnh phúc bằng việc ngủ cả ngày.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Ví von (giống như, cứ như là)</p>
+    <table>
+      <tr><th>Mẫu</th><th>Cấu trúc</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">~ような/に</td>
+        <td>N の + ような + N<br>N の + ように + V<br>(như là, đưa ví dụ/so sánh — trang trọng)</td>
+        <td class="example"><div class="jp-line">チョコレートのような甘いものが大好きです。</div><div class="vn-line">Tôi rất thích những thứ ngọt như chocolate.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~みたいな/に</td>
+        <td>N + みたいな + N<br>N + みたいに + V<br>(giống như là — khẩu ngữ)</td>
+        <td class="example"><div class="jp-line">トムさんみたいに日本語が上手に話せるようになりたいなあ。</div><div class="vn-line">Tôi muốn nói tiếng Nhật giỏi được như anh Tom vậy.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~まるで〜みたいだ</td>
+        <td>まるで + N/普通形 + みたいだ<br>(cứ như là — nhấn mạnh bằng まるで)</td>
+        <td class="example"><div class="jp-line">このお酒はジュースみたいで飲みやすい。</div><div class="vn-line">Rượu này cứ như nước ép, dễ uống.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~まるで〜ようだ</td>
+        <td>まるで + N の/普通形 + ようだ<br>(hệt như là — trang trọng hơn)</td>
+        <td class="example"><div class="jp-line">ランさんはまるで日本人のように日本語を話す。</div><div class="vn-line">Bạn Lan nói tiếng Nhật hệt như người Nhật vậy.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Phân biệt nhanh:</strong> ~ほど…ない / ~に比べて / ~割に dùng để so sánh mức độ (hơn - kém - lệch kỳ vọng); ~ば〜ほど / ~ほど…はない diễn tả xu hướng tỉ lệ thuận hoặc so sánh tuyệt đối (nhất); còn nhóm ~ような・~みたいな・まるで〜ようだ/みたいだ là ví von — đưa ra hình ảnh để so sánh, không phải so sánh mức độ hơn kém.
+  </div>
+
+</div>
+
+<div id="cho-nhan" class="tab-panel">
+
+  <div class="group-card">
+    <p class="cat-title">Nguyên tắc hướng cho — nhận</p>
+    <p class="rule">Điểm mấu chốt: chủ ngữ luôn là người <b>thực hiện hành động cho/nhận</b>, không phải người bị tác động.</p>
+    <table>
+      <tr><th>Động từ</th><th>Ý nghĩa</th><th>Cấu trúc</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">あげる</td>
+        <td>Tôi (hoặc người khác) cho ai đó — người nhận <b>không phải là "tôi"</b></td>
+        <td>A は B に N をあげる</td>
+        <td class="example"><div class="jp-line">私は友達に本をあげました。</div><div class="vn-line">Tôi đã cho bạn quyển sách.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">もらう</td>
+        <td>Tôi (chủ ngữ) nhận được từ ai đó</td>
+        <td>A は B に／から N をもらう</td>
+        <td class="example"><div class="jp-line">私は友達に本をもらいました。</div><div class="vn-line">Tôi đã nhận được quyển sách từ bạn.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">くれる</td>
+        <td>Người khác cho <b>"tôi"</b> (hoặc người trong nhóm của tôi) — <b>không dùng あげる</b> khi người nhận là tôi</td>
+        <td>A は 私(たち) に N をくれる</td>
+        <td class="example"><div class="jp-line">友達が私に本をくれました。</div><div class="vn-line">Bạn đã cho tôi quyển sách.</div></td>
+      </tr>
+    </table>
+    <div class="note">Lỗi hay gặp: KHÔNG nói 友達は私に本をあげました (sai) — vì người nhận là "tôi" thì bắt buộc phải dùng くれる: 友達は私に本をくれました。</div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Thể て + cho — nhận (làm gì đó cho/được ai đó làm cho)</p>
+    <table>
+      <tr><th>Mẫu</th><th>Ý nghĩa</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">~てあげる</td>
+        <td>Tôi làm gì đó giúp người khác (cẩn thận: nghe hơi kẻ cả nếu nói thẳng với cấp trên/khách hàng)</td>
+        <td class="example"><div class="jp-line">後輩に資料の作り方を教えてあげました。</div><div class="vn-line">Tôi đã chỉ cho hậu bối cách làm tài liệu.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~てくれる</td>
+        <td>Người khác làm gì đó cho tôi (thể hiện biết ơn, thường dùng khi người khác chủ động giúp)</td>
+        <td class="example"><div class="jp-line">同僚がバグを直してくれました。</div><div class="vn-line">Đồng nghiệp đã sửa bug giúp tôi.</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~てもらう</td>
+        <td>Tôi được ai đó làm gì cho (nhấn mạnh mình là người hưởng lợi, thường do mình chủ động nhờ)</td>
+        <td class="example"><div class="jp-line">先輩にコードをレビューしてもらいました。</div><div class="vn-line">Tôi đã nhờ (được) tiền bối review giúp code.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Kính ngữ / khiêm nhường ngữ tương ứng</p>
+    <table>
+      <tr><th>Thể thường</th><th>Kính ngữ / Khiêm nhường</th><th>Ví dụ</th></tr>
+      <tr>
+        <td>あげる</td>
+        <td class="jp">差(さ)し上(あ)げる <span class="furigana">(khiêm nhường)</span></td>
+        <td class="example"><div class="jp-line">資料(しりょう)を差し上げます。</div><div class="vn-line">Tôi xin gửi tặng tài liệu ạ.</div></td>
+      </tr>
+      <tr>
+        <td>もらう</td>
+        <td class="jp">いただく <span class="furigana">(khiêm nhường)</span></td>
+        <td class="example"><div class="jp-line">資料(しりょう)をいただきました。</div><div class="vn-line">Tôi đã nhận được tài liệu ạ.</div></td>
+      </tr>
+      <tr>
+        <td>くれる</td>
+        <td class="jp">くださる <span class="furigana">(kính ngữ)</span></td>
+        <td class="example"><div class="jp-line">部長(ぶちょう)が資料(しりょう)をくださいました。</div><div class="vn-line">Trưởng phòng đã cho tôi tài liệu ạ.</div></td>
+      </tr>
+      <tr>
+        <td>~てあげる</td>
+        <td class="jp">~て差(さ)し上(あ)げる</td>
+        <td class="example"><div class="jp-line">資料(しりょう)を作(つく)って差し上げます。</div><div class="vn-line">Tôi xin làm tài liệu giúp ạ. (ít dùng trực tiếp trước mặt khách vì hơi kẻ cả, nên hạn chế)</div></td>
+      </tr>
+      <tr>
+        <td>~てもらう</td>
+        <td class="jp">~ていただく</td>
+        <td class="example"><div class="jp-line">資料(しりょう)を確認(かくにん)していただきました。</div><div class="vn-line">Tôi đã được anh/chị xác nhận giúp tài liệu ạ.</div></td>
+      </tr>
+      <tr>
+        <td>~てくれる</td>
+        <td class="jp">~てくださる</td>
+        <td class="example"><div class="jp-line">部長(ぶちょう)が資料(しりょう)を送(おく)ってくださいました。</div><div class="vn-line">Trưởng phòng đã gửi tài liệu giúp tôi ạ.</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Mẫu nhờ vả (rất hay dùng trong công việc/IT)</p>
+    <table>
+      <tr><th>Mẫu</th><th>Mức độ lịch sự</th><th>Ví dụ</th></tr>
+      <tr>
+        <td class="pattern">~ていただけますか<br>~ていただけませんか</td>
+        <td>Lịch sự nhất — dùng với khách hàng, cấp trên</td>
+        <td class="example"><div class="jp-line">仕様書(しようしょ)をご確認(かくにん)いただけますでしょうか。</div><div class="vn-line">Anh/chị có thể vui lòng xác nhận giúp tài liệu đặc tả được không ạ?</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~てもらえますか<br>~てもらえませんか</td>
+        <td>Lịch sự vừa phải — dùng với đồng nghiệp, người ngang cấp</td>
+        <td class="example"><div class="jp-line">このバグを直(なお)してもらえますか。</div><div class="vn-line">Bạn sửa giúp mình bug này được không?</div></td>
+      </tr>
+      <tr>
+        <td class="pattern">~てくれますか<br>~てくれませんか</td>
+        <td>Thân mật — dùng với bạn bè, người thân thiết</td>
+        <td class="example"><div class="jp-line">ちょっと手伝(てつだ)ってくれる?</div><div class="vn-line">Giúp mình một chút được không?</div></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="note">
+    <strong>Mẹo dùng trong IT/BrSE:</strong> Khi nhờ khách hàng/cấp trên, luôn dùng ~ていただけますでしょうか (lịch sự nhất). Khi báo cáo mình đã nhờ ai đó giúp, dùng ~ていただきました. Tránh dùng ~てあげる/~て差し上げる trực tiếp trước mặt người được giúp vì dễ nghe như đang "ban ơn" — nên diễn đạt gián tiếp hơn, ví dụ thay vì 教えてあげます (tôi dạy cho bạn) thì nói お教えします (tôi xin chỉ dẫn).
+  </div>
+
+</div>
+
+<div id="dokkai" class="tab-panel">
+
+  <p class="rule">Rê chuột vào từ gạch chân (màu cam) để xem nghĩa. Bấm vào tiêu đề mỗi bài để mở/đóng. Đọc xong thì bấm vào 1 đáp án để tự làm bài — hệ thống sẽ báo đúng/sai, đáp án đúng sẽ tô xanh, bấm "Làm lại" để thử lại. Nguồn: N3読解問題55+ (北嶋千鶴子) — hiện đã làm 10/55+ bài, sẽ bổ sung dần.</p>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 1 — Nội quy nhà ở (ひばりハウス規則)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">ひばりハウス<span class="keigo-term" data-jp="きそく" data-vn="quy tắc, nội quy">規則</span>
+1　家族・友だちを部屋に入れないこと。入れるときは<span class="keigo-term" data-jp="かんりにん" data-vn="người quản lý">管理人</span>に<span class="keigo-term" data-jp="きょか" data-vn="cho phép">許可</span>をもらうこと。
+2　ハウス内でたばこを<span class="keigo-term" data-jp="すう" data-vn="hút (thuốc)">吸わ</span>ないこと。
+3　部屋のゴミは自分で分けて<span class="keigo-term" data-jp="ゴミおきば" data-vn="nơi để rác">ゴミ置き場</span>に<span class="keigo-term" data-jp="すてる" data-vn="vứt bỏ">捨てる</span>こと。
+4　シャワー、<span class="keigo-term" data-jp="せんたくき" data-vn="máy giặt">洗濯機</span>の<span class="keigo-term" data-jp="しよう" data-vn="sử dụng">使用</span>は朝6時30分から夜12時まで。
+5　ロビーのパソコンは<span class="keigo-term" data-jp="むりょう" data-vn="miễn phí">無料</span>だが、1人で長い時間使用しないこと。</div>
+      <div class="question-box">
+        <p class="q-text">問1　ひばりハウスでしてはいけないことはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　">夜10時にシャワーを使うこと</li>
+          <li data-num="2　">友だちと廊下で話すこと</li>
+          <li data-num="3　" class="correct-choice">ロビーでたばこを吸うこと<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="4　">自分のパソコンを長い時間使うこと</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Điều 2 quy định không được hút thuốc trong toàn bộ khu nhà (ハウス内) — sảnh (ロビー) cũng là một phần của khu nhà nên vẫn bị cấm. Đáp án 1 sai vì shower dùng đến 12h đêm vẫn hợp lệ; đáp án 2 không nằm trong nội quy; đáp án 4 chỉ cấm dùng máy tính chung ở sảnh quá lâu, không liên quan đến máy tính cá nhân.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Nội quy nhà Hibari: 1. Không cho gia đình/bạn bè vào phòng; nếu cho vào phải xin phép quản lý. 2. Không hút thuốc trong nhà. 3. Rác trong phòng tự phân loại và vứt vào nơi để rác. 4. Vòi sen, máy giặt chỉ dùng từ 6h30 sáng đến 12h đêm. 5. Máy tính ở sảnh miễn phí nhưng không được dùng một mình quá lâu.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Văn bản dạng nội quy dùng mẫu ~ないこと (không được làm) và V+こと (phải làm) — đây chính là mẫu ngữ pháp ~こと (mệnh lệnh/quy định) đã học. Khi đọc đề, hãy đọc câu hỏi trước để biết cần tìm thông tin gì, sau đó quét nhanh từng điều khoản để đối chiếu với 4 đáp án thay vì dịch toàn bộ từ đầu.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 2 — Quảng cáo tìm bạn ở ghép (ルームメイト募集)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">ルームメイト<span class="keigo-term" data-jp="ぼしゅう" data-vn="tuyển, chiêu mộ">募集</span>
+私は20歳の<span class="keigo-term" data-jp="じょしだいせい" data-vn="nữ sinh đại học">女子大生</span>で<span class="keigo-term" data-jp="しゅみ" data-vn="sở thích">趣味</span>は旅行と音楽を聞くことです。ひばり駅から歩いて5分の静かなところに住んでいます。（注）6畳の部屋が<span class="keigo-term" data-jp="あいて" data-vn="trống, để trống">空いて</span>います。今一緒に住んでくれる方を<span class="keigo-term" data-jp="さがして" data-vn="tìm kiếm">さがして</span>います。夜の仕事の方<span class="keigo-term" data-jp="いがい" data-vn="ngoại trừ">以外</span>で35歳<span class="keigo-term" data-jp="いか" data-vn="trở xuống">以下</span>の女性の方でしたらどなたでもかまいません。<span class="keigo-term" data-jp="やちん" data-vn="tiền nhà">家賃</span>は9万円ですが、4万円でいいです。水道電気ガス代は<span class="keigo-term" data-jp="はんぶん" data-vn="một nửa">半分</span>ずつ払いましょう。外国人でもいいですが、できれば日本語が話せる人を<span class="keigo-term" data-jp="きぼう" data-vn="mong muốn, hy vọng">希望</span>します。
+連絡先　kita@japanese-nihongo.com</div>
+      <div class="question-box">
+        <p class="q-text">問1　どの人が申し込めるか。</p>
+        <ol class="choices">
+          <li data-num="1　">クラブに勤めている20歳の日本人女性</li>
+          <li data-num="2　">大学3年の日本語が話せる韓国人の男性</li>
+          <li data-num="3　">36歳のアメリカ人女性の高校の先生</li>
+          <li data-num="4　" class="correct-choice">18歳の日本語が話せないカナダの女子学生<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Điều kiện bắt buộc: nữ, không làm việc ban đêm, dưới 35 tuổi. Đáp án 1 sai vì làm ở club thường là công việc ban đêm. Đáp án 2 sai vì là nam. Đáp án 3 sai vì 36 tuổi, vượt quá giới hạn 35. Đáp án 4 hợp lệ — việc "できれば日本語が話せる人を希望" chỉ là mong muốn ưu tiên, KHÔNG phải điều kiện bắt buộc, nên không nói được tiếng Nhật vẫn đăng ký được.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Tìm bạn ở ghép. Tôi là nữ sinh đại học 20 tuổi, sở thích là du lịch và nghe nhạc. Tôi sống ở nơi yên tĩnh, đi bộ 5 phút từ ga Hibari. Đang có phòng 6 chiếu (~9,29m²) còn trống. Hiện đang tìm người ở cùng. Ngoại trừ người làm việc ban đêm, chỉ cần nữ từ 35 tuổi trở xuống, ai cũng được. Tiền nhà 90.000 yên nhưng chỉ cần trả 40.000 yên. Tiền nước điện gas chia đôi. Người nước ngoài cũng được, nhưng nếu được thì mong muốn người nói được tiếng Nhật.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài quảng cáo có nhiều điều kiện liệt kê liên tiếp — cần phân biệt điều kiện <b>bắt buộc</b> (câu dùng ~でしたら, ~以外で, ~以下) với điều kiện chỉ là <b>mong muốn/ưu tiên</b> (câu dùng できれば〜希望します, なくてもいい). Đây là bẫy thường gặp trong đề JLPT.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 3 — Thông báo cấm để xe đạp (お願い)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">お願い
+2011年4月1日より北駅から500メートル<span class="keigo-term" data-jp="いない" data-vn="trong vòng, trong phạm vi">以内</span>のすべての道路は（注）<span class="keigo-term" data-jp="ちゅうりんきんし" data-vn="cấm để xe đạp">駐輪禁止</span>となります。それ以後、道路上に自転車は止められなくなりますのでご注意ください。道に止めている自転車は西駅の<span class="keigo-term" data-jp="ほかんばしょ" data-vn="nơi bảo quản, lưu giữ">保管場所</span>まで<span class="keigo-term" data-jp="いどうします" data-vn="di chuyển">移動します</span>。自転車を止める時は近くの市の自転車置き場をご利用ください。駐輪料金は自転車1台につき1日100円です。皆様のご<span class="keigo-term" data-jp="きょうりょく" data-vn="hợp tác">協力</span>をお願い致します。
+（注）駐輪：自転車を止めること</div>
+      <div class="question-box">
+        <p class="q-text">問1　内容からわからないことは何か。</p>
+        <ol class="choices">
+          <li data-num="1　">自転車が止められなくなる場所</li>
+          <li data-num="2　">市の自転車置き場の利用料金</li>
+          <li data-num="3　" class="correct-choice">市の自転車置き場の場所<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="4　">自転車が止められなくなる年月日</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Đoạn văn chỉ nói "gần đó có bãi để xe của thành phố" (近くの市の自転車置き場) chứ không nêu vị trí cụ thể — nên đây là thông tin KHÔNG biết được. Các đáp án khác đều có trong bài: khu vực cấm (trong 500m từ ga Bắc), giá thuê (100 yên/ngày), ngày bắt đầu (1/4/2011).</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Thông báo: Từ ngày 1/4/2011, toàn bộ đường trong phạm vi 500m từ ga Bắc sẽ cấm để xe đạp. Sau đó, không được để xe đạp trên đường nữa, xin lưu ý. Xe đạp đang để trên đường sẽ được chuyển đến nơi lưu giữ ở ga Tây. Khi để xe, xin sử dụng bãi để xe của thành phố gần đó. Phí gửi xe là 100 yên/xe/ngày. Rất mong sự hợp tác của quý vị.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Dạng câu hỏi "わからないこと" (điều KHÔNG được biết) là câu hỏi ngược — cần tìm thông tin bị THIẾU trong bài, không phải thông tin có sẵn. Cách làm: đối chiếu từng đáp án với bài, đáp án nào không tìm thấy chi tiết cụ thể tương ứng thì đó là đáp án đúng.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 4 — Nội quy công viên (南公園ご利用のお願い)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">南公園ご利用のお願い
+1　公園内でボールを使わないでください。
+2　ゴミは<span class="keigo-term" data-jp="すてないで" data-vn="không vứt bỏ">捨てないで</span>持って帰ってください。
+3　木に<span class="keigo-term" data-jp="のぼったり" data-vn="leo trèo">登ったり</span><span class="keigo-term" data-jp="いけ" data-vn="ao, hồ">池</span>の中に入ったりしないでください。
+4　犬の<span class="keigo-term" data-jp="さんぽ" data-vn="đi dạo">散歩</span>は首につけた<span class="keigo-term" data-jp="ひも" data-vn="dây">ひも</span>を<span class="keigo-term" data-jp="はなさないで" data-vn="không buông ra, không tách rời">離さないで</span>ください。
+5　公園の花を<span class="keigo-term" data-jp="とらないで" data-vn="không hái, không lấy">とらないで</span>ください。
+6　夜おそく<span class="keigo-term" data-jp="おおごえ" data-vn="giọng to">大声</span>で話したり<span class="keigo-term" data-jp="はなび" data-vn="pháo hoa">花火</span>をしたりうるさくしないでください。</div>
+      <div class="question-box">
+        <p class="q-text">問1　南公園でできることはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　" class="correct-choice">みんなで昼ご飯を食べること<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="2　">サッカーをすること</li>
+          <li data-num="3　">夜11時におおぜいで集まること</li>
+          <li data-num="4　">公園の花を持って帰ること</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Không có điều nào cấm việc ăn trưa cùng nhau. Đáp án 2 vi phạm điều 1 (cấm bóng); đáp án 3 vi phạm điều 6 (tụ tập đông người ồn ào ban đêm); đáp án 4 vi phạm điều 5 (cấm hái hoa).</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Xin vui lòng khi sử dụng công viên Nam: 1. Không sử dụng bóng trong công viên. 2. Không vứt rác, xin mang về. 3. Không được trèo cây hoặc xuống hồ. 4. Khi dắt chó đi dạo không được thả dây khỏi cổ chó. 5. Không hái hoa trong công viên. 6. Không nói to hoặc đốt pháo hoa gây ồn vào đêm khuya.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Ngược với dạng "không được làm gì" (〜ないでください), câu hỏi "できること" (điều CÓ THỂ làm) yêu cầu cách làm loại trừ: đối chiếu từng đáp án với danh sách cấm, đáp án nào KHÔNG trùng với bất kỳ điều cấm nào chính là đáp án đúng.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 5 — Thông báo làm thẻ tặng phiếu quà (日本書店クレジットカード)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box"><span class="keigo-term" data-jp="ほんじつ" data-vn="hôm nay (trang trọng)">本日</span>「日本書店」（注）原宿店で「日本書店クレジットカード」を作られた方全員に、その場で2000円の<span class="keigo-term" data-jp="としょけん" data-vn="phiếu mua sách">図書券</span>をさし上げます。これはいつでも日本中の「日本書店」で使うことができます。カードをお作りになるときには<span class="keigo-term" data-jp="うんてんめんきょしょう" data-vn="bằng lái xe">運転免許証</span>やパスポートなどの写真つきの<span class="keigo-term" data-jp="みぶんしょうめいしょ" data-vn="giấy tờ tùy thân">身分証明書</span>が必要です。カードをお作りになりたい方は<span class="keigo-term" data-jp="うけつけ" data-vn="quầy lễ tân, quầy tiếp nhận">受付</span>にお<span class="keigo-term" data-jp="もうしこみ" data-vn="đăng ký">申し込み</span>ください。
+（注）原宿：東京の場所の名前</div>
+      <div class="question-box">
+        <p class="q-text">問1　今日このクレジットカードを作るとどんな図書券がもらえるか。</p>
+        <ol class="choices">
+          <li data-num="1　">どこの本屋でも使える図書券</li>
+          <li data-num="2　" class="correct-choice">この店で直ぐにでも使える図書券<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="3　">日本書店の原宿店で使わなければならない図書券</li>
+          <li data-num="4　">今日中に使わなければならない図書券</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài nói phiếu được tặng "ngay tại chỗ" (その場で〜さし上げます) — nghĩa là có thể dùng ngay lập tức tại chính cửa hàng này. Đáp án 1 sai vì chỉ dùng được ở chuỗi "日本書店", không phải "bất kỳ hiệu sách nào" nói chung. Đáp án 3 sai vì dùng được ở TẤT CẢ chi nhánh "日本書店" trên toàn quốc, không chỉ riêng Harajuku. Đáp án 4 sai vì phiếu dùng được いつでも (bất cứ lúc nào), không bắt buộc dùng trong hôm nay.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Hôm nay, tất cả những ai làm "Thẻ tín dụng Nihon Shoten" tại chi nhánh Harajuku của "Nihon Shoten" sẽ được tặng ngay tại chỗ phiếu mua sách trị giá 2000 yên. Phiếu này có thể dùng bất cứ lúc nào tại các cửa hàng "Nihon Shoten" trên khắp Nhật Bản. Khi làm thẻ cần giấy tờ tùy thân có ảnh như bằng lái xe hoặc hộ chiếu. Quý khách muốn làm thẻ xin đăng ký tại quầy lễ tân.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Cẩn thận với các đáp án gây nhiễu bằng cách bó hẹp hoặc nới rộng sai phạm vi/thời gian so với bài gốc. Đối chiếu kỹ từng cụm: その場で (ngay tại chỗ) ≠ "phải dùng hôm nay"; 日本中の「日本書店」(khắp Nhật Bản, riêng chuỗi này) ≠ "bất kỳ hiệu sách nào" hay "chỉ ở Harajuku".</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 6 — Thông báo giảm giá siêu thị (ミキスーパー)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">ミキスーパーでは毎月5日と20日にカードでお買い物した場合に10%<span class="keigo-term" data-jp="わりびき" data-vn="giảm giá">割引</span>いたします。また今月25日は開店10周年<span class="keigo-term" data-jp="きねんび" data-vn="ngày kỷ niệm">記念日</span>なのでカードご利用の場合には商品を20%割引いたします。そのほか毎朝午前10時までは<span class="keigo-term" data-jp="しょくりょうひん" data-vn="thực phẩm">食料品</span><span class="keigo-term" data-jp="うりば" data-vn="quầy bán hàng">売り場</span>で商品の5%割引をいたしておりますのでどうぞご利用ください。カードの割引は銀行から<span class="keigo-term" data-jp="ひきおとされる" data-vn="bị trừ tiền (tự động)">引き落とされる</span>ときに受けられます。また<span class="keigo-term" data-jp="しょうひんけん" data-vn="phiếu quà tặng">商品券</span>・たばこ・<span class="keigo-term" data-jp="きって" data-vn="tem">切手</span>などはすべての割引がありませんのでご注意ください。</div>
+      <div class="question-box">
+        <p class="q-text">問1　ミキスーパーの割引の説明で正しいのはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　">5日は全ての商品が10%割引してもらえる。</li>
+          <li data-num="2　">毎月25日は20%割引してもらえる。</li>
+          <li data-num="3　" class="correct-choice">食料品の5%割引はカードでなくても受けられる。<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="4　">カードの割引は買ったときにしてもらえる。</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Giảm giá 5% cho thực phẩm (trước 10h sáng) không được nhắc là cần thẻ, khác với giảm giá 10%/20% (đều yêu cầu カードで/カードご利用の場合). Đáp án 1 sai vì 10% chỉ áp dụng khi dùng thẻ, không phải "toàn bộ sản phẩm"; đáp án 2 sai vì 25% chỉ là ngày kỷ niệm THÁNG NÀY (今月25日), không phải hàng tháng; đáp án 4 sai vì giảm giá thẻ được áp dụng lúc bị trừ tiền qua ngân hàng, không phải lúc thanh toán tại quầy.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Siêu thị Miki giảm giá 10% khi mua sắm bằng thẻ vào ngày 5 và 20 hàng tháng. Ngoài ra ngày 25 tháng này là kỷ niệm 10 năm khai trương nên nếu dùng thẻ sẽ được giảm 20%. Ngoài ra mỗi sáng trước 10h, khu thực phẩm giảm giá 5%, mời quý khách sử dụng. Giảm giá của thẻ được áp dụng khi tiền bị trừ qua ngân hàng. Phiếu quà tặng, thuốc lá, tem thư... không được áp dụng bất kỳ giảm giá nào, xin lưu ý.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài có nhiều điều kiện giảm giá chồng chéo theo ngày/giờ/loại thanh toán — nên lập bảng nhẩm trong đầu: giảm giá nào áp dụng khi nào, điều kiện nào bắt buộc dùng thẻ và điều kiện nào không, để tránh nhầm lẫn khi đối chiếu đáp án.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 7 — Tin nhắn thoại (留守番電話)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">留守番電話
+キムです。吉田さん、お<span class="keigo-term" data-jp="るす" data-vn="vắng nhà">留守</span>のようですね。今日<span class="keigo-term" data-jp="しゅっちょう" data-vn="công tác">出張</span>で韓国から東京に来ました。日本には2週間いる予定ですが、これから東京を始め日本<span class="keigo-term" data-jp="かくち" data-vn="các nơi, khắp nơi">各地</span>を<span class="keigo-term" data-jp="まわる" data-vn="đi vòng quanh">回る</span>予定です。あさって大阪に出発しなければならないので、東京にいる間にお会いしたいと思って電話しました。メテロホテルの1103号室に<span class="keigo-term" data-jp="しゅくはくして" data-vn="lưu trú">宿泊して</span>います。電話番号は0303-1111番です。夜7時<span class="keigo-term" data-jp="すぎ" data-vn="quá (thời gian)">過ぎ</span>にはホテルにいる予定です。夜遅くてもいいですから必ず連絡してください。お待ちしております。</div>
+      <div class="question-box">
+        <p class="q-text">問1　内容と合っているのはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　">キムさんは吉田さんに夜遅く電話する。</li>
+          <li data-num="2　">キムさんは吉田さんに会いに日本へ来た。</li>
+          <li data-num="3　" class="correct-choice">キムさんが行くのは大阪だけではない。<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="4　">キムさんは4日間東京にいる予定だ。</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài nói Kim sẽ "bắt đầu từ Tokyo rồi đi khắp các nơi ở Nhật" (東京を始め日本各地を回る予定) — nghĩa là không chỉ riêng Osaka. Đáp án 1 sai vì Kim nhờ Yoshida gọi lại muộn cũng được, chứ không phải Kim gọi muộn. Đáp án 2 sai vì Kim đến Nhật vì công tác (出張), gặp Yoshida chỉ là mong muốn thêm. Đáp án 4 sai vì kế hoạch ở Nhật là 2 tuần, không phải 4 ngày.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Tin nhắn thoại: Tôi là Kim. Anh Yoshida, có vẻ anh không có nhà. Hôm nay tôi đi công tác từ Hàn Quốc đến Tokyo. Tôi dự định ở Nhật 2 tuần, từ giờ sẽ đi khắp các nơi ở Nhật bắt đầu từ Tokyo. Vì ngày kia phải xuất phát đi Osaka nên tôi muốn gặp anh trong lúc còn ở Tokyo nên đã gọi điện. Tôi đang ở phòng 1103 khách sạn Metro. Số điện thoại là 0303-1111. Sau 7h tối tôi sẽ ở khách sạn. Dù muộn cũng được, xin hãy liên lạc cho tôi. Tôi sẽ đợi.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài dạng tin nhắn thoại có nhiều mốc thời gian và địa điểm (hôm nay, ngày kia, 2 tuần, Tokyo, Osaka) — nên gạch chân/ghi chú nhanh các mốc này khi đọc lần đầu để không nhầm lẫn khi đối chiếu đáp án.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 8 — Thông báo thi công đường (片側通行のお願い)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box"><span class="keigo-term" data-jp="かたがわつうこう" data-vn="đi một chiều, một bên đường">片側通行</span>のお願い
+この道路はただいま<span class="keigo-term" data-jp="すいどうこうじ" data-vn="thi công đường ống nước">水道工事</span>をしております。お<span class="keigo-term" data-jp="いそぎ" data-vn="vội vàng, gấp">急ぎ</span>のところ大変申し訳ございませんが、ここより片側通行をお願い致します。
+1　工事期間　12月15日より1月15日まで
+2　工事時間　夜間1時より5時まで
+3　工事区間　東町1丁目<span class="keigo-term" data-jp="こうさてん" data-vn="ngã tư, giao lộ">交差点</span>より3丁目交差点まで
+みどり市役所
+株式会社モウリ</div>
+      <div class="question-box">
+        <p class="q-text">問1　内容と合っているのはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　">今年中に工事は終わる。</li>
+          <li data-num="2　" class="correct-choice">昼間は工事をしない。<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="3　">道路の修理工事をしている。</li>
+          <li data-num="4　">この道は夜通ることができない。</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Thi công chỉ diễn ra ban đêm 1h-5h sáng (夜間1時より5時まで), nên ban ngày không thi công. Đáp án 1 sai vì thi công kéo dài đến 15/1 năm sau (qua năm mới). Đáp án 3 sai vì là thi công đường ống nước (水道工事), không phải sửa đường. Đáp án 4 sai vì ban đêm vẫn đi được, chỉ là đi một chiều (片側通行), không phải cấm hoàn toàn.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Xin lưu ý đi một chiều. Con đường này hiện đang thi công đường ống nước. Rất xin lỗi vì gây bất tiện cho quý vị đang vội, xin vui lòng đi một chiều từ đoạn này. 1. Thời gian thi công: từ 15/12 đến 15/1. 2. Giờ thi công: từ 1h đến 5h sáng. 3. Đoạn thi công: từ ngã tư khu Higashi-machi 1 chome đến ngã tư 3 chome. — Ủy ban thành phố Midori, Công ty cổ phần Mouri.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài có nhiều số liệu ngày giờ (thời gian, khung giờ, đoạn đường) dễ gây nhầm lẫn giữa "năm nay/năm sau", "ngày/đêm" — cần đối chiếu kỹ từng con số với đáp án, tránh suy đoán theo cảm tính.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 9 — Thông báo giao hàng (荷物配達のお知らせ)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">No.TH12058
+松本様
+本日15:00に荷物を<span class="keigo-term" data-jp="はいたつ" data-vn="giao hàng">配達</span>に<span class="keigo-term" data-jp="うかがいました" data-vn="đến (khiêm nhường)">伺いました</span>が、お留守でした。配達をご希望の場合は日時を電話またはEメールでお知らせください。本日17:00<span class="keigo-term" data-jp="いこう" data-vn="từ đó trở đi, sau đó">以降</span>のご連絡の場合は申し訳ございませんが、配達は明日以降になります。
+配達時間　①9〜12時　②12〜15時　③15〜18時　④18〜21時</div>
+      <div class="question-box">
+        <p class="q-text">問1　松本さんの仕事は9時から5時までなので夜6時に帰れるが、明日は飲みに行く予定だ。一番早く荷物を<span class="keigo-term" data-jp="うけとれる" data-vn="nhận được">受け取れる</span>のはいつか。</p>
+        <ol class="choices">
+          <li data-num="1　">今晩18〜21時</li>
+          <li data-num="2　">明日9〜12時</li>
+          <li data-num="3　">明日18〜21時</li>
+          <li data-num="4　" class="correct-choice"><span class="keigo-term" data-jp="あさって" data-vn="ngày mốt">明後日</span>18〜21時<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Matsumoto làm việc đến 17h, về nhà lúc 18h — tức là đã QUA mốc 17h nên không kịp liên lạc trong hôm nay, giao hàng phải dời sang "明日以降" (từ ngày mai trở đi). Nhưng NGÀY MAI anh lại có kế hoạch đi nhậu (không chắc có nhà buổi tối) nên không chọn được khung giờ ngày mai. Vậy thời điểm sớm nhất còn lại là NGÀY MỐT (明後日), khung 18-21h sau khi tan làm về nhà.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Số TH12058. Kính gửi anh/chị Matsumoto. Hôm nay lúc 15:00 tôi đã đến giao hàng nhưng anh/chị không có nhà. Nếu muốn nhận hàng, xin thông báo ngày giờ qua điện thoại hoặc email. Nếu liên lạc sau 17:00 hôm nay, rất xin lỗi nhưng việc giao hàng sẽ chuyển sang từ ngày mai trở đi. Khung giờ giao hàng: ① 9-12h ② 12-15h ③ 15-18h ④ 18-21h.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Dạng bài kết hợp thông tin trong đoạn văn (mốc giờ 17:00) với lịch trình cá nhân nêu trong CÂU HỎI (giờ làm việc, giờ về nhà, kế hoạch ngày mai) để suy luận ra đáp án — phải đọc kỹ cả câu hỏi, không chỉ đọc đoạn văn.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 10 — Hướng dẫn sử dụng thư viện (図書館利用案内)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">ひばり市の図書館では<span class="keigo-term" data-jp="じしょ" data-vn="từ điển">辞書</span>・<span class="keigo-term" data-jp="じてん" data-vn="từ điển (loại khác)">辞典</span>は借りられません。そのほかの本、<span class="keigo-term" data-jp="ざっし" data-vn="tạp chí">雑誌</span>、CDなどは1人10（注）点まで2週間<span class="keigo-term" data-jp="かりる" data-vn="mượn">借りる</span>ことができます。ご利用になりたい方は最初にカードを作ってください。<span class="keigo-term" data-jp="けんこうほけんしょう" data-vn="thẻ bảo hiểm y tế">健康保険証</span>・運転免許証・外国人<span class="keigo-term" data-jp="とうろくしょう" data-vn="giấy chứng nhận đăng ký">登録証</span>など<span class="keigo-term" data-jp="じゅうしょ" data-vn="địa chỉ">住所</span>がわかる物をお持ちの場合直ぐにカードが作れます。作れる方はひばり市に住んでいる方、ひばり市で働いている方だけです。となりの市の太田市と早川市の図書館カードでもひばり市の図書館で本を借りることができます。
+（注）点：品物を数えるときに使う</div>
+      <div class="question-box">
+        <p class="q-text">問1　今ひばり市の図書館を利用できる人はどの人か。</p>
+        <ol class="choices">
+          <li data-num="1　">図書館カードを持っている人ならだれでも</li>
+          <li data-num="2　">ひばり市の図書館のカードを持っている人だけ</li>
+          <li data-num="3　">ひばり市かとなりの市に住んでいる人</li>
+          <li data-num="4　" class="correct-choice">ひばり市かとなりの市の図書館カードを持っている人<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài nêu rõ: thẻ thư viện của thành phố Ota và Hayakawa (2 thành phố lân cận) cũng dùng mượn sách được ở thư viện Hibari. Đáp án 1 sai vì không phải "bất kỳ thẻ nào" (chỉ 3 thành phố cụ thể). Đáp án 2 sai vì bỏ sót điều kiện dùng thẻ thành phố lân cận. Đáp án 3 sai vì nhầm điều kiện LÀM THẺ (phải sống/làm việc ở Hibari) với điều kiện MƯỢN SÁCH (rộng hơn).</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Thư viện thành phố Hibari không cho mượn từ điển. Sách, tạp chí, CD khác thì mỗi người được mượn tối đa 10 món trong 2 tuần. Người muốn sử dụng phải làm thẻ trước. Nếu mang theo giấy tờ có địa chỉ như thẻ bảo hiểm y tế, bằng lái, giấy đăng ký người nước ngoài thì có thể làm thẻ ngay. Chỉ người sống hoặc làm việc tại thành phố Hibari mới làm được thẻ. Thẻ thư viện của 2 thành phố lân cận là Ota và Hayakawa cũng có thể dùng để mượn sách tại thư viện Hibari.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bẫy hay gặp: bài nêu HAI điều kiện khác nhau (điều kiện LÀM THẺ và điều kiện MƯỢN SÁCH/SỬ DỤNG) — cần đọc kỹ câu hỏi để xác định đang hỏi về điều kiện nào, tránh nhầm lẫn giữa hai loại điều kiện được nêu trong cùng đoạn văn.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 11 — Thông báo tiệc tất niên (忘年会のお知らせ)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box"><span class="keigo-term" data-jp="ぼうねんかい" data-vn="tiệc tất niên">忘年会</span>のお知らせ
+今年も残り少なくなって参りました。忘年会の日時が決まりましたのでお知らせ致します。今年は会社の<span class="keigo-term" data-jp="ぎょうせき" data-vn="thành tích kinh doanh">業績</span>が<span class="keigo-term" data-jp="かいふくしました" data-vn="hồi phục">回復しました</span>ので会社から10万円の<span class="keigo-term" data-jp="きふ" data-vn="quyên góp, đóng góp">寄付</span>をもらうことができました。ですから<span class="keigo-term" data-jp="かいひ" data-vn="hội phí">会費</span>は去年より安くできました。ぜひ皆様のご<span class="keigo-term" data-jp="さんか" data-vn="tham gia">参加</span>をお待ちしています。参加できる方は2枚目の用紙にお名前をお書きください。
+日時：　12月12日金曜日午後7時より9時まで
+場所：　「風の谷」　電話番号323-3232
+会費：　3000円　当日集めます　　　　　　　　森田</div>
+      <div class="question-box">
+        <p class="q-text">問1　このお知らせでわからないことは何か。</p>
+        <ol class="choices">
+          <li data-num="1　">「風の谷」の連絡先</li>
+          <li data-num="2　" class="correct-choice">「風の谷」の場所<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="3　">集金日</li>
+          <li data-num="4　">申し込み方法</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài chỉ nêu TÊN địa điểm「風の谷」và số điện thoại, không nói địa chỉ/vị trí cụ thể ở đâu. Số điện thoại (đáp án 1), ngày thu tiền — "当日集めます" tức ngày 12/12 (đáp án 3), và cách đăng ký — viết tên vào tờ giấy trang 2 (đáp án 4) đều đã có trong bài.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Thông báo tiệc tất niên. Năm nay cũng sắp hết rồi. Ngày giờ tiệc tất niên đã được quyết định nên xin thông báo. Năm nay công ty đã hồi phục doanh thu nên nhận được khoản đóng góp 100.000 yên từ công ty. Vì vậy hội phí năm nay rẻ hơn năm ngoái. Rất mong sự tham gia của mọi người. Ai tham gia được xin viết tên vào tờ giấy trang 2. Ngày giờ: Thứ Sáu 12/12, 7h-9h tối. Địa điểm: "Kaze no Tani", điện thoại 323-3232. Hội phí: 3000 yên, thu vào ngày hôm đó. — Morita</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Lại là dạng câu hỏi "わからないこと" — chú ý phân biệt "tên địa điểm" với "vị trí/địa chỉ cụ thể của địa điểm đó", đây là điểm hay bị đánh lừa.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 12 — Thông báo bảo trì thang máy (A棟エレベーターの定期点検修理)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">A<span class="keigo-term" data-jp="とう" data-vn="tòa nhà">棟</span>エレベーターの<span class="keigo-term" data-jp="ていきてんけん" data-vn="kiểm tra định kỳ">定期点検</span><span class="keigo-term" data-jp="しゅうり" data-vn="sửa chữa">修理</span>のお知らせ
+10月5日午前10時から午後3時ごろまで定期点検修理のためA棟エレベーターは<span class="keigo-term" data-jp="うんてんちゅうし" data-vn="ngừng vận hành">運転中止</span>となります。その間は階段かB棟のエレベーターをご利用くださいますようにお願い申し上げます。大変ご<span class="keigo-term" data-jp="めいわく" data-vn="phiền phức">迷惑</span>をおかけいたしますが、皆様の<span class="keigo-term" data-jp="あんぜん" data-vn="an toàn">安全</span>のためにご協力をお願い申し上げます。
+　　　　　　　　　　　　　　　　　　　　　　マンション管理人</div>
+      <div class="question-box">
+        <p class="q-text">問1　10月5日、A棟の人はどうしなければならないか。</p>
+        <ol class="choices">
+          <li data-num="1　">1日中階段を使わなければならない。</li>
+          <li data-num="2　">夕方5時にはB棟のエレベーターを使わなければならない。</li>
+          <li data-num="3　">午後2時にA棟のエレベーターを使ってもいい。</li>
+          <li data-num="4　" class="correct-choice">12時には階段かB棟のエレベーターを使わなければならない。<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Thang máy A ngừng hoạt động từ 10h sáng đến khoảng 3h chiều. 12h trưa nằm trong khung giờ này nên phải dùng thang bộ hoặc thang máy B. Đáp án 1 sai vì chỉ ngừng vài tiếng, không phải cả ngày; đáp án 2 sai vì 5h chiều đã hết giờ bảo trì; đáp án 3 sai vì 2h chiều vẫn trong khung giờ ngừng hoạt động.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Thông báo kiểm tra bảo trì định kỳ thang máy tòa A. Từ 10h sáng đến khoảng 3h chiều ngày 5/10, thang máy tòa A sẽ ngừng hoạt động để bảo trì định kỳ. Trong thời gian đó, xin quý vị sử dụng cầu thang bộ hoặc thang máy tòa B. Thành thật xin lỗi vì gây bất tiện, mong quý vị hợp tác vì sự an toàn của mọi người. — Quản lý chung cư</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài có khung giờ cụ thể (10h-15h) — khi câu hỏi hỏi về MỘT thời điểm cụ thể (12h, 2h chiều, 5h chiều), cần xác định thời điểm đó có nằm trong khung giờ bảo trì hay không rồi mới chọn đáp án.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 13 — Mở tài khoản ngân hàng (銀行口座を開く)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">新しく（注1）銀行<span class="keigo-term" data-jp="こうざ" data-vn="tài khoản (ngân hàng)">口座</span>を開く場合は<span class="keigo-term" data-jp="じゅうみんひょう" data-vn="giấy đăng ký cư trú">住民票</span>、外国人<span class="keigo-term" data-jp="とうろくしょう" data-vn="giấy chứng nhận đăng ký">登録証</span>、健康保険証、運転免許証など住所がわかる書類が必要です。まずこの<span class="keigo-term" data-jp="もうしこみようし" data-vn="tờ đăng ký">申込用紙</span>にお名前とご住所とお話番号をお書きください。カードをお申し込みの方は（注2）<span class="keigo-term" data-jp="あんしょうばんごう" data-vn="mã PIN">暗証番号</span>もお願い致します。書き終わりましたらそちらで番号を取ってお名前をお呼びするまでお待ちください。
+（注1）銀行口座：銀行がお金の出し入れを計算して処理する単位
+（注2）暗証番号：銀行などで使う秘密の番号</div>
+      <div class="question-box">
+        <p class="q-text">問1　この銀行で口座を開くときしなくてもいいことはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　" class="correct-choice">カードを申し込むこと<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="2　">住所がわかる書類を持っていくこと</li>
+          <li data-num="3　">名前、住所などを書くこと</li>
+          <li data-num="4　">番号を取ること</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài viết "カードをお申し込みの方は暗証番号もお願い致します" — chỉ NHỮNG AI muốn làm thẻ mới cần cung cấp thêm mã PIN, ngụ ý việc đăng ký thẻ không bắt buộc khi mở tài khoản. Các việc còn lại (mang giấy tờ, viết thông tin, lấy số thứ tự) đều là thủ tục bắt buộc.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Khi mở tài khoản ngân hàng mới cần các giấy tờ chứng minh địa chỉ như giấy đăng ký cư trú, giấy chứng nhận đăng ký người nước ngoài, thẻ bảo hiểm y tế, bằng lái xe. Trước tiên xin điền tên, địa chỉ và số điện thoại vào tờ đăng ký này. Quý khách muốn đăng ký thẻ xin vui lòng cung cấp thêm mã PIN. Sau khi viết xong, xin lấy số thứ tự và đợi đến khi được gọi tên.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Câu hỏi "しなくてもいいこと" (điều KHÔNG cần làm) yêu cầu tìm chi tiết mang tính TÙY CHỌN trong bài — thường được đánh dấu bằng các cụm như "〜の方は" (những ai muốn...) chỉ áp dụng cho một nhóm nhỏ, khác với yêu cầu áp dụng cho tất cả mọi người.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 14 — Dự báo thời tiết (天気予報)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">10月3日朝6時<span class="keigo-term" data-jp="きしょうちょう" data-vn="cục khí tượng">気象庁</span>発表の天気予報をお知らせいたします。東京地方は朝のうち晴れて暖かいでしょう。時間がたつにつれて気温はかなり上がるでしょう。午後<span class="keigo-term" data-jp="ていきあつ" data-vn="áp thấp">低気圧</span>が近づくため<span class="keigo-term" data-jp="いちじ" data-vn="tạm thời, có lúc">一時</span>雨が降ることがあるでしょう。また時々強い風が吹くので<span class="keigo-term" data-jp="じゅうぶん" data-vn="đầy đủ, kỹ càng">十分</span>注意してください。5時ごろから急に寒くなるでしょう。夜8時過ぎには風は<span class="keigo-term" data-jp="やみます" data-vn="ngừng, tạnh">止みます</span>が雨が降り始めるでしょう。雨は夜中から朝にかけて降ったり止んだりするでしょう。</div>
+      <div class="question-box">
+        <p class="q-text">問1　朝出かけて夜7時ごろに帰る人はどうすればいいか。</p>
+        <ol class="choices">
+          <li data-num="1　">上着を持っていったほうがいい。</li>
+          <li data-num="2　">かさを持っていったほうがいい。</li>
+          <li data-num="3　" class="correct-choice">かさと上着を持っていったほうがいい。<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="4　">寒くないようにたくさん服を着ていったほうがいい。</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>7h tối: đã qua mốc "5時ごろから急に寒くなる" (lạnh đột ngột từ khoảng 5h) nên cần áo khoác; đồng thời buổi chiều "一時雨が降ることがある" (có lúc mưa) và mưa "8時過ぎ" mới bắt đầu rơi hẳn — 7h tối vẫn có khả năng mưa nên cần cả ô. Đáp án 4 sai vì mặc nhiều lớp áo không thực tế bằng mang theo áo khoác.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Xin thông báo dự báo thời tiết do Cục khí tượng công bố lúc 6h sáng ngày 3/10. Khu vực Tokyo buổi sáng trời nắng và ấm áp. Theo thời gian, nhiệt độ sẽ tăng khá nhiều. Buổi chiều do áp thấp đến gần nên có lúc sẽ có mưa. Ngoài ra thỉnh thoảng có gió mạnh nên xin hãy chú ý kỹ. Khoảng 5h chiều trời sẽ đột nhiên lạnh. Sau 8h tối gió sẽ ngừng nhưng mưa sẽ bắt đầu rơi. Mưa sẽ rơi rồi tạnh xen kẽ từ đêm khuya đến sáng.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài dự báo thời tiết có nhiều mốc thời gian gắn với hiện tượng khác nhau (nắng/mưa/gió/lạnh) — cần xác định chính xác MỐC THỜI GIAN mà câu hỏi hỏi đến rơi vào giai đoạn nào để chọn đáp án tổng hợp đúng (ở đây là 2 yếu tố cùng lúc: lạnh + có thể mưa).</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 15 — Tuyển tình nguyện viên lễ hội hoa anh đào (さくら祭りボランティアの募集)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">さくら祭りボランティアの<span class="keigo-term" data-jp="ぼしゅう" data-vn="tuyển, chiêu mộ">募集</span>
+今年も4月1日にみんなの広場でさくら祭り（10時〜4時）を行う予定です。ただいま当日のボランティアを募集しております。どなたでも<span class="keigo-term" data-jp="けっこう" data-vn="được, ổn (đồng ý lịch sự)">結構</span>ですからぜひご協力ください。午前あるいは午後だけでも結構です。
+募集人員：　<span class="keigo-term" data-jp="あんない" data-vn="hướng dẫn">案内</span>4名・放送4名
+　　　　　自転車置き場<span class="keigo-term" data-jp="せいり" data-vn="sắp xếp, dọn dẹp">整理</span>10名
+　　　　　売店30名・掃除20名
+また同時に前日の準備をしてくださる方も30名募集しております。多ければ多いほど助かります。楽しい祭りになるように皆様のご協力をお待ちしております。
+　　　　　　　　　　　　　　　　　桜祭り<span class="keigo-term" data-jp="じっこういいんかい" data-vn="ban tổ chức">実行委員会</span></div>
+      <div class="question-box">
+        <p class="q-text">問1　この募集に書き加えなければならないことは何か。</p>
+        <ol class="choices">
+          <li data-num="1　">ボランティアの仕事の内容</li>
+          <li data-num="2　">必要なボランティアの人数</li>
+          <li data-num="3　">ボランティアの年齢</li>
+          <li data-num="4　" class="correct-choice">実行委員会の連絡先<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài đã liệt kê rõ nội dung công việc (đáp án 1) và số lượng cần cho từng việc (đáp án 2). "どなたでも結構" ngụ ý không giới hạn độ tuổi nên đáp án 3 không phải điều thiếu sót nghiêm trọng. Tuy nhiên bài KHÔNG hề có số điện thoại/email để đăng ký làm tình nguyện viên — đây là thiếu sót cần bổ sung.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Tuyển tình nguyện viên lễ hội hoa anh đào. Năm nay cũng sẽ tổ chức lễ hội hoa anh đào tại quảng trường chung vào ngày 1/4 (10h-16h). Hiện đang tuyển tình nguyện viên cho ngày hôm đó. Ai cũng được, rất mong sự hợp tác. Chỉ tham gia buổi sáng hoặc buổi chiều cũng được. Số lượng cần tuyển: hướng dẫn 4 người, phát thanh 4 người, sắp xếp bãi để xe đạp 10 người, quầy bán hàng 30 người, dọn dẹp 20 người. Đồng thời cũng tuyển 30 người chuẩn bị vào ngày hôm trước. Càng nhiều người càng tốt. Mong sự hợp tác của mọi người để lễ hội trở nên vui vẻ. — Ban tổ chức lễ hội hoa anh đào</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Dạng câu hỏi "cần bổ sung thêm gì" yêu cầu soi toàn bộ thông báo để tìm thông tin CẦN THIẾT nhưng bị THIẾU — thường là cách thức liên hệ/đăng ký, vì đây là thông tin hành động cụ thể mà người đọc cần để phản hồi.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 16 — Thư nhờ đưa con đi chơi (前略の手紙)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">前略
+みどりさん、夏休みに子どもたちをご<span class="keigo-term" data-jp="しょうたい" data-vn="mời">招待</span>くださいましてありがとうございます。子どもたちはとても<span class="keigo-term" data-jp="たのしみに" data-vn="mong chờ">楽しみに</span>しております。ご質問の行きたい場所ですが、「ディズニーランド」と「（注）キッザニア」だそうです。申し訳ありませんが、連れて行ってくださいませんか。もちろんかかったお金はこちらで払わせていただきます。子ども2人だけで東京まで行かせるのはちょっと<span class="keigo-term" data-jp="しんぱい" data-vn="lo lắng">心配</span>ですが、これもいい<span class="keigo-term" data-jp="けいけん" data-vn="kinh nghiệm, trải nghiệm">経験</span>になると思っております。みどりさんにはいろいろご<span class="keigo-term" data-jp="めいわく" data-vn="phiền phức">迷惑</span>をおかけいたしますが、よろしくお願いいたします。
+　　　　　　　　　　　　　　　　　　　　　　　　早々
+（注）キッザニア：メキシコで始まった子供がいろいろな仕事を体験できる施設</div>
+      <div class="question-box">
+        <p class="q-text">問1　何がいい経験になると言っているか。</p>
+        <ol class="choices">
+          <li data-num="1　">「ディズニーランド」や「キッザニア」行くこと</li>
+          <li data-num="2　">2人だけで「ディズニーランド」などに行くこと</li>
+          <li data-num="3　">夏休みにみどりさんの家に泊まること</li>
+          <li data-num="4　" class="correct-choice">子どもだけで東京まで行くこと<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Câu gốc: "子ども2人だけで東京まで行かせるのはちょっと心配ですが、これもいい経験になると思っております" — chỉ rõ "これ" (điều này) là việc để 2 đứa trẻ TỰ ĐI đến Tokyo một mình, không phải việc đi chơi Disneyland nói chung.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>(Lược phần mở đầu) Chị Midori, cảm ơn chị đã mời các cháu đến chơi vào kỳ nghỉ hè. Các cháu đang rất mong chờ. Về nơi các cháu muốn đến, nghe nói là "Disneyland" và "Kidzania". Xin lỗi vì phiền chị, nhưng chị có thể đưa các cháu đi được không? Tất nhiên chi phí phát sinh tôi sẽ trả. Để 2 đứa trẻ tự đi đến Tokyo tôi có hơi lo lắng, nhưng nghĩ đây cũng là một trải nghiệm tốt. Sẽ làm phiền chị Midori nhiều, mong chị giúp đỡ. — Souso (lời kết thư)</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Khi câu hỏi hỏi về từ chỉ định như これ (điều này), cần lần ngược lại câu/đoạn văn ngay trước đó để xác định これ đang thay thế cho ý gì cụ thể — đây là kỹ năng đọc hiểu chỉ thị từ (指示語) rất hay xuất hiện trong đề N3.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 17 — Lịch thu gom rác cuối năm (年末年始のゴミのお知らせ)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">年末年始のゴミのお知らせ
+ゴミの<span class="keigo-term" data-jp="しゅうしゅう" data-vn="thu gom">収集</span>は12月29日から1月3日までお休みですのでぜったいにゴミを出さないでください。28日（火曜日）と4日（火曜日）は市のすべての地域で<span class="keigo-term" data-jp="もえるゴミ" data-vn="rác cháy được (rác hữu cơ)">燃えるゴミ</span>の収集を行います。東町と南町では月曜日が燃えるゴミ、火曜日が<span class="keigo-term" data-jp="びん" data-vn="chai (thủy tinh)">瓶</span>と<span class="keigo-term" data-jp="かん" data-vn="lon">缶</span>の収集日に当たっていますが、27日には瓶と缶の収集のみを行い、燃えるゴミの収集はありません。また1月4日（火曜日）の瓶と缶の収集はお休みになりますので特にご注意ください。
+　　　　　　　　　　　　　　　　　　　　　　大山市役所</div>
+      <div class="question-box">
+        <p class="q-text">問1　南町のゴミの収集はどうなるか。</p>
+        <ol class="choices">
+          <li data-num="1　" class="correct-choice">27日瓶と缶、28日燃えるゴミ、4日燃えるゴミ<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="2　">27日燃えるゴミと瓶と缶、28日燃えるゴミ、4日燃えるゴミ</li>
+          <li data-num="3　">27日燃えるゴミ、28日瓶と缶、4日燃えるゴミ</li>
+          <li data-num="4　">27日瓶と缶、28日燃えるゴミ、4日は休み</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bình thường Nam-machi: thứ 2 = rác cháy được, thứ 3 = chai/lon. Nhưng 27 (thứ 2) đặc biệt CHỈ thu chai/lon (không thu rác cháy được). 28 (thứ 3) toàn thành phố thu rác cháy được (ghi đè lịch thường). 4/1 (thứ 3) toàn thành phố cũng thu rác cháy được, dù việc thu chai/lon riêng của ngày này bị nghỉ — nhưng đó không ảnh hưởng đến việc thu rác cháy được.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Thông báo rác cuối năm đầu năm. Việc thu gom rác nghỉ từ 29/12 đến 3/1 nên tuyệt đối không được bỏ rác ra trong thời gian này. Ngày 28 (thứ Ba) và ngày 4 (thứ Ba) toàn bộ khu vực thành phố sẽ thu rác cháy được. Ở Higashi-machi và Minami-machi, thứ Hai là ngày thu rác cháy được, thứ Ba là ngày thu chai và lon, nhưng riêng ngày 27 chỉ thu chai và lon, không thu rác cháy được. Ngoài ra việc thu chai lon ngày 4/1 (thứ Ba) sẽ nghỉ, xin đặc biệt lưu ý. — Ủy ban thành phố Oyama</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài có lịch trình phức tạp với NHIỀU ngoại lệ chồng lên lịch thường — nên vẽ nhanh một bảng nhỏ (ngày - loại rác) trong đầu hoặc trên giấy nháp, ưu tiên áp dụng ngoại lệ được nêu sau cùng khi có mâu thuẫn với quy tắc chung.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 18 — Giày vẽ được (自分だけの品物)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">自分だけの品物がほしい人が増えています。ホワイトボードに描くように何でも描ける<span class="keigo-term" data-jp="めずらしい" data-vn="hiếm, lạ">珍しい</span>くつが<span class="keigo-term" data-jp="うりだされました" data-vn="được bán ra, được tung ra thị trường">売り出されました</span>。6色のペンで花や星、電車や車、何でも好きに<span class="keigo-term" data-jp="かけます" data-vn="vẽ được">描けます</span>。くつにペンを1本つけることができるので、外出中でも描き直すことができます。自分だけのデザインのくつをはきたいという気持ちもありますが、子供たちにとっては<span class="keigo-term" data-jp="むしろ" data-vn="đúng hơn là, thà rằng">むしろ</span>単純に面白いと言うだけの<span class="keigo-term" data-jp="きょうみをひく" data-vn="thu hút sự chú ý">興味を引く</span>材料になっているようです。</div>
+      <div class="question-box">
+        <p class="q-text">問1　この靴が子供に人気がある一番の理由はどれか。</p>
+        <ol class="choices">
+          <li data-num="1　">自分だけのデザインのくつをはきたいから</li>
+          <li data-num="2　">色々な色でいつでも好きな絵が描けるから</li>
+          <li data-num="3　" class="correct-choice">絵を描いたり消したりできて面白いから<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="4　">くつに6色のペンがつけられるので楽しいから</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài kết luận: đối với trẻ em, lý do chính là "単純に面白い" (đơn giản là thấy thú vị) nhờ có thể vẽ đi vẽ lại (描き直すことができます). Đáp án 1 là lý do của người lớn (muốn có thiết kế riêng), không phải của trẻ em theo bài.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Ngày càng nhiều người muốn có món đồ chỉ riêng mình sở hữu. Một loại giày hiếm có, có thể vẽ bất cứ thứ gì như vẽ lên bảng trắng, đã được bán ra thị trường. Với bút 6 màu có thể vẽ hoa, ngôi sao, tàu điện, ô tô... bất cứ gì mình thích. Vì có thể gắn kèm 1 cây bút vào giày nên ngay cả khi đang ra ngoài cũng có thể vẽ lại. Tuy có tâm lý muốn mang giày với thiết kế riêng của mình, nhưng đối với trẻ em thì đây có vẻ đơn thuần chỉ là thứ thu hút sự chú ý vì cảm giác thú vị.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài có 2 lý do được nêu (của người lớn và của trẻ em) — câu hỏi chỉ hỏi về lý do CỦA TRẺ EM (子供に人気がある理由), nên cần xác định đúng đối tượng trong câu hỏi trước khi chọn đáp án, tránh nhầm giữa hai nhóm đối tượng trong bài.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 19 — Kế hoạch du lịch gia đình (家族旅行の計画)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">家族で2泊3日の旅行を計画しています。祖母は何度も温泉に入ったり自然の中を散歩したりしたいそうです。母は静かなところならどこでもいいそうです。体の<span class="keigo-term" data-jp="つかれをとる" data-vn="giải tỏa mệt mỏi">疲れを取る</span>ために一つの場所でゆっくり過ごしたいそうです。家事から<span class="keigo-term" data-jp="かいほうされる" data-vn="được giải phóng">解放される</span>のが旅行の一番いい点だと言っています。私と弟は体を動かすことが好きですからスポーツ施設があるところを希望しています。父は日頃家族を<span class="keigo-term" data-jp="ほうりっぱなし" data-vn="bỏ mặc, để mặc">放りっぱなし</span>にしている<span class="keigo-term" data-jp="おわび" data-vn="lời xin lỗi">おわび</span>もかねてサービスすると言っています。東京から車で3時間ぐらいの山の近くでみんなが<span class="keigo-term" data-jp="まんぞくする" data-vn="hài lòng">満足する</span>ホテルを探したいです。</div>
+      <div class="question-box">
+        <p class="q-text">問1　旅行の条件に合わないのはどれか。</p>
+        <ol class="choices">
+          <li data-num="1　">温泉がある。</li>
+          <li data-num="2　" class="correct-choice">キャンプ場がとなりにある。<span class="answer-tag">✓ Đáp án đúng</span></li>
+          <li data-num="3　">2泊同じホテルにする。</li>
+          <li data-num="4　">テニスコートがある。</li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Bài không hề nhắc đến khu cắm trại (キャンプ場). Các điều kiện khác đều khớp: suối nước nóng (bà muốn), ở cùng 1 khách sạn 2 đêm (mẹ muốn nghỉ ngơi 1 chỗ), có sân tennis/cơ sở thể thao (tôi và em trai muốn).</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Gia đình tôi đang lên kế hoạch du lịch 2 đêm 3 ngày. Bà muốn tắm suối nước nóng nhiều lần và đi dạo trong thiên nhiên. Mẹ nói chỗ nào yên tĩnh cũng được, muốn ở một chỗ nghỉ ngơi thong thả để giải tỏa mệt mỏi cơ thể. Mẹ nói điểm tốt nhất của chuyến du lịch là được giải phóng khỏi việc nhà. Tôi và em trai thích vận động nên mong muốn nơi có cơ sở thể thao. Bố nói sẽ phục vụ mọi người, coi như lời xin lỗi vì ngày thường hay bỏ mặc gia đình. Tôi muốn tìm một khách sạn gần núi, cách Tokyo khoảng 3 tiếng lái xe, mà ai cũng hài lòng.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài liệt kê yêu cầu của NHIỀU nhân vật khác nhau (bà, mẹ, tôi/em trai, bố) — nên gạch chân yêu cầu của từng người khi đọc, rồi đối chiếu từng đáp án xem có khớp với ít nhất một yêu cầu đã nêu hay không; đáp án không khớp với ai cả chính là đáp án đúng.</div>
+    </div>
+  </div>
+
+  <div class="dokkai-item">
+    <div class="dokkai-header"><span>Bài 20 — Tiệc sinh nhật mẹ (母の誕生日パーティー)</span><span class="dokkai-arrow">▶</span></div>
+    <div class="dokkai-body">
+      <div class="passage-box">私の<span class="keigo-term" data-jp="しまい" data-vn="chị em gái">姉妹</span>は私をのぞいて3人です。来週母の誕生日があります。1人5000円集めて手作りのパーティーをする予定です。母に喜んでもらいたいので何がほしいかたずねたところ、もう何もいらないと言われました。みんなで相談した上でまず花が好きな母のために5000円の<span class="keigo-term" data-jp="はなたば" data-vn="bó hoa">花束</span>と5000円のアイスクリームのケーキを注文しました。ケーキは10%<span class="keigo-term" data-jp="わりびき" data-vn="giảm giá">割引</span>してくれました。それから母の好きなCDを3000円で買いました。当日の料理はみんなで作って<span class="keigo-term" data-jp="もちよる" data-vn="mỗi người mang một ít đến góp lại">持ち寄る</span>つもりです。<span class="keigo-term" data-jp="のこりの" data-vn="còn lại">残りの</span>お金でワインやそのほかの飲み物を買おうと思っています。</div>
+      <div class="question-box">
+        <p class="q-text">問1　飲み物代にいくら使うことができるか。</p>
+        <ol class="choices">
+          <li data-num="1　">2000円</li>
+          <li data-num="2　">2500円</li>
+          <li data-num="3　">7000円</li>
+          <li data-num="4　" class="correct-choice">7500円<span class="answer-tag">✓ Đáp án đúng</span></li>
+        </ol>
+        <div class="explain-box"><p class="box-label">Giải thích</p>Số chị em gồm cả người kể chuyện: 1 (tôi) + 3 (chị em) = 4 người, mỗi người góp 5000 yên → tổng 20.000 yên. Chi phí: hoa 5000 + bánh kem 5000 (giảm 10% → 4500) + CD 3000 = 12.500 yên. Còn lại: 20.000 − 12.500 = 7.500 yên dùng cho đồ uống.</div>
+      </div>
+      <div class="translate-box"><p class="box-label">Bản dịch</p>Chị em gái của tôi, không tính tôi, có 3 người. Tuần sau là sinh nhật mẹ. Chúng tôi dự định mỗi người góp 5000 yên để tổ chức tiệc tự làm. Vì muốn mẹ vui nên đã hỏi mẹ muốn gì, mẹ nói không cần gì cả. Sau khi bàn bạc, trước tiên vì mẹ thích hoa nên đã đặt bó hoa 5000 yên và bánh kem kem 5000 yên. Bánh kem được giảm giá 10%. Sau đó mua đĩa CD mẹ thích với giá 3000 yên. Món ăn hôm đó dự định mọi người tự nấu rồi mang đến góp chung. Số tiền còn lại dự định dùng để mua rượu vang và các đồ uống khác.</div>
+      <div class="tip-box"><p class="box-label">Hướng dẫn dịch</p>Bài dạng tính toán số học — cần đọc kỹ xem "tôi" có được tính vào số người góp tiền hay không (ở đây "姉妹は私をのぞいて3人" nghĩa là CHƯA TÍNH tôi, nên tổng số người là 4), và chú ý các khoản giảm giá (割引) khi tính tổng chi phí.</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanels.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.tab).classList.add('active');
+      localStorage.setItem('activeTab', btn.dataset.tab);
+    });
+  });
+  const saved = localStorage.getItem('activeTab');
+  if (saved && document.getElementById(saved)) {
+    tabButtons.forEach(b => b.classList.toggle('active', b.dataset.tab === saved));
+    tabPanels.forEach(p => p.classList.toggle('active', p.id === saved));
+  }
+
+  // Keigo term dropdown: click to show example, click again / mouseleave / click elsewhere to hide
+  document.querySelectorAll('.keigo-term').forEach(term => {
+    const popover = document.createElement('div');
+    popover.className = 'keigo-popover';
+    popover.innerHTML =
+      '<div class="popover-jp">' + (term.dataset.jp || '') + '</div>' +
+      '<div class="popover-vn">' + (term.dataset.vn || '') + '</div>';
+    term.appendChild(popover);
+
+    term.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = term.classList.contains('open');
+      document.querySelectorAll('.keigo-term.open').forEach(t => t.classList.remove('open'));
+      if (!isOpen) term.classList.add('open');
+    });
+
+    term.addEventListener('mouseleave', () => {
+      term.classList.remove('open');
+    });
+  });
+
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.keigo-term.open').forEach(t => t.classList.remove('open'));
+  });
+
+  // Dokkai accordion: click header to expand/collapse a passage
+  document.querySelectorAll('.dokkai-header').forEach(header => {
+    header.addEventListener('click', () => {
+      header.parentElement.classList.toggle('open');
+    });
+  });
+
+  // Dokkai quiz: user picks an answer, then gets marked correct/incorrect
+  document.querySelectorAll('.choices').forEach(list => {
+    // feedback line, inserted right after the choices list
+    const feedback = document.createElement('div');
+    feedback.className = 'feedback-line';
+    list.insertAdjacentElement('afterend', feedback);
+
+    // retry button, inserted after the explain-box (or after feedback if no explain-box)
+    const explainBox = list.parentElement.querySelector('.explain-box');
+    const retryBtn = document.createElement('button');
+    retryBtn.className = 'retry-btn';
+    retryBtn.type = 'button';
+    retryBtn.textContent = 'Làm lại';
+    (explainBox || feedback).insertAdjacentElement('afterend', retryBtn);
+
+    const items = Array.from(list.querySelectorAll('li'));
+
+    function reset() {
+      list.classList.remove('answered');
+      items.forEach(li => {
+        li.classList.remove('chosen-wrong');
+        const wt = li.querySelector('.wrong-tag');
+        if (wt) wt.remove();
+      });
+      feedback.textContent = '';
+      feedback.className = 'feedback-line';
+    }
+
+    retryBtn.addEventListener('click', reset);
+
+    items.forEach(li => {
+      li.addEventListener('click', () => {
+        if (list.classList.contains('answered')) return;
+        list.classList.add('answered');
+        const isCorrect = li.classList.contains('correct-choice');
+        if (isCorrect) {
+          feedback.textContent = '✓ Chính xác!';
+          feedback.classList.add('ok');
+        } else {
+          li.classList.add('chosen-wrong');
+          const wt = document.createElement('span');
+          wt.className = 'wrong-tag';
+          wt.textContent = '✗ Bạn đã chọn';
+          li.appendChild(wt);
+          feedback.textContent = '✗ Chưa đúng — đáp án đúng đã được tô xanh bên trên.';
+          feedback.classList.add('no');
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
