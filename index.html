@@ -219,6 +219,22 @@
   .translate-box { background: #eff6ff; border-left-color: #2563eb; }
   .tip-box { background: #f5f3ff; border-left-color: #7c3aed; }
   .box-label { font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.02em; margin: 0 0 4px; }
+
+  .vocab-search-box {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #e7e2da;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+  }
+  .vocab-search-box:focus { outline: none; border-color: #d97706; }
+  .vocab-count { font-size: 12px; color: #78716c; margin: -10px 0 16px; }
+  td.vk { white-space: nowrap; }
+  td.vex { font-size: 13px; line-height: 1.5; }
+  td.vex .jp-line { font-size: 14px; }
+  td.vex .vn-line { color: #78716c; font-size: 12px; }
 </style>
 </head>
 <body>
@@ -233,6 +249,7 @@
   <button class="tab-btn" data-tab="so-sanh">Mẫu so sánh</button>
   <button class="tab-btn" data-tab="cho-nhan">あげる・もらう・くれる</button>
   <button class="tab-btn" data-tab="dokkai">Đọc hiểu N3 (55+)</button>
+  <button class="tab-btn" data-tab="it-vocab">Từ vựng IT/BrSE</button>
 </div>
 
 <div id="chia-the" class="tab-panel active">
@@ -1193,6 +1210,195 @@
 
 </div>
 
+<div id="it-vocab" class="tab-panel">
+
+  <input type="text" class="vocab-search-box" id="vocab-search-input" placeholder="🔍 Tìm từ vựng (hán tự, hiragana, nghĩa, ví dụ...)">
+  <p class="vocab-count" id="vocab-count-label">105 từ vựng</p>
+
+  <div class="group-card">
+    <p class="cat-title">A. Quy trình phát triển phần mềm</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">要件定義</td><td>ようけんていぎ</td><td>xác định yêu cầu</td><td class="vex"><div class="jp-line">要件定義書を作成します。</div><div class="vn-line">Tôi sẽ tạo tài liệu xác định yêu cầu.</div></td></tr>
+      <tr><td class="vk">設計</td><td>せっけい</td><td>thiết kế</td><td class="vex"><div class="jp-line">システムの設計を見直します。</div><div class="vn-line">Tôi sẽ xem lại thiết kế hệ thống.</div></td></tr>
+      <tr><td class="vk">基本設計</td><td>きほんせっけい</td><td>thiết kế cơ bản</td><td class="vex"><div class="jp-line">基本設計書はもう完成しましたか。</div><div class="vn-line">Tài liệu thiết kế cơ bản đã hoàn thành chưa?</div></td></tr>
+      <tr><td class="vk">詳細設計</td><td>しょうさいせっけい</td><td>thiết kế chi tiết</td><td class="vex"><div class="jp-line">詳細設計をレビューしてください。</div><div class="vn-line">Hãy review thiết kế chi tiết.</div></td></tr>
+      <tr><td class="vk">実装</td><td>じっそう</td><td>triển khai (code)</td><td class="vex"><div class="jp-line">新機能の実装が終わりました。</div><div class="vn-line">Việc triển khai tính năng mới đã xong.</div></td></tr>
+      <tr><td class="vk">開発</td><td>かいはつ</td><td>phát triển</td><td class="vex"><div class="jp-line">このシステムを開発しています。</div><div class="vn-line">Đang phát triển hệ thống này.</div></td></tr>
+      <tr><td class="vk">単体テスト</td><td>たんたいテスト</td><td>unit test</td><td class="vex"><div class="jp-line">単体テストを実施します。</div><div class="vn-line">Sẽ thực hiện unit test.</div></td></tr>
+      <tr><td class="vk">結合テスト</td><td>けつごうテスト</td><td>integration test</td><td class="vex"><div class="jp-line">結合テストで問題が見つかりました。</div><div class="vn-line">Phát hiện vấn đề trong integration test.</div></td></tr>
+      <tr><td class="vk">総合テスト</td><td>そうごうテスト</td><td>system test</td><td class="vex"><div class="jp-line">総合テストは来週開始します。</div><div class="vn-line">System test sẽ bắt đầu tuần sau.</div></td></tr>
+      <tr><td class="vk">受入テスト</td><td>うけいれテスト</td><td>acceptance test (UAT)</td><td class="vex"><div class="jp-line">お客様の受入テストが始まりました。</div><div class="vn-line">UAT của khách hàng đã bắt đầu.</div></td></tr>
+      <tr><td class="vk">リリース</td><td>りりーす</td><td>release</td><td class="vex"><div class="jp-line">新バージョンをリリースします。</div><div class="vn-line">Sẽ release phiên bản mới.</div></td></tr>
+      <tr><td class="vk">保守</td><td>ほしゅ</td><td>bảo trì</td><td class="vex"><div class="jp-line">システムの保守を担当しています。</div><div class="vn-line">Tôi phụ trách bảo trì hệ thống.</div></td></tr>
+      <tr><td class="vk">運用</td><td>うんよう</td><td>vận hành</td><td class="vex"><div class="jp-line">運用チームに引き継ぎます。</div><div class="vn-line">Sẽ bàn giao cho đội vận hành.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">B. Lập trình / Code</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">仕様書</td><td>しようしょ</td><td>tài liệu đặc tả</td><td class="vex"><div class="jp-line">仕様書を確認してください。</div><div class="vn-line">Hãy xác nhận tài liệu đặc tả.</div></td></tr>
+      <tr><td class="vk">コーディング</td><td>こーでぃんぐ</td><td>coding</td><td class="vex"><div class="jp-line">コーディング規約を守ってください。</div><div class="vn-line">Hãy tuân thủ quy tắc coding.</div></td></tr>
+      <tr><td class="vk">ソースコード</td><td>そーすこーど</td><td>source code</td><td class="vex"><div class="jp-line">ソースコードをレビューします。</div><div class="vn-line">Sẽ review source code.</div></td></tr>
+      <tr><td class="vk">バージョン管理</td><td>ばーじょんかんり</td><td>quản lý phiên bản</td><td class="vex"><div class="jp-line">Gitでバージョン管理をしています。</div><div class="vn-line">Đang quản lý phiên bản bằng Git.</div></td></tr>
+      <tr><td class="vk">変数</td><td>へんすう</td><td>biến</td><td class="vex"><div class="jp-line">この変数の値が正しくありません。</div><div class="vn-line">Giá trị của biến này không đúng.</div></td></tr>
+      <tr><td class="vk">関数</td><td>かんすう</td><td>hàm</td><td class="vex"><div class="jp-line">この関数はエラーを返します。</div><div class="vn-line">Hàm này trả về lỗi.</div></td></tr>
+      <tr><td class="vk">引数</td><td>ひきすう</td><td>tham số, đối số</td><td class="vex"><div class="jp-line">引数の数が足りません。</div><div class="vn-line">Thiếu số lượng tham số.</div></td></tr>
+      <tr><td class="vk">戻り値</td><td>もどりち</td><td>giá trị trả về</td><td class="vex"><div class="jp-line">戻り値がnullになっています。</div><div class="vn-line">Giá trị trả về đang là null.</div></td></tr>
+      <tr><td class="vk">コメント</td><td>こめんと</td><td>chú thích, comment</td><td class="vex"><div class="jp-line">コードにコメントを書いてください。</div><div class="vn-line">Hãy viết comment vào code.</div></td></tr>
+      <tr><td class="vk">リファクタリング</td><td>りふぁくたりんぐ</td><td>tái cấu trúc code</td><td class="vex"><div class="jp-line">このコードをリファクタリングしましょう。</div><div class="vn-line">Hãy refactor đoạn code này.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">C. Bug / Testing</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">バグ</td><td>ばぐ</td><td>bug</td><td class="vex"><div class="jp-line">重大なバグが見つかりました。</div><div class="vn-line">Đã phát hiện bug nghiêm trọng.</div></td></tr>
+      <tr><td class="vk">不具合</td><td>ふぐあい</td><td>lỗi, sự cố</td><td class="vex"><div class="jp-line">不具合を修正しました。</div><div class="vn-line">Đã sửa lỗi.</div></td></tr>
+      <tr><td class="vk">障害</td><td>しょうがい</td><td>sự cố hệ thống</td><td class="vex"><div class="jp-line">サーバーで障害が発生しました。</div><div class="vn-line">Đã xảy ra sự cố ở server.</div></td></tr>
+      <tr><td class="vk">修正</td><td>しゅうせい</td><td>sửa chữa</td><td class="vex"><div class="jp-line">このバグの修正には時間がかかります。</div><div class="vn-line">Sửa bug này sẽ mất thời gian.</div></td></tr>
+      <tr><td class="vk">再現</td><td>さいげん</td><td>tái hiện (lỗi)</td><td class="vex"><div class="jp-line">このバグは再現できませんでした。</div><div class="vn-line">Không tái hiện được bug này.</div></td></tr>
+      <tr><td class="vk">デバッグ</td><td>でばっぐ</td><td>debug</td><td class="vex"><div class="jp-line">コードをデバッグしています。</div><div class="vn-line">Đang debug code.</div></td></tr>
+      <tr><td class="vk">テストケース</td><td>てすとけーす</td><td>test case</td><td class="vex"><div class="jp-line">テストケースを作成してください。</div><div class="vn-line">Hãy tạo test case.</div></td></tr>
+      <tr><td class="vk">テスト項目</td><td>てすとこうもく</td><td>hạng mục test</td><td class="vex"><div class="jp-line">テスト項目を確認しましょう。</div><div class="vn-line">Hãy kiểm tra hạng mục test.</div></td></tr>
+      <tr><td class="vk">エラーメッセージ</td><td>えらーめっせーじ</td><td>thông báo lỗi</td><td class="vex"><div class="jp-line">エラーメッセージが表示されました。</div><div class="vn-line">Đã hiển thị thông báo lỗi.</div></td></tr>
+      <tr><td class="vk">例外処理</td><td>れいがいしょり</td><td>xử lý ngoại lệ</td><td class="vex"><div class="jp-line">例外処理を追加してください。</div><div class="vn-line">Hãy thêm xử lý ngoại lệ.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">D. Server / Hạ tầng</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">サーバー</td><td>さーばー</td><td>server</td><td class="vex"><div class="jp-line">サーバーがダウンしました。</div><div class="vn-line">Server đã bị sập.</div></td></tr>
+      <tr><td class="vk">データベース</td><td>でーたべーす</td><td>database</td><td class="vex"><div class="jp-line">データベースに接続できません。</div><div class="vn-line">Không thể kết nối database.</div></td></tr>
+      <tr><td class="vk">ネットワーク</td><td>ねっとわーく</td><td>mạng</td><td class="vex"><div class="jp-line">ネットワークが不安定です。</div><div class="vn-line">Mạng không ổn định.</div></td></tr>
+      <tr><td class="vk">環境構築</td><td>かんきょうこうちく</td><td>dựng môi trường</td><td class="vex"><div class="jp-line">開発環境を構築します。</div><div class="vn-line">Sẽ dựng môi trường phát triển.</div></td></tr>
+      <tr><td class="vk">本番環境</td><td>ほんばんかんきょう</td><td>môi trường production</td><td class="vex"><div class="jp-line">本番環境にデプロイします。</div><div class="vn-line">Sẽ deploy lên môi trường production.</div></td></tr>
+      <tr><td class="vk">テスト環境</td><td>てすとかんきょう</td><td>môi trường test</td><td class="vex"><div class="jp-line">テスト環境で確認してください。</div><div class="vn-line">Hãy kiểm tra trên môi trường test.</div></td></tr>
+      <tr><td class="vk">デプロイ</td><td>でぷろい</td><td>deploy</td><td class="vex"><div class="jp-line">今夜デプロイを行います。</div><div class="vn-line">Tối nay sẽ thực hiện deploy.</div></td></tr>
+      <tr><td class="vk">バックアップ</td><td>ばっくあっぷ</td><td>sao lưu</td><td class="vex"><div class="jp-line">毎日バックアップを取っています。</div><div class="vn-line">Backup mỗi ngày.</div></td></tr>
+      <tr><td class="vk">セキュリティ</td><td>せきゅりてぃ</td><td>bảo mật</td><td class="vex"><div class="jp-line">セキュリティを強化する必要があります。</div><div class="vn-line">Cần tăng cường bảo mật.</div></td></tr>
+      <tr><td class="vk">アクセス権限</td><td>あくせすけんげん</td><td>quyền truy cập</td><td class="vex"><div class="jp-line">アクセス権限がありません。</div><div class="vn-line">Không có quyền truy cập.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">E. Họp / Giao tiếp</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">打ち合わせ</td><td>うちあわせ</td><td>cuộc họp trao đổi</td><td class="vex"><div class="jp-line">明日打ち合わせがあります。</div><div class="vn-line">Ngày mai có cuộc họp.</div></td></tr>
+      <tr><td class="vk">会議</td><td>かいぎ</td><td>cuộc họp</td><td class="vex"><div class="jp-line">会議室を予約してください。</div><div class="vn-line">Hãy đặt phòng họp.</div></td></tr>
+      <tr><td class="vk">議事録</td><td>ぎじろく</td><td>biên bản họp</td><td class="vex"><div class="jp-line">議事録を共有します。</div><div class="vn-line">Sẽ chia sẻ biên bản họp.</div></td></tr>
+      <tr><td class="vk">進捗</td><td>しんちょく</td><td>tiến độ</td><td class="vex"><div class="jp-line">進捗状況を報告してください。</div><div class="vn-line">Hãy báo cáo tình hình tiến độ.</div></td></tr>
+      <tr><td class="vk">報告</td><td>ほうこく</td><td>báo cáo</td><td class="vex"><div class="jp-line">週次報告を提出します。</div><div class="vn-line">Sẽ nộp báo cáo hàng tuần.</div></td></tr>
+      <tr><td class="vk">連絡</td><td>れんらく</td><td>liên lạc</td><td class="vex"><div class="jp-line">何かあればすぐにご連絡ください。</div><div class="vn-line">Có gì thì xin liên lạc ngay.</div></td></tr>
+      <tr><td class="vk">相談</td><td>そうだん</td><td>trao đổi, bàn bạc</td><td class="vex"><div class="jp-line">この件について相談したいです。</div><div class="vn-line">Tôi muốn trao đổi về việc này.</div></td></tr>
+      <tr><td class="vk">確認</td><td>かくにん</td><td>xác nhận</td><td class="vex"><div class="jp-line">内容をご確認ください。</div><div class="vn-line">Xin hãy xác nhận nội dung.</div></td></tr>
+      <tr><td class="vk">承認</td><td>しょうにん</td><td>phê duyệt</td><td class="vex"><div class="jp-line">この変更は承認が必要です。</div><div class="vn-line">Thay đổi này cần được phê duyệt.</div></td></tr>
+      <tr><td class="vk">質問</td><td>しつもん</td><td>câu hỏi</td><td class="vex"><div class="jp-line">ご質問があればどうぞ。</div><div class="vn-line">Nếu có câu hỏi xin cứ hỏi.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">F. Quản lý dự án</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">納期</td><td>のうき</td><td>hạn giao (deadline)</td><td class="vex"><div class="jp-line">納期に間に合いません。</div><div class="vn-line">Không kịp hạn giao.</div></td></tr>
+      <tr><td class="vk">工数</td><td>こうすう</td><td>công sức (man-hour)</td><td class="vex"><div class="jp-line">この作業の工数を見積もってください。</div><div class="vn-line">Hãy ước tính man-hour cho công việc này.</div></td></tr>
+      <tr><td class="vk">見積もり</td><td>みつもり</td><td>ước tính, báo giá</td><td class="vex"><div class="jp-line">見積もりを送ります。</div><div class="vn-line">Sẽ gửi báo giá.</div></td></tr>
+      <tr><td class="vk">スケジュール</td><td>すけじゅーる</td><td>lịch trình</td><td class="vex"><div class="jp-line">スケジュールを調整しましょう。</div><div class="vn-line">Hãy điều chỉnh lịch trình.</div></td></tr>
+      <tr><td class="vk">遅延</td><td>ちえん</td><td>trễ hạn</td><td class="vex"><div class="jp-line">プロジェクトに遅延が発生しています。</div><div class="vn-line">Dự án đang bị trễ.</div></td></tr>
+      <tr><td class="vk">優先順位</td><td>ゆうせんじゅんい</td><td>thứ tự ưu tiên</td><td class="vex"><div class="jp-line">タスクの優先順位を決めます。</div><div class="vn-line">Sẽ quyết định thứ tự ưu tiên công việc.</div></td></tr>
+      <tr><td class="vk">タスク</td><td>たすく</td><td>công việc, task</td><td class="vex"><div class="jp-line">このタスクを今日中に終わらせます。</div><div class="vn-line">Sẽ hoàn thành task này trong hôm nay.</div></td></tr>
+      <tr><td class="vk">担当者</td><td>たんとうしゃ</td><td>người phụ trách</td><td class="vex"><div class="jp-line">この件の担当者は誰ですか。</div><div class="vn-line">Ai là người phụ trách việc này?</div></td></tr>
+      <tr><td class="vk">責任者</td><td>せきにんしゃ</td><td>người chịu trách nhiệm</td><td class="vex"><div class="jp-line">プロジェクトの責任者に確認します。</div><div class="vn-line">Sẽ xác nhận với người chịu trách nhiệm dự án.</div></td></tr>
+      <tr><td class="vk">予算</td><td>よさん</td><td>ngân sách</td><td class="vex"><div class="jp-line">予算内で対応します。</div><div class="vn-line">Sẽ xử lý trong phạm vi ngân sách.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">G. Email / Văn phòng</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">添付</td><td>てんぷ</td><td>đính kèm</td><td class="vex"><div class="jp-line">ファイルを添付いたします。</div><div class="vn-line">Tôi xin đính kèm file.</div></td></tr>
+      <tr><td class="vk">資料</td><td>しりょう</td><td>tài liệu</td><td class="vex"><div class="jp-line">資料をお送りします。</div><div class="vn-line">Tôi sẽ gửi tài liệu.</div></td></tr>
+      <tr><td class="vk">宛先</td><td>あてさき</td><td>địa chỉ người nhận</td><td class="vex"><div class="jp-line">宛先を確認してください。</div><div class="vn-line">Hãy kiểm tra địa chỉ người nhận.</div></td></tr>
+      <tr><td class="vk">件名</td><td>けんめい</td><td>tiêu đề (email)</td><td class="vex"><div class="jp-line">件名にプロジェクト名を入れてください。</div><div class="vn-line">Hãy ghi tên dự án vào tiêu đề.</div></td></tr>
+      <tr><td class="vk">返信</td><td>へんしん</td><td>trả lời (email)</td><td class="vex"><div class="jp-line">至急ご返信ください。</div><div class="vn-line">Xin trả lời gấp.</div></td></tr>
+      <tr><td class="vk">転送</td><td>てんそう</td><td>chuyển tiếp</td><td class="vex"><div class="jp-line">このメールを転送します。</div><div class="vn-line">Sẽ chuyển tiếp email này.</div></td></tr>
+      <tr><td class="vk">署名</td><td>しょめい</td><td>chữ ký (email)</td><td class="vex"><div class="jp-line">署名を忘れずに入れてください。</div><div class="vn-line">Đừng quên thêm chữ ký.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">H. Vai trò / Team</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">開発者</td><td>かいはつしゃ</td><td>lập trình viên</td><td class="vex"><div class="jp-line">開発者と相談します。</div><div class="vn-line">Sẽ trao đổi với lập trình viên.</div></td></tr>
+      <tr><td class="vk">顧客</td><td>こきゃく</td><td>khách hàng</td><td class="vex"><div class="jp-line">顧客の要望を確認します。</div><div class="vn-line">Sẽ xác nhận yêu cầu của khách hàng.</div></td></tr>
+      <tr><td class="vk">発注者</td><td>はっちゅうしゃ</td><td>bên đặt hàng</td><td class="vex"><div class="jp-line">発注者に確認が必要です。</div><div class="vn-line">Cần xác nhận với bên đặt hàng.</div></td></tr>
+      <tr><td class="vk">委託</td><td>いたく</td><td>ủy thác, thuê ngoài</td><td class="vex"><div class="jp-line">この作業は委託しています。</div><div class="vn-line">Công việc này đang thuê ngoài.</div></td></tr>
+      <tr><td class="vk">ブリッジエンジニア</td><td>ぶりっじえんじにあ</td><td>BrSE</td><td class="vex"><div class="jp-line">私はブリッジエンジニアとして働いています。</div><div class="vn-line">Tôi làm việc với vai trò BrSE.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">I. Thao tác / Chức năng hệ thống</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">機能</td><td>きのう</td><td>chức năng</td><td class="vex"><div class="jp-line">新しい機能を追加します。</div><div class="vn-line">Sẽ thêm chức năng mới.</div></td></tr>
+      <tr><td class="vk">画面</td><td>がめん</td><td>màn hình</td><td class="vex"><div class="jp-line">この画面のデザインを変更します。</div><div class="vn-line">Sẽ thay đổi thiết kế màn hình này.</div></td></tr>
+      <tr><td class="vk">操作</td><td>そうさ</td><td>thao tác</td><td class="vex"><div class="jp-line">簡単な操作でできます。</div><div class="vn-line">Có thể làm với thao tác đơn giản.</div></td></tr>
+      <tr><td class="vk">入力</td><td>にゅうりょく</td><td>nhập liệu</td><td class="vex"><div class="jp-line">データを入力してください。</div><div class="vn-line">Hãy nhập dữ liệu.</div></td></tr>
+      <tr><td class="vk">出力</td><td>しゅつりょく</td><td>xuất ra</td><td class="vex"><div class="jp-line">結果を出力します。</div><div class="vn-line">Sẽ xuất kết quả.</div></td></tr>
+      <tr><td class="vk">更新</td><td>こうしん</td><td>cập nhật</td><td class="vex"><div class="jp-line">データを更新しました。</div><div class="vn-line">Đã cập nhật dữ liệu.</div></td></tr>
+      <tr><td class="vk">削除</td><td>さくじょ</td><td>xóa</td><td class="vex"><div class="jp-line">このファイルを削除してください。</div><div class="vn-line">Hãy xóa file này.</div></td></tr>
+      <tr><td class="vk">登録</td><td>とうろく</td><td>đăng ký</td><td class="vex"><div class="jp-line">ユーザーを登録します。</div><div class="vn-line">Sẽ đăng ký người dùng.</div></td></tr>
+      <tr><td class="vk">検索</td><td>けんさく</td><td>tìm kiếm</td><td class="vex"><div class="jp-line">キーワードで検索できます。</div><div class="vn-line">Có thể tìm kiếm bằng từ khóa.</div></td></tr>
+      <tr><td class="vk">一覧</td><td>いちらん</td><td>danh sách</td><td class="vex"><div class="jp-line">ユーザー一覧を表示します。</div><div class="vn-line">Sẽ hiển thị danh sách người dùng.</div></td></tr>
+      <tr><td class="vk">認証</td><td>にんしょう</td><td>xác thực</td><td class="vex"><div class="jp-line">ログイン認証に失敗しました。</div><div class="vn-line">Xác thực đăng nhập thất bại.</div></td></tr>
+      <tr><td class="vk">権限</td><td>けんげん</td><td>quyền hạn</td><td class="vex"><div class="jp-line">管理者権限が必要です。</div><div class="vn-line">Cần quyền quản trị viên.</div></td></tr>
+      <tr><td class="vk">処理</td><td>しょり</td><td>xử lý</td><td class="vex"><div class="jp-line">データの処理に時間がかかります。</div><div class="vn-line">Xử lý dữ liệu mất thời gian.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">J. Xử lý sự cố & chất lượng</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">対応</td><td>たいおう</td><td>đối ứng, xử lý</td><td class="vex"><div class="jp-line">早急に対応します。</div><div class="vn-line">Sẽ xử lý gấp.</div></td></tr>
+      <tr><td class="vk">影響範囲</td><td>えいきょうはんい</td><td>phạm vi ảnh hưởng</td><td class="vex"><div class="jp-line">影響範囲を調査してください。</div><div class="vn-line">Hãy điều tra phạm vi ảnh hưởng.</div></td></tr>
+      <tr><td class="vk">原因</td><td>げんいん</td><td>nguyên nhân</td><td class="vex"><div class="jp-line">原因を特定しました。</div><div class="vn-line">Đã xác định được nguyên nhân.</div></td></tr>
+      <tr><td class="vk">対策</td><td>たいさく</td><td>biện pháp đối phó</td><td class="vex"><div class="jp-line">再発防止の対策を考えます。</div><div class="vn-line">Sẽ nghĩ biện pháp phòng ngừa tái diễn.</div></td></tr>
+      <tr><td class="vk">改善</td><td>かいぜん</td><td>cải tiến</td><td class="vex"><div class="jp-line">パフォーマンスを改善します。</div><div class="vn-line">Sẽ cải thiện hiệu năng.</div></td></tr>
+      <tr><td class="vk">効率</td><td>こうりつ</td><td>hiệu suất</td><td class="vex"><div class="jp-line">作業の効率を上げたいです。</div><div class="vn-line">Muốn nâng cao hiệu suất công việc.</div></td></tr>
+      <tr><td class="vk">品質</td><td>ひんしつ</td><td>chất lượng</td><td class="vex"><div class="jp-line">品質を確保することが重要です。</div><div class="vn-line">Đảm bảo chất lượng là quan trọng.</div></td></tr>
+      <tr><td class="vk">保証</td><td>ほしょう</td><td>đảm bảo</td><td class="vex"><div class="jp-line">動作を保証できません。</div><div class="vn-line">Không thể đảm bảo hoạt động.</div></td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">K. Tiến độ công việc</p>
+    <table>
+      <tr><th>Hán tự</th><th>Hiragana</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="vk">完了</td><td>かんりょう</td><td>hoàn thành</td><td class="vex"><div class="jp-line">タスクが完了しました。</div><div class="vn-line">Task đã hoàn thành.</div></td></tr>
+      <tr><td class="vk">着手</td><td>ちゃくしゅ</td><td>bắt tay vào làm</td><td class="vex"><div class="jp-line">来週から着手します。</div><div class="vn-line">Sẽ bắt tay vào làm từ tuần sau.</div></td></tr>
+      <tr><td class="vk">中断</td><td>ちゅうだん</td><td>tạm dừng</td><td class="vex"><div class="jp-line">作業を中断しました。</div><div class="vn-line">Đã tạm dừng công việc.</div></td></tr>
+      <tr><td class="vk">再開</td><td>さいかい</td><td>tiếp tục lại</td><td class="vex"><div class="jp-line">明日作業を再開します。</div><div class="vn-line">Ngày mai sẽ tiếp tục công việc.</div></td></tr>
+      <tr><td class="vk">引き継ぎ</td><td>ひきつぎ</td><td>bàn giao</td><td class="vex"><div class="jp-line">業務の引き継ぎを行います。</div><div class="vn-line">Sẽ thực hiện bàn giao công việc.</div></td></tr>
+      <tr><td class="vk">提案</td><td>ていあん</td><td>đề xuất</td><td class="vex"><div class="jp-line">新しい方法を提案します。</div><div class="vn-line">Sẽ đề xuất phương pháp mới.</div></td></tr>
+      <tr><td class="vk">課題</td><td>かだい</td><td>vấn đề cần giải quyết</td><td class="vex"><div class="jp-line">いくつかの課題が残っています。</div><div class="vn-line">Còn lại vài vấn đề cần giải quyết.</div></td></tr>
+      <tr><td class="vk">制約</td><td>せいやく</td><td>ràng buộc</td><td class="vex"><div class="jp-line">時間的な制約があります。</div><div class="vn-line">Có ràng buộc về thời gian.</div></td></tr>
+      <tr><td class="vk">要望</td><td>ようぼう</td><td>nguyện vọng, yêu cầu</td><td class="vex"><div class="jp-line">お客様の要望を伺います。</div><div class="vn-line">Sẽ lắng nghe yêu cầu của khách hàng.</div></td></tr>
+    </table>
+  </div>
+
+</div>
+
 <script>
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
@@ -1235,6 +1441,29 @@
   document.addEventListener('click', () => {
     document.querySelectorAll('.keigo-term.open').forEach(t => t.classList.remove('open'));
   });
+
+  // IT/BrSE vocab search filter
+  const vocabInput = document.getElementById('vocab-search-input');
+  const vocabCountLabel = document.getElementById('vocab-count-label');
+  if (vocabInput) {
+    const vocabRows = Array.from(document.querySelectorAll('#it-vocab table tr')).filter(tr => !tr.querySelector('th'));
+    const totalVocab = vocabRows.length;
+    vocabInput.addEventListener('input', () => {
+      const q = vocabInput.value.trim().toLowerCase();
+      let visible = 0;
+      vocabRows.forEach(tr => {
+        const match = tr.textContent.toLowerCase().includes(q);
+        tr.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      // hide category cards with no visible rows
+      document.querySelectorAll('#it-vocab .group-card').forEach(card => {
+        const anyVisible = Array.from(card.querySelectorAll('tbody tr, table tr')).some(tr => !tr.querySelector('th') && tr.style.display !== 'none');
+        card.style.display = anyVisible ? '' : 'none';
+      });
+      vocabCountLabel.textContent = q ? (visible + ' / ' + totalVocab + ' từ khớp') : (totalVocab + ' từ vựng');
+    });
+  }
 
   // Dokkai accordion: click header to expand/collapse a passage
   document.querySelectorAll('.dokkai-header').forEach(header => {
