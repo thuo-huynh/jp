@@ -235,6 +235,41 @@
   td.vex { font-size: 13px; line-height: 1.5; }
   td.vex .jp-line { font-size: 14px; }
   td.vex .vn-line { color: #78716c; font-size: 12px; }
+
+  .qa-item {
+    border: 1px solid #e7e2da;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    background: #fff;
+  }
+  .qa-question {
+    font-weight: 700;
+    font-size: 15px;
+    color: #1c1917;
+    margin: 0 0 4px;
+  }
+  .qa-question .furigana-line { font-size: 12px; color: #a8a29e; font-weight: 400; display: block; margin-top: 2px; }
+  .qa-question-vn { font-size: 12.5px; color: #78716c; margin: 0 0 10px; font-style: italic; }
+  .qa-answer-box {
+    background: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .qa-answer-box .a-vn { color: #57534e; font-size: 12.5px; margin-top: 6px; line-height: 1.5; }
+  .qa-vocab { margin-top: 8px; font-size: 12px; color: #92400e; }
+  .self-intro-box {
+    background: #fafaf9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 18px 20px;
+    white-space: pre-line;
+    font-size: 15.5px;
+    line-height: 2.1;
+  }
 </style>
 </head>
 <body>
@@ -250,6 +285,7 @@
   <button class="tab-btn" data-tab="cho-nhan">あげる・もらう・くれる</button>
   <button class="tab-btn" data-tab="dokkai">Đọc hiểu N3 (55+)</button>
   <button class="tab-btn" data-tab="it-vocab">Từ vựng IT/BrSE</button>
+  <button class="tab-btn" data-tab="interview">Phỏng vấn IT (N3)</button>
 </div>
 
 <div id="chia-the" class="tab-panel active">
@@ -1395,6 +1431,250 @@
       <tr><td class="vk">制約</td><td>せいやく</td><td>ràng buộc</td><td class="vex"><div class="jp-line">時間的な制約があります。</div><div class="vn-line">Có ràng buộc về thời gian.</div></td></tr>
       <tr><td class="vk">要望</td><td>ようぼう</td><td>nguyện vọng, yêu cầu</td><td class="vex"><div class="jp-line">お客様の要望を伺います。</div><div class="vn-line">Sẽ lắng nghe yêu cầu của khách hàng.</div></td></tr>
     </table>
+  </div>
+
+</div>
+
+<div id="interview" class="tab-panel">
+
+  <p class="rule">Chuẩn bị cho phỏng vấn technical bằng tiếng Nhật (trình độ N3). Dựa theo hồ sơ: 5 năm ở Hitachi (nhúng → Web backend), hiện tại backend ở công ty Âu Mỹ, đã lâu không dùng tiếng Nhật trong công việc.</p>
+
+  <div class="group-card">
+    <p class="cat-title">Mẫu giới thiệu bản thân (自己紹介)</p>
+    <div class="self-intro-box">はじめまして。〇〇と申します。本日はよろしくお願いいたします。
+
+私は日本語能力試験N3を取得しています。
+
+大学卒業後、日立で5年間働きました。最初の数年は組み込みソフトウェアの開発を担当していましたが、その後Webのバックエンド開発に異動し、そこでの経験を積みました。
+
+現在はヨーロッパ系の会社でバックエンドエンジニアとして働いています。
+
+今の仕事では日本語を使う機会があまりありませんが、また日本語を使いながら働きたいと思い、今回応募いたしました。
+
+よろしくお願いいたします。</div>
+    <div class="translate-box"><p class="box-label">Bản dịch</p>Xin chào, tôi tên là 〇〇. Hôm nay rất mong được anh/chị giúp đỡ. Tôi có chứng chỉ năng lực tiếng Nhật N3. Sau khi tốt nghiệp đại học, tôi đã làm việc 5 năm tại Hitachi. Những năm đầu tôi phụ trách phát triển phần mềm nhúng, sau đó chuyển sang phát triển backend cho Web và tích lũy kinh nghiệm ở mảng đó. Hiện tại tôi đang làm kỹ sư backend tại một công ty châu Âu. Công việc hiện tại không có nhiều cơ hội dùng tiếng Nhật, nhưng tôi muốn được làm việc và sử dụng tiếng Nhật trở lại nên đã ứng tuyển lần này. Rất mong được anh/chị giúp đỡ.</div>
+    <div class="tip-box"><p class="box-label">Mẹo tùy biến</p>Thay 〇〇 bằng tên bạn. Nếu muốn nói cụ thể hơn về mảng backend (ngôn ngữ, framework), thêm câu: 「主にJava/Pythonを使ってバックエンド開発をしています。」(Tôi chủ yếu dùng Java/Python để phát triển backend). Luyện nói phần này thật trôi chảy vì gần như chắc chắn sẽ được hỏi đầu tiên.</div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Câu hỏi về kinh nghiệm làm việc</p>
+
+    <div class="qa-item">
+      <p class="qa-question">今までどんな仕事をしてきましたか。<span class="furigana-line">いままでどんなしごとをしてきましたか</span></p>
+      <p class="qa-question-vn">Từ trước đến giờ bạn đã làm những công việc gì?</p>
+      <div class="qa-answer-box">日立で5年間働きました。最初は組み込みの仕事をしていましたが、その後Webのバックエンド開発の仕事に変わりました。今はヨーロッパ系の会社でバックエンドエンジニアをしています。
+        <div class="a-vn">Tôi đã làm việc 5 năm ở Hitachi. Ban đầu tôi làm mảng nhúng, sau đó chuyển sang làm backend cho Web. Hiện tại tôi đang làm kỹ sư backend ở một công ty châu Âu.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 組み込み(くみこみ) mảng nhúng ・ バックエンド backend ・ 変わる chuyển đổi</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">なぜ組み込みからWebの仕事に変わったのですか。<span class="furigana-line">なぜくみこみからうぇぶのしごとにかわったのですか</span></p>
+      <p class="qa-question-vn">Tại sao bạn chuyển từ mảng nhúng sang Web?</p>
+      <div class="qa-answer-box">Webの技術にもっと興味があったからです。それに、Webの仕事のほうが新しい技術を早く学べると思いました。
+        <div class="a-vn">Vì tôi có hứng thú hơn với công nghệ Web. Ngoài ra, tôi nghĩ làm Web thì có thể học công nghệ mới nhanh hơn.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 興味(きょうみ) hứng thú ・ 技術(ぎじゅつ) công nghệ ・ 学ぶ(まなぶ) học hỏi</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">バックエンドの仕事でどんなことをしていますか。<span class="furigana-line">ばっくえんどのしごとでどんなことをしていますか</span></p>
+      <p class="qa-question-vn">Trong công việc backend bạn làm những gì?</p>
+      <div class="qa-answer-box">主にAPIの開発とデータベースの設計をしています。それから、バグの修正やパフォーマンスの改善もしています。
+        <div class="a-vn">Tôi chủ yếu phát triển API và thiết kế database. Ngoài ra tôi cũng sửa lỗi và cải thiện hiệu năng.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 主に(おもに) chủ yếu ・ 設計(せっけい) thiết kế ・ パフォーマンス hiệu năng</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">今までで一番大変だったことは何ですか。<span class="furigana-line">いままででいちばんたいへんだったことはなんですか</span></p>
+      <p class="qa-question-vn">Điều khó khăn nhất bạn từng trải qua là gì?</p>
+      <div class="qa-answer-box">本番環境で大きな障害が発生したときです。原因を調査して、チームと協力して早く解決しました。その経験から、問題が起きても落ち着いて対応することの大切さを学びました。
+        <div class="a-vn">Là lúc xảy ra sự cố lớn ở môi trường production. Tôi đã điều tra nguyên nhân và hợp tác với team để giải quyết nhanh chóng. Từ trải nghiệm đó, tôi học được tầm quan trọng của việc bình tĩnh xử lý khi có sự cố.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 障害(しょうがい) sự cố ・ 調査する(ちょうさする) điều tra ・ 協力する(きょうりょくする) hợp tác</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">どんなプロジェクトが一番印象に残っていますか。<span class="furigana-line">どんなぷろじぇくとがいちばんいんしょうにのこっていますか</span></p>
+      <p class="qa-question-vn">Dự án nào để lại ấn tượng nhất với bạn?</p>
+      <div class="qa-answer-box">大規模なシステムのリプレイスプロジェクトです。古いシステムを新しい技術に置き換える仕事で、大変でしたが多くのことを学びました。
+        <div class="a-vn">Là dự án thay thế hệ thống quy mô lớn. Công việc thay hệ thống cũ bằng công nghệ mới, tuy vất vả nhưng tôi đã học được nhiều điều.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 大規模(だいきぼ) quy mô lớn ・ 置き換える(おきかえる) thay thế</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">チームでは主にどんな役割をしていましたか。<span class="furigana-line">ちーむではおもにどんなやくわりをしていましたか</span></p>
+      <p class="qa-question-vn">Trong team bạn chủ yếu đảm nhận vai trò gì?</p>
+      <div class="qa-answer-box">主に設計とコードレビューを担当していました。後輩のサポートもしていました。
+        <div class="a-vn">Tôi chủ yếu phụ trách thiết kế và review code. Tôi cũng hỗ trợ các đồng nghiệp cấp dưới.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 役割(やくわり) vai trò ・ 後輩(こうはい) đàn em, hậu bối ・ サポート hỗ trợ</p>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Câu hỏi về kỹ thuật chuyên môn</p>
+
+    <div class="qa-item">
+      <p class="qa-question">得意なプログラミング言語は何ですか。<span class="furigana-line">とくいなぷろぐらみんぐげんごはなんですか</span></p>
+      <p class="qa-question-vn">Ngôn ngữ lập trình bạn giỏi/mạnh nhất là gì?</p>
+      <div class="qa-answer-box">Javaが一番得意です。それから、PythonやSQLも使うことができます。
+        <div class="a-vn">Tôi giỏi nhất là Java. Ngoài ra tôi cũng có thể dùng Python và SQL.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 得意(とくい) sở trường, giỏi ・ 言語(げんご) ngôn ngữ</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">データベースの経験はありますか。<span class="furigana-line">でーたべーすのけいけんはありますか</span></p>
+      <p class="qa-question-vn">Bạn có kinh nghiệm về database không?</p>
+      <div class="qa-answer-box">はい、あります。MySQLやPostgreSQLを使ってデータベースを設計した経験があります。SQLでのデータ処理にも慣れています。
+        <div class="a-vn">Vâng, tôi có. Tôi từng có kinh nghiệm thiết kế database bằng MySQL và PostgreSQL. Tôi cũng quen với việc xử lý dữ liệu bằng SQL.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 経験(けいけん) kinh nghiệm ・ 慣れる(なれる) quen thuộc</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">組み込みとWebの仕事の違いは何だと思いますか。<span class="furigana-line">くみこみとうぇぶのしごとのちがいはなんだとおもいますか</span></p>
+      <p class="qa-question-vn">Bạn nghĩ sự khác biệt giữa công việc nhúng và Web là gì?</p>
+      <div class="qa-answer-box">組み込みはハードウェアと密接に関係していて、メモリなどの制約が多いです。一方、Webはユーザーの数が多く、パフォーマンスやセキュリティがとても重要だと思います。
+        <div class="a-vn">Mảng nhúng liên quan mật thiết đến phần cứng, có nhiều ràng buộc như bộ nhớ. Còn Web thì có nhiều người dùng, tôi nghĩ hiệu năng và bảo mật rất quan trọng.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 密接に(みっせつに) mật thiết ・ 制約(せいやく) ràng buộc ・ セキュリティ bảo mật</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">難しい問題が起きたとき、どうやって解決しますか。<span class="furigana-line">むずかしいもんだいがおきたとき、どうやってかいけつしますか</span></p>
+      <p class="qa-question-vn">Khi gặp vấn đề khó, bạn giải quyết như thế nào?</p>
+      <div class="qa-answer-box">まず原因を調べます。それでもわからない場合は、チームメンバーに相談します。一人で悩まず、みんなで解決することが大切だと思っています。
+        <div class="a-vn">Trước tiên tôi tìm hiểu nguyên nhân. Nếu vẫn không rõ, tôi sẽ trao đổi với thành viên trong team. Tôi nghĩ điều quan trọng là không tự mình băn khoăn một mình mà giải quyết cùng mọi người.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 調べる(しらべる) tìm hiểu ・ 相談する(そうだんする) trao đổi ・ 悩む(なやむ) băn khoăn</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">どんな開発手法を使っていますか。<span class="furigana-line">どんなかいはつしゅほうをつかっていますか</span></p>
+      <p class="qa-question-vn">Bạn dùng phương pháp phát triển nào? (Agile, Scrum...)</p>
+      <div class="qa-answer-box">アジャイル開発を使っています。2週間ごとにスプリントを行っています。
+        <div class="a-vn">Tôi dùng phương pháp phát triển Agile. Thực hiện sprint mỗi 2 tuần một lần.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 開発手法(かいはつしゅほう) phương pháp phát triển ・ スプリント sprint</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">クラウドサービスを使ったことがありますか。<span class="furigana-line">くらうどさーびすをつかったことがありますか</span></p>
+      <p class="qa-question-vn">Bạn đã từng dùng dịch vụ cloud chưa? (AWS, Azure, GCP...)</p>
+      <div class="qa-answer-box">はい、AWSを使ったことがあります。EC2やS3などのサービスを使ってシステムを構築しました。
+        <div class="a-vn">Vâng, tôi đã từng dùng AWS. Tôi đã dựng hệ thống bằng các dịch vụ như EC2, S3.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: クラウド cloud ・ 構築する(こうちくする) xây dựng, dựng lên</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">テストはどうやって書いていますか。<span class="furigana-line">てすとはどうやってかいていますか</span></p>
+      <p class="qa-question-vn">Bạn viết test như thế nào?</p>
+      <div class="qa-answer-box">主に単体テストを書いています。コードを変更するたびに、テストを実行してバグがないか確認しています。
+        <div class="a-vn">Tôi chủ yếu viết unit test. Mỗi khi thay đổi code, tôi chạy test để kiểm tra không có bug.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 単体テスト(たんたいてすと) unit test ・ 変更する(へんこうする) thay đổi ・ 実行する(じっこうする) thực thi</p>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Câu hỏi liên quan đến AI</p>
+
+    <div class="qa-item">
+      <p class="qa-question">仕事でAIツールを使ったことがありますか。<span class="furigana-line">しごとであいつーるをつかったことがありますか</span></p>
+      <p class="qa-question-vn">Bạn đã dùng công cụ AI trong công việc chưa?</p>
+      <div class="qa-answer-box">はい、あります。コードを書くときにGitHub Copilotを使っています。それから、ドキュメントを書くときにChatGPTも使うことがあります。
+        <div class="a-vn">Vâng, có. Khi viết code tôi dùng GitHub Copilot. Ngoài ra khi viết tài liệu tôi cũng có dùng ChatGPT.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: ツール công cụ ・ ドキュメント tài liệu</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">ChatGPTやCopilotのようなAIツールについてどう思いますか。<span class="furigana-line">ちゃっとじーぴーてぃーやこぱいろっとのようなあいつーるについてどうおもいますか</span></p>
+      <p class="qa-question-vn">Bạn nghĩ gì về các công cụ AI như ChatGPT, Copilot?</p>
+      <div class="qa-answer-box">とても便利だと思います。簡単なコードを早く書けますし、わからないことをすぐに調べられます。でも、AIの答えが必ず正しいとは限らないので、自分で確認することも大切だと思います。
+        <div class="a-vn">Tôi nghĩ rất tiện lợi. Có thể viết code đơn giản nhanh hơn, và tra cứu ngay những điều chưa biết. Nhưng câu trả lời của AI không phải lúc nào cũng đúng nên tôi nghĩ việc tự mình kiểm tra lại cũng quan trọng.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 便利(べんり) tiện lợi ・ 〜とは限らない(とはかぎらない) không hẳn là...</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">AIが開発の仕事にどんな影響を与えると思いますか。<span class="furigana-line">あいがかいはつのしごとにどんなえいきょうをあたえるとおもいますか</span></p>
+      <p class="qa-question-vn">Bạn nghĩ AI ảnh hưởng thế nào đến công việc phát triển phần mềm?</p>
+      <div class="qa-answer-box">AIのおかげで、簡単な作業の時間が短くなると思います。ですから、エンジニアはもっと難しい問題を考えることに集中できるようになると思います。
+        <div class="a-vn">Nhờ AI, tôi nghĩ thời gian cho các công việc đơn giản sẽ ngắn lại. Vì vậy tôi nghĩ kỹ sư sẽ có thể tập trung hơn vào việc suy nghĩ những vấn đề khó hơn.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 影響を与える(えいきょうをあたえる) gây ảnh hưởng ・ 集中する(しゅうちゅうする) tập trung</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">AIツールを使うときに気をつけていることは何ですか。<span class="furigana-line">あいつーるをつかうときにきをつけていることはなんですか</span></p>
+      <p class="qa-question-vn">Khi dùng công cụ AI, bạn chú ý điều gì?</p>
+      <div class="qa-answer-box">AIが書いたコードをそのまま使わず、必ず自分で内容を確認しています。特にセキュリティやお客様の情報に関わる部分は注意しています。
+        <div class="a-vn">Tôi không dùng nguyên code AI viết ra mà luôn tự kiểm tra lại nội dung. Đặc biệt tôi chú ý đến những phần liên quan đến bảo mật và thông tin khách hàng.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: そのまま giữ nguyên như vậy ・ 関わる(かかわる) liên quan đến</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">今後AI関連の技術を学びたいですか。<span class="furigana-line">こんごあいかんれんのぎじゅつをまなびたいですか</span></p>
+      <p class="qa-question-vn">Sau này bạn có muốn học các công nghệ liên quan đến AI không?</p>
+      <div class="qa-answer-box">はい、学びたいです。AIはこれからもっと重要になると思うので、機械学習の基礎を勉強したいと思っています。
+        <div class="a-vn">Vâng, tôi muốn học. Tôi nghĩ AI sẽ ngày càng quan trọng hơn nên tôi muốn học kiến thức cơ bản về machine learning.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 関連(かんれん) liên quan ・ 機械学習(きかいがくしゅう) machine learning ・ 基礎(きそ) kiến thức cơ bản</p>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Câu hỏi về động lực & mong muốn</p>
+
+    <div class="qa-item">
+      <p class="qa-question">なぜ弊社に応募しましたか。<span class="furigana-line">なぜへいしゃにおうぼしましたか</span></p>
+      <p class="qa-question-vn">Tại sao bạn ứng tuyển vào công ty chúng tôi?</p>
+      <div class="qa-answer-box">日本語を使う仕事がしたいと思っていたからです。私は日本語能力試験N3を持っていますし、以前日系企業で働いた経験もあります。日本語の環境でまた自分のスキルを活かしたいと思い、応募しました。
+        <div class="a-vn">Vì tôi muốn làm công việc có sử dụng tiếng Nhật. Tôi có chứng chỉ N3 và cũng từng có kinh nghiệm làm việc ở công ty Nhật trước đây. Tôi muốn tận dụng lại kỹ năng của mình trong môi trường tiếng Nhật nên đã ứng tuyển.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 応募する(おうぼする) ứng tuyển ・ 活かす(いかす) tận dụng ・ 環境(かんきょう) môi trường</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">5年後、どんなエンジニアになっていたいですか。<span class="furigana-line">ごねんご、どんなえんじにあになっていたいですか</span></p>
+      <p class="qa-question-vn">5 năm sau bạn muốn trở thành kỹ sư như thế nào?</p>
+      <div class="qa-answer-box">技術力をもっと高めて、チームをリードできるエンジニアになりたいです。それから、日本語を使ってお客様やチームと直接コミュニケーションが取れるようになりたいです。
+        <div class="a-vn">Tôi muốn nâng cao năng lực kỹ thuật hơn nữa và trở thành kỹ sư có thể dẫn dắt team. Ngoài ra, tôi muốn có thể giao tiếp trực tiếp với khách hàng và team bằng tiếng Nhật.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 高める(たかめる) nâng cao ・ リードする dẫn dắt ・ コミュニケーションが取れる giao tiếp được</p>
+    </div>
+
+    <div class="qa-item">
+      <p class="qa-question">あなたの強みと弱みは何ですか。<span class="furigana-line">あなたのつよみとよわみはなんですか</span></p>
+      <p class="qa-question-vn">Điểm mạnh và điểm yếu của bạn là gì?</p>
+      <div class="qa-answer-box">強みは、新しい技術を早く学べることです。弱みは、心配性なところがありますが、そのおかげで細かいミスに気づきやすいとも思っています。
+        <div class="a-vn">Điểm mạnh của tôi là có thể học công nghệ mới nhanh. Điểm yếu là hay lo lắng, nhưng nhờ vậy mà tôi cũng dễ nhận ra những lỗi nhỏ.</div>
+      </div>
+      <p class="qa-vocab">Từ vựng: 強み(つよみ) điểm mạnh ・ 弱み(よわみ) điểm yếu ・ 心配性(しんぱいしょう) hay lo lắng</p>
+    </div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Câu hỏi bạn nên chuẩn bị hỏi lại nhà tuyển dụng</p>
+    <table>
+      <tr><th>Câu hỏi</th><th>Ý nghĩa</th></tr>
+      <tr><td class="jp">チームの人数は何人ぐらいですか。</td><td>Team có khoảng bao nhiêu người?</td></tr>
+      <tr><td class="jp">主にどんな技術を使っていますか。</td><td>Chủ yếu team dùng công nghệ gì?</td></tr>
+      <tr><td class="jp">日本語を使う機会はどのくらいありますか。</td><td>Có bao nhiêu cơ hội dùng tiếng Nhật trong công việc?</td></tr>
+      <tr><td class="jp">入社後、どんな研修がありますか。</td><td>Sau khi vào công ty có khóa đào tạo gì không?</td></tr>
+    </table>
+    <div class="tip-box"><p class="box-label">Mẹo</p>Cuối phỏng vấn thường được hỏi 「何かご質問はありますか」(Bạn có câu hỏi gì không?) — luôn chuẩn bị sẵn 1-2 câu để thể hiện sự quan tâm nghiêm túc đến công việc, tránh trả lời "không có gì".</div>
+  </div>
+
+  <div class="note">
+    <strong>Mẹo tổng quát cho phỏng vấn N3:</strong> Ở trình độ N3, nhà tuyển dụng chủ yếu đánh giá khả năng giao tiếp cơ bản trong công việc, không kỳ vọng bạn nói lưu loát như người bản xứ. Nên trả lời bằng câu ngắn, rõ ràng, đúng ngữ pháp cơ bản đã học (ので, から, ことができます, ようになりました, たいと思います) thay vì cố dùng câu phức tạp dễ sai. Luyện nói to phần tự giới thiệu và các câu trả lời mẫu ở trên nhiều lần trước khi phỏng vấn thật.
   </div>
 
 </div>
