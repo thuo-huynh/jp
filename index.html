@@ -270,12 +270,15 @@
     font-size: 15.5px;
     line-height: 2.6;
   }
-  .self-intro-box ruby rt {
+  .self-intro-box ruby rt,
+  .qa-answer-box ruby rt,
+  .qa-question ruby rt {
     font-size: 0.55em;
     color: #b45309;
     font-weight: 400;
     user-select: none;
   }
+  .qa-answer-box { white-space: pre-line; }
 </style>
 </head>
 <body>
@@ -1520,12 +1523,16 @@
     </div>
 
     <div class="qa-item">
-      <p class="qa-question">ヘルスケアのプロジェクトについて詳しく教えてください。<span class="furigana-line">へるすけあのぷろじぇくとについてくわしくおしえてください</span></p>
+      <p class="qa-question">ヘルスケアのプロジェクトについて<ruby>詳<rt>くわ</rt></ruby>しく<ruby>教<rt>おし</rt></ruby>えてください。</p>
       <p class="qa-question-vn">Hãy cho biết chi tiết hơn về dự án healthcare đó.</p>
-      <div class="qa-answer-box">そのプロジェクトでは、心拍計や酸素飽和度計などのデバイスからデータを読み取ります。それから、計算式を使って早期警告スコアを算出します。これによって、看護師はどの患者の健康状態が危険に近づいているかがわかり、すぐに対応することができます。そのほかに、WebRTCを使ったストリーミング機能も開発しました。これは、看護師が病室のベッドにいる患者をリアルタイムで確認できるようにするためです。
-        <div class="a-vn">Trong dự án đó, chúng tôi đọc dữ liệu từ các thiết bị như máy đo nhịp tim, máy đo nồng độ oxy trong máu. Sau đó dùng công thức tính toán để đưa ra chỉ số cảnh báo sớm. Nhờ đó, y tá có thể biết được bệnh nhân nào đang có tình trạng sức khỏe tiến gần đến nguy kịch, và có thể xử lý ngay. Ngoài ra, chúng tôi cũng phát triển tính năng streaming bằng WebRTC. Đây là để y tá có thể theo dõi bệnh nhân đang nằm trên giường bệnh theo thời gian thực.</div>
+      <div class="qa-answer-box">そのプロジェクトでは、<ruby>心拍計<rt>しんぱくけい</rt></ruby>や<ruby>酸素飽和度計<rt>さんそほうわどけい</rt></ruby>のような<ruby>機械<rt>きかい</rt></ruby>からデータを<ruby>取<rt>と</rt></ruby>ります。それから、<ruby>計算<rt>けいさん</rt></ruby>をして、<ruby>患者<rt>かんじゃ</rt></ruby>が<ruby>危<rt>あぶ</rt></ruby>ないかどうかを<ruby>知<rt>し</rt></ruby>らせる<ruby>数字<rt>すうじ</rt></ruby>を<ruby>出<rt>だ</rt></ruby>します。
+
+この<ruby>数字<rt>すうじ</rt></ruby>を<ruby>見<rt>み</rt></ruby>て、<ruby>看護師<rt>かんごし</rt></ruby>はどの<ruby>患者<rt>かんじゃ</rt></ruby>が<ruby>危<rt>あぶ</rt></ruby>なくなりそうかが<ruby>分<rt>わ</rt></ruby>かります。だから、<ruby>早<rt>はや</rt></ruby>く<ruby>対応<rt>たいおう</rt></ruby>することができます。
+
+そのほかに、WebRTCという<ruby>技術<rt>ぎじゅつ</rt></ruby>を<ruby>使<rt>つか</rt></ruby>って、<ruby>映像<rt>えいぞう</rt></ruby>を<ruby>見<rt>み</rt></ruby>られる<ruby>機能<rt>きのう</rt></ruby>も<ruby>作<rt>つく</rt></ruby>りました。これで、<ruby>看護師<rt>かんごし</rt></ruby>はベッドにいる<ruby>患者<rt>かんじゃ</rt></ruby>をすぐに<ruby>見<rt>み</rt></ruby>ることができます。
+        <div class="a-vn">Trong dự án đó, chúng tôi lấy dữ liệu từ các máy như máy đo nhịp tim, máy đo nồng độ oxy. Sau đó tính toán và đưa ra con số báo cho biết bệnh nhân có nguy hiểm hay không. Nhìn vào con số này, y tá sẽ biết được bệnh nhân nào có khả năng trở nên nguy hiểm. Vì vậy có thể xử lý nhanh chóng. Ngoài ra, chúng tôi cũng dùng công nghệ WebRTC để làm tính năng xem hình ảnh/video. Nhờ đó y tá có thể xem ngay bệnh nhân đang ở trên giường.</div>
       </div>
-      <p class="qa-vocab">Từ vựng: 心拍計(しんぱくけい) máy đo nhịp tim ・ 酸素飽和度計(さんそほうわどけい) máy đo SpO2 ・ 読み取る(よみとる) đọc (dữ liệu) ・ 算出する(さんしゅつする) tính ra ・ 看護師(かんごし) y tá ・ 危険に近づく(きけんにちかづく) tiến gần nguy hiểm ・ リアルタイム thời gian thực</p>
+      <p class="qa-vocab">Từ vựng: 心拍計(しんぱくけい) máy đo nhịp tim ・ 酸素飽和度計(さんそほうわどけい) máy đo nồng độ oxy ・ 機械(きかい) máy móc ・ 患者(かんじゃ) bệnh nhân ・ 危ない(あぶない) nguy hiểm ・ 数字(すうじ) con số ・ 看護師(かんごし) y tá ・ 対応する(たいおうする) xử lý ・ 映像(えいぞう) hình ảnh, video ・ 機能(きのう) chức năng</p>
     </div>
   </div>
 
