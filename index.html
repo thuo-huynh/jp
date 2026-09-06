@@ -200,6 +200,39 @@
     line-height: 2;
     margin-bottom: 14px;
   }
+  .reading-steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 12px 0 0;
+  }
+  .reading-step {
+    background: #f9f6f0;
+    border-top: 3px solid #d97706;
+    border-radius: 8px;
+    padding: 12px;
+  }
+  .reading-step strong { display: block; color: #92400e; font-size: 13px; margin-bottom: 5px; }
+  .reading-step p { margin: 0; font-size: 12.5px; line-height: 1.55; color: #57534e; }
+  .chunk-sentence {
+    background: #fbfaf8;
+    border: 1px solid #e7e2da;
+    border-radius: 8px;
+    padding: 13px 15px;
+    font-size: 16px;
+    line-height: 2.1;
+    margin: 10px 0;
+  }
+  .chunk { padding: 2px 4px; border-radius: 4px; }
+  .chunk.context { background: #e8f1f7; color: #334e68; }
+  .chunk.modifier { background: #f5eee0; color: #7c4a03; }
+  .chunk.core { background: #fce7c3; color: #7c2d12; font-weight: 700; }
+  .chunk-end { font-size: 12px; color: #78716c; margin-top: 5px; }
+  .trap-title { color: #92400e; font-weight: 700; }
+  @media (max-width: 640px) {
+    .reading-steps { grid-template-columns: 1fr; }
+    .chunk-sentence { font-size: 14px; }
+  }
   .question-box { margin-bottom: 14px; }
   .q-text { font-weight: 600; font-size: 14px; margin: 0 0 8px; }
   .choices { list-style: none; padding: 0; margin: 0; font-size: 14px; }
@@ -327,6 +360,7 @@
   <button class="tab-btn" data-tab="so-sanh">Mẫu so sánh</button>
   <button class="tab-btn" data-tab="cho-nhan">あげる・もらう・くれる</button>
   <button class="tab-btn" data-tab="dokkai">Đọc hiểu N3 (55+)</button>
+  <button class="tab-btn" data-tab="reading-playbook">Kỹ năng đọc hiểu N3→N2</button>
   <button class="tab-btn" data-tab="it-vocab">Từ vựng IT/BrSE</button>
   <button class="tab-btn" data-tab="interview">Phỏng vấn IT (N3)</button>
   <button class="tab-btn" data-tab="study-method">Phương pháp học N3→N2</button>
@@ -961,6 +995,113 @@
 
   <div class="note">
     <strong>Mẹo dùng trong IT/BrSE:</strong> Khi nhờ khách hàng/cấp trên, luôn dùng ~ていただけますでしょうか (lịch sự nhất). Khi báo cáo mình đã nhờ ai đó giúp, dùng ~ていただきました. Tránh dùng ~てあげる/~て差し上げる trực tiếp trước mặt người được giúp vì dễ nghe như đang "ban ơn" — nên diễn đạt gián tiếp hơn, ví dụ thay vì 教えてあげます (tôi dạy cho bạn) thì nói お教えします (tôi xin chỉ dẫn).
+  </div>
+
+</div>
+
+<div id="reading-playbook" class="tab-panel">
+
+  <p class="rule">Đọc hiểu N3/N2 không yêu cầu dịch hết từng chữ. Mục tiêu là dựng được quan hệ: <b>ai / việc gì / vì sao / trái với điều gì / kết luận nào</b>. Ở N2, đáp án sai thường không hoàn toàn sai — nó chỉ sai ở chủ thể, phạm vi, mức chắc chắn hoặc quan hệ nguyên nhân–kết quả.</p>
+
+  <div class="group-card">
+    <p class="cat-title">Quy trình đọc 3 lượt</p>
+    <div class="reading-steps">
+      <div class="reading-step"><strong>Lượt 1 — Lấy bản đồ</strong><p>Đọc tiêu đề, câu đầu và câu cuối. Xác định loại văn bản: thông báo, ý kiến, thư, quảng cáo hay giải thích.</p></div>
+      <div class="reading-step"><strong>Lượt 2 — Đánh dấu rẽ hướng</strong><p>Khoanh しかし・一方で・つまり・そのため・ただし. Đây là nơi tác giả đổi ý, kết luận hoặc giới hạn ý.</p></div>
+      <div class="reading-step"><strong>Lượt 3 — Trả lời đúng câu hỏi</strong><p>Chỉ quay lại đoạn cần thiết. So từng điều kiện của đáp án với bài, không chọn vì “có từ giống bài”.</p></div>
+    </div>
+    <div class="note"><strong>Quy tắc vàng:</strong> Câu hỏi hỏi <b>lý do</b> thì đừng chọn <b>kết quả</b>; hỏi <b>ý kiến tác giả</b> thì đừng chọn ví dụ hay ý của nhân vật khác.</div>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Cách ngắt câu để tìm xương sống</p>
+    <p>Ngắt sau cụm thời gian/điều kiện, khoanh cụm bổ nghĩa đứng trước danh từ, rồi tìm động từ/kết luận cuối. Động từ cuối thường quyết định câu đang khẳng định, phủ định, suy đoán hay đề xuất điều gì.</p>
+    <div class="chunk-sentence"><span class="chunk context">日本で働くために、</span><span class="chunk modifier">日本語を勉強している</span> <span class="chunk core">学生が増えている。</span><div class="chunk-end">Xương sống: 学生が増えている = số học sinh tăng. Phần màu nâu chỉ bổ nghĩa “học sinh nào”; phần xanh là mục đích.</div></div>
+    <div class="chunk-sentence"><span class="chunk context">便利になった一方で、</span><span class="chunk modifier">人と直接話す</span> <span class="chunk core">機会は減っているのではないだろうか。</span><div class="chunk-end">Xương sống: 機会は減っている. のではないだろうか = tác giả nêu nhận định mềm: “chẳng phải đang giảm hay sao?”.</div></div>
+    <table>
+      <tr><th>Thấy gì trong câu?</th><th>Cách xử lý</th></tr>
+      <tr><td class="jp">V普通形 + N</td><td>Khoanh toàn bộ là cụm bổ nghĩa: <b>日本語を勉強している学生</b> = học sinh đang học tiếng Nhật.</td></tr>
+      <tr><td class="jp">～ために / ～ので / ～から</td><td>Đánh dấu nguyên nhân/mục đích; hỏi “vì sao” thường nằm ở đây, không nằm ở vế kết quả.</td></tr>
+      <tr><td class="jp">～が / ～けれども / ～のに</td><td>Có đối lập hoặc nhượng bộ. Đọc kỹ vế sau vì thường là điểm tác giả muốn nói.</td></tr>
+      <tr><td class="jp">～こと / ～の</td><td>Danh từ hóa một hành động. Tìm động từ thật ở sau: 必要だ・難しい・分かる…</td></tr>
+      <tr><td class="jp">～という + N</td><td>“việc/ý rằng…”; chưa phải kết luận chính, hãy theo tới động từ cuối câu.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Bản đồ đuôi câu</p>
+    <table>
+      <tr><th>Đuôi câu</th><th>Đọc nhanh</th><th>Bẫy thường gặp</th></tr>
+      <tr><td class="pattern">～わけだ</td><td>Thảo nào / hóa ra là; kết luận hợp lý từ thông tin trước.</td><td>Đừng hiểu như một nguyên nhân đơn thuần.</td></tr>
+      <tr><td class="pattern">～わけではない</td><td>Không hẳn, không phải toàn bộ.</td><td>Đáp án “hoàn toàn không” thường sai vì đã phủ định quá mạnh.</td></tr>
+      <tr><td class="pattern">～わけがない</td><td>Không thể nào; phủ định mạnh.</td><td>Khác わけではない: một bên “không thể”, một bên “không hẳn”.</td></tr>
+      <tr><td class="pattern">～にすぎない</td><td>Chỉ là, không hơn mức đó.</td><td>Cẩn thận đáp án thêm ý nghĩa lớn lao/quá mức.</td></tr>
+      <tr><td class="pattern">～にほかならない</td><td>Không gì khác ngoài; khẳng định bản chất mạnh.</td><td>Không phải suy đoán.</td></tr>
+      <tr><td class="pattern">～ことになる</td><td>Được quyết định / dẫn tới việc.</td><td>Không mặc định là ý muốn của chủ thể; so với ことにする.</td></tr>
+      <tr><td class="pattern">～ことはない</td><td>Không cần phải.</td><td>Không có nghĩa “không thể”.</td></tr>
+      <tr><td class="pattern">～わけにはいかない</td><td>Không thể làm vì trách nhiệm/quy tắc.</td><td>Không phải thiếu khả năng vật lý.</td></tr>
+      <tr><td class="pattern">～はずだ / ～に違いない</td><td>Chắc là; はずだ dựa vào logic, に違いない là tin chắc mạnh.</td><td>Đáp án dùng かもしれない có độ chắc chắn yếu hơn.</td></tr>
+      <tr><td class="pattern">～ようだ / ～らしい / ～そうだ</td><td>Có vẻ / nghe nói / trông có vẻ.</td><td>Phải xác định nguồn suy đoán: quan sát, thông tin gián tiếp hay truyền văn.</td></tr>
+      <tr><td class="pattern">～のではないか<br>～のではないだろうか</td><td>Chẳng phải là… sao? Ý kiến/đề xuất mềm của tác giả.</td><td>Đừng loại vì câu có vẻ là câu hỏi; nó thường là kết luận.</td></tr>
+      <tr><td class="pattern">～といえる<br>～と考えられる</td><td>Có thể nói / được cho là.</td><td>Không đổi thành 必ず・絶対; tác giả đang giữ mức khẳng định vừa phải.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Từ nối thay đổi hướng đọc</p>
+    <table>
+      <tr><th>Từ nối</th><th>Vai trò</th><th>Nơi cần nhìn khi làm đề</th></tr>
+      <tr><td class="pattern">しかし・だが・ところが</td><td>Đảo hướng / phản biện</td><td>Vế <b>sau</b> thường gần với quan điểm tác giả hơn.</td></tr>
+      <tr><td class="pattern">一方で・反面</td><td>Nêu hai mặt</td><td>Đáp án đúng phải giữ được cả hai mặt, không chỉ lấy một bên.</td></tr>
+      <tr><td class="pattern">つまり・要するに</td><td>Tóm tắt/kết luận</td><td>Đây là vị trí ưu tiên khi hỏi 主張 hoặc 筆者の考え.</td></tr>
+      <tr><td class="pattern">そのため・したがって</td><td>Kết quả/suy luận</td><td>Phân biệt với nguyên nhân đứng trước.</td></tr>
+      <tr><td class="pattern">なぜなら・というのは</td><td>Giải thích lý do</td><td>Câu sau giải thích cho ý ngay trước đó.</td></tr>
+      <tr><td class="pattern">たとえば</td><td>Ví dụ minh họa</td><td>Không chọn ví dụ làm ý chính trừ khi câu hỏi hỏi ví dụ đó.</td></tr>
+      <tr><td class="pattern">ただし・もっとも</td><td>Ngoại lệ/giới hạn</td><td>Đáp án bỏ điều kiện này thường bị “quá rộng”.</td></tr>
+      <tr><td class="pattern">むしろ・かえって</td><td>Ngược lại, trái dự đoán</td><td>Đề dễ đổi hướng thành ý ban đầu.</td></tr>
+      <tr><td class="pattern">また・さらに・しかも</td><td>Thêm ý</td><td>Là thông tin bổ sung, không nhất thiết phủ định điều trước.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Bẫy N2: đáp án đúng một phần</p>
+    <table>
+      <tr><th>Bẫy</th><th>Dấu hiệu trong đáp án sai</th><th>Cách tự kiểm tra</th></tr>
+      <tr><td class="trap-title">1. Đúng chi tiết, sai câu hỏi</td><td>Đáp án có câu/từ thật trong bài nhưng câu hỏi hỏi lý do, ý kiến hoặc mục đích khác.</td><td>Đọc lại từ khóa của câu hỏi: なぜ・どうして・筆者・最も言いたいこと.</td></tr>
+      <tr><td class="trap-title">2. Đổi phạm vi</td><td>ある人・場合によって・必ずしも… bị đổi thành すべて・いつも・だれでも.</td><td>So từ chỉ số lượng/phạm vi. Một từ “mọi/luôn/chắc chắn” có thể làm đáp án sai.</td></tr>
+      <tr><td class="trap-title">3. Đổi mức chắc chắn</td><td>かもしれない・だろう・と考えられる bị đổi thành 必ず・絶対に.</td><td>Gạch từ thể hiện độ chắc chắn ở câu gốc và đáp án.</td></tr>
+      <tr><td class="trap-title">4. Đảo nguyên nhân–kết quả</td><td>AなのでB trong bài, nhưng đáp án nói BだからA.</td><td>Vẽ mũi tên nhỏ: nguyên nhân → kết quả. Không chọn nếu mũi tên ngược.</td></tr>
+      <tr><td class="trap-title">5. Nhầm người nói</td><td>Ý của nhân vật A, chuyên gia hoặc ví dụ bị gắn thành 筆者の考え.</td><td>Khoanh chủ thể: 筆者・Aさん・調査結果・一般の人.</td></tr>
+      <tr><td class="trap-title">6. Bỏ mất phủ định</td><td>必ずしも～ない・～わけではない・～とは限らない bị đọc thành khẳng định.</td><td>Tìm ない ở cuối mẫu, không chỉ nhìn từ đầu câu.</td></tr>
+      <tr><td class="trap-title">7. Bỏ điều kiện/ngoại lệ</td><td>～場合・～限り・ただし bị bỏ, làm câu trở thành luôn đúng.</td><td>Hỏi: “Đúng trong mọi trường hợp hay chỉ khi có điều kiện?”</td></tr>
+      <tr><td class="trap-title">8. Nhầm thứ tự thời gian</td><td>Trình tự まず・その後・～てから・までに bị đảo.</td><td>Ghi 1 → 2 → 3 bên lề trước khi nhìn đáp án.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Chiến thuật theo dạng câu hỏi</p>
+    <table>
+      <tr><th>Dạng câu hỏi</th><th>Tìm ở đâu?</th><th>Không được mắc bẫy</th></tr>
+      <tr><td class="pattern">筆者の考え・主張</td><td>Câu đầu/câu cuối đoạn; sau しかし; gần つまり・と考える・のではないか.</td><td>Không chọn ví dụ, thống kê hoặc ý người khác nếu tác giả chưa đồng ý với nó.</td></tr>
+      <tr><td class="pattern">なぜ・理由</td><td>Trước から・ので・ため・理由は; hoặc câu giải thích sau なぜなら.</td><td>Đừng chọn kết quả xảy ra sau nguyên nhân.</td></tr>
+      <tr><td class="pattern">内容と合うもの</td><td>Đối chiếu từng điều kiện: ai, khi nào, phạm vi, mức chắc chắn.</td><td>Không chọn đáp án “gần đúng”; chỉ cần sai một điều kiện là loại.</td></tr>
+      <tr><td class="pattern">指すもの・それ/この</td><td>1–2 câu ngay trước, tìm danh từ/ý trọn vẹn có thể thay vào.</td><td>それ có thể chỉ cả một sự việc, không chỉ danh từ gần nhất.</td></tr>
+      <tr><td class="pattern">どういう意味か</td><td>Đọc câu trước/sau để lấy ngữ cảnh, nhất là đối lập và cảm xúc.</td><td>Không dịch đen thành ngữ; chọn ý phù hợp cả đoạn.</td></tr>
+      <tr><td class="pattern">次にすること</td><td>Động từ mệnh lệnh/đề nghị và mốc thời gian: ～てください・～前に・～後で.</td><td>Không đảo thứ tự thao tác hoặc bỏ điều kiện bắt buộc.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <p class="cat-title">Checklist 30 giây trước khi chốt đáp án</p>
+    <table>
+      <tr><th>#</th><th>Tự hỏi</th><th>Nếu chưa rõ</th></tr>
+      <tr><td>1</td><td>Câu hỏi đang hỏi <b>ai</b>, <b>lý do</b>, <b>ý kiến</b> hay <b>việc tiếp theo</b>?</td><td>Gạch đúng từ khóa trong câu hỏi trước khi đọc đáp án.</td></tr>
+      <tr><td>2</td><td>Ai là chủ thể của hành động/ý kiến?</td><td>Viết tên ngắn ở lề: 筆者 / Aさん / 会社 / 調査.</td></tr>
+      <tr><td>3</td><td>Có ない, しかし, ただし hay điều kiện nào không?</td><td>Đọc lại từ nối và đuôi câu, không chỉ đọc danh từ chính.</td></tr>
+      <tr><td>4</td><td>Đáp án có thêm “luôn luôn”, “tất cả”, “chắc chắn” không?</td><td>So trực tiếp mức độ: たぶん ≠ 必ず; 一部 ≠ 全部.</td></tr>
+      <tr><td>5</td><td>Đáp án có trả lời đúng câu hỏi hay chỉ là một chi tiết đúng?</td><td>Diễn đạt đáp án bằng tiếng Việt trong một câu rồi đối chiếu lại.</td></tr>
+    </table>
+    <div class="note"><strong>Khi kẹt giữa 2 đáp án:</strong> Chọn đáp án ít “nói quá” hơn nếu bài dùng cách nói thận trọng. N2 rất thích thêm một từ tuyệt đối hóa hoặc bỏ một điều kiện để biến câu gần đúng thành sai.</div>
   </div>
 
 </div>
