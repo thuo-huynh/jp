@@ -4,6 +4,7 @@ $htmlPath = Join-Path $PSScriptRoot '..\index.html'
 $html = Get-Content -Raw $htmlPath
 $requiredSnippets = @(
   'data-reading-set="kotodama"',
+  '問題II — Đoạn văn dài hơn (mỗi bài 3–4 câu hỏi)',
   'Bài đọc dài — 言霊（ことだま）',
   '問1　どうして日本の病院には４号室がないのか。',
   '問2　どうして試合の前に「トンカツ」を食べるのか。',
