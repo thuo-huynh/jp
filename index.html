@@ -1171,7 +1171,7 @@
     <div class="note"><strong>Khi kẹt giữa 2 đáp án:</strong> Chọn đáp án ít “nói quá” hơn nếu bài dùng cách nói thận trọng. N2 rất thích thêm một từ tuyệt đối hóa hoặc bỏ một điều kiện để biến câu gần đúng thành sai.</div>
   </div>
 
-  <div class="dokkai-item" data-reading-set="mondai3-luck">
+  <div class="dokkai-item" data-reading-set="mondai3-luck" data-relocate-to="dokkai">
     <div class="dokkai-header"><span>Bài 34 — Nghĩ tích cực về vận may（問題III・4）</span><span class="dokkai-arrow">▶</span></div>
     <div class="dokkai-body">
       <div class="passage-box">私の友人にどんなことも<span class="keigo-term" data-jp="まえむきに" data-vn="theo hướng tích cực">前向きに</span>考える人がいる。ある時一緒にドライブ旅行した。温泉に向かっているときに道を間違えて１時間ほど時間をむだにしてしまった。ところが彼女は「道を間違えたおかげできれいな富士山が見られた。よかったね」と言った。しかしその道だけが特別きれいな富士山が見えるわけではない。その辺りはどこから見ても富士山がきれいなのだ。
@@ -1226,7 +1226,7 @@
     </div>
   </div>
 
-  <div class="dokkai-item" data-reading-set="mondai3-shops">
+  <div class="dokkai-item" data-reading-set="mondai3-shops" data-relocate-to="dokkai">
     <div class="dokkai-header"><span>Bài 35 — Sự thay đổi của các loại cửa hàng（問題III・5）</span><span class="dokkai-arrow">▶</span></div>
     <div class="dokkai-body">
       <div class="passage-box">店の形は時代によって変わる。１９５０年ごろは扱う商品の違いによってそれぞれ肉屋、魚屋、八百屋などのように分かれていた。しかし１９６０年代になるとそこへ行けば食料品が一度に買えるスーパーが中心になった。スーパーはその後衣料品や雑貨なども扱うようになって、どんどん力をつけていった。１９７２年にはすでに売上げがデパートより多いスーパーが現れた。しかし薬屋や酒屋などはまだ国の規制に守られていたのでそのままの形で残ることができていた。
@@ -3364,6 +3364,12 @@ Vì quan tâm đến lời nói, người Nhật cũng thường chơi chữ; đ
     header.addEventListener('click', () => {
       header.parentElement.classList.toggle('open');
     });
+  });
+
+  // Keep the full 問題III set in the reading-practice tab.
+  const dokkai = document.getElementById('dokkai');
+  document.querySelectorAll('[data-relocate-to="dokkai"]').forEach(item => {
+    if (dokkai) dokkai.appendChild(item);
   });
 
   // Dokkai quiz: user picks an answer, then gets marked correct/incorrect

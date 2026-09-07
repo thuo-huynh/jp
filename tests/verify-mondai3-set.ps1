@@ -28,4 +28,12 @@ if ($questionCount -ne 16) {
   throw "Expected 16 問題III questions, found $questionCount"
 }
 
+$relocatedReadingCount = [regex]::Matches($html, 'data-reading-set="mondai3-(luck|shops)" data-relocate-to="dokkai"').Count
+if ($relocatedReadingCount -ne 2) {
+  throw "Expected two 問題III readings to be relocated into dokkai, found $relocatedReadingCount"
+}
+if (-not $html.Contains('dokkai.appendChild(item)')) {
+  throw 'Missing runtime relocation for the 問題III readings'
+}
+
 Write-Output '問題III reading-set verification passed.'
