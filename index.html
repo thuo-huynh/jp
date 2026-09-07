@@ -356,6 +356,31 @@
     user-select: none;
   }
   .qa-answer-box { white-space: pre-line; }
+  .counter-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+    gap: 10px;
+    margin: 14px 0;
+  }
+  .counter-map-item {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 9px;
+    padding: 11px 12px;
+  }
+  .counter-map-item strong { display: block; color: #92400e; font-size: 18px; }
+  .counter-map-item span { display: block; margin-top: 3px; color: #57534e; font-size: 12.5px; line-height: 1.45; }
+  .counter-reading { color: #92400e; font-weight: 700; }
+  .counter-example { color: #57534e; font-size: 12.5px; line-height: 1.55; }
+  .counter-alert {
+    background: #fef2f2;
+    border-left: 4px solid #dc2626;
+    padding: 11px 14px;
+    border-radius: 6px;
+    color: #7f1d1d;
+    line-height: 1.6;
+    margin-top: 12px;
+  }
 </style>
 </head>
 <body>
@@ -365,6 +390,7 @@
 
 <div class="tabs">
   <button class="tab-btn active" data-tab="chia-the">Chia thể động từ</button>
+  <button class="tab-btn" data-tab="counters">Đếm ngày, tháng & trợ số từ</button>
   <button class="tab-btn" data-tab="it-brse">Ngữ pháp hay dùng trong IT/BrSE</button>
   <button class="tab-btn" data-tab="keigo">Kính ngữ toàn diện</button>
   <button class="tab-btn" data-tab="so-sanh">Mẫu so sánh</button>
@@ -378,6 +404,121 @@
   <button class="tab-btn" data-tab="n2-key-grammar">N2 trọng điểm thi</button>
   <button class="tab-btn" data-tab="mock-roundup">Tổng hợp mock N3/N2</button>
   <button class="tab-btn" data-tab="compare-guess">らしい・っぽい・よう・そう</button>
+</div>
+
+<div id="counters" class="tab-panel">
+  <p class="rule">Cách đếm tiếng Nhật gồm hai phần: <b>số + trợ số từ</b> (xe, giấy, lon...) và các <b>cách đọc cố định</b> (ngày/tháng). Đừng học từng số rời rạc: hãy nhận ra <b>hình dạng</b> của vật trước, sau đó nhớ nhóm đổi âm 1・3・6・8・10.</p>
+
+  <div class="group-card">
+    <h2>Tháng 1–12</h2>
+    <table>
+      <thead><tr><th>Tháng</th><th>Cách đọc</th><th>Ghi nhớ</th></tr></thead>
+      <tbody>
+        <tr><td>1月</td><td class="counter-reading">いちがつ</td><td>Tháng Một</td></tr>
+        <tr><td>2月</td><td class="counter-reading">にがつ</td><td>Tháng Hai</td></tr>
+        <tr><td>3月</td><td class="counter-reading">さんがつ</td><td>Tháng Ba</td></tr>
+        <tr><td>4月</td><td class="counter-reading">しがつ</td><td>Không đọc よんがつ</td></tr>
+        <tr><td>5月</td><td class="counter-reading">ごがつ</td><td>Tháng Năm</td></tr>
+        <tr><td>6月</td><td class="counter-reading">ろくがつ</td><td>Tháng Sáu</td></tr>
+        <tr><td>7月</td><td class="counter-reading">しちがつ</td><td>Không đọc なながつ</td></tr>
+        <tr><td>8月</td><td class="counter-reading">はちがつ</td><td>Tháng Tám</td></tr>
+        <tr><td>9月</td><td class="counter-reading">くがつ</td><td>Không đọc きゅうがつ</td></tr>
+        <tr><td>10月</td><td class="counter-reading">じゅうがつ</td><td>Tháng Mười</td></tr>
+        <tr><td>11月</td><td class="counter-reading">じゅういちがつ</td><td>Tháng Mười Một</td></tr>
+        <tr><td>12月</td><td class="counter-reading">じゅうにがつ</td><td>Tháng Mười Hai</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Mẹo:</strong> tháng luôn là <b>〜月（がつ）</b>. Chỉ cần đóng đinh ba ngoại lệ: <b>4 = し</b>, <b>7 = しち</b>, <b>9 = く</b>.</div>
+  </div>
+
+  <div class="group-card">
+    <h2>Ngày trong tháng 1–31</h2>
+    <table>
+      <thead><tr><th>Ngày</th><th>Đọc</th><th>Ngày</th><th>Đọc</th><th>Ngày</th><th>Đọc</th></tr></thead>
+      <tbody>
+        <tr><td>1日</td><td class="counter-reading">ついたち</td><td>11日</td><td>じゅういちにち</td><td>21日</td><td>にじゅういちにち</td></tr>
+        <tr><td>2日</td><td class="counter-reading">ふつか</td><td>12日</td><td>じゅうににち</td><td>22日</td><td>にじゅうににち</td></tr>
+        <tr><td>3日</td><td class="counter-reading">みっか</td><td>13日</td><td>じゅうさんにち</td><td>23日</td><td>にじゅうさんにち</td></tr>
+        <tr><td>4日</td><td class="counter-reading">よっか</td><td>14日</td><td class="counter-reading">じゅうよっか</td><td>24日</td><td class="counter-reading">にじゅうよっか</td></tr>
+        <tr><td>5日</td><td class="counter-reading">いつか</td><td>15日</td><td>じゅうごにち</td><td>25日</td><td>にじゅうごにち</td></tr>
+        <tr><td>6日</td><td class="counter-reading">むいか</td><td>16日</td><td>じゅうろくにち</td><td>26日</td><td>にじゅうろくにち</td></tr>
+        <tr><td>7日</td><td class="counter-reading">なのか</td><td>17日</td><td>じゅうしちにち</td><td>27日</td><td>にじゅうしちにち</td></tr>
+        <tr><td>8日</td><td class="counter-reading">ようか</td><td>18日</td><td>じゅうはちにち</td><td>28日</td><td>にじゅうはちにち</td></tr>
+        <tr><td>9日</td><td class="counter-reading">ここのか</td><td>19日</td><td>じゅうくにち</td><td>29日</td><td>にじゅうくにち</td></tr>
+        <tr><td>10日</td><td class="counter-reading">とおか</td><td>20日</td><td class="counter-reading">はつか</td><td>30日</td><td>さんじゅうにち</td></tr>
+        <tr><td></td><td></td><td>31日</td><td>さんじゅういちにち</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="counter-alert"><strong>Bẫy số 1:</strong> <b>一日（ついたち）</b> là <b>ngày mùng 1</b>, nhưng <b>一日（いちにち）</b> là <b>một ngày</b>. <b>二十日（はつか）</b> là ngày 20 — phải thuộc như một từ riêng. Tương tự, <b>二日間（ふつかかん）</b> = trong hai ngày, không phải ngày mùng 2.</div>
+  </div>
+
+  <div class="group-card">
+    <h2>Mẹo nhớ theo hình dạng</h2>
+    <div class="counter-map">
+      <div class="counter-map-item"><strong>🗒️ Mỏng, phẳng → 枚</strong><span>Giấy, vé, ảnh, áo thun, đĩa pizza.</span></div>
+      <div class="counter-map-item"><strong>✏️ Dài, trụ → 本</strong><span>Bút, chai, ô, cây, dây, chuối.</span></div>
+      <div class="counter-map-item"><strong>🥫 Lon → 缶</strong><span>Đếm lon đồ uống, lon thực phẩm.</span></div>
+      <div class="counter-map-item"><strong>🚗 Máy, xe → 台</strong><span>Ô tô, xe máy, máy tính, TV, máy ảnh.</span></div>
+      <div class="counter-map-item"><strong>📚 Đóng thành quyển → 冊</strong><span>Sách, vở, tạp chí, truyện.</span></div>
+      <div class="counter-map-item"><strong>👕 Mặc lên người → 着</strong><span>Áo khoác, váy, bộ quần áo.</span></div>
+      <div class="counter-map-item"><strong>🥤 Đồ trong cốc → 杯</strong><span>Cốc cà phê, ly bia, bát cơm.</span></div>
+      <div class="counter-map-item"><strong>📦 Không rõ loại → つ / 個</strong><span>つ cho vật chung; 個 cho đồ nhỏ, từng cái.</span></div>
+    </div>
+    <div class="note"><strong>Câu tự hỏi nhanh:</strong> nó <b>phẳng</b>, <b>dài</b>, <b>chạy bằng máy</b>, <b>được mặc</b>, hay <b>đựng trong lon/cốc</b>? Hình dạng thường quyết định trợ số từ.</div>
+  </div>
+
+  <div class="group-card">
+    <h2>Trợ số từ đồ vật và đời sống — tra cứu nhanh</h2>
+    <table>
+      <thead><tr><th>Trợ số từ</th><th>Dùng để đếm</th><th>Cách đọc 1・3・6・8・10</th><th>Ví dụ</th></tr></thead>
+      <tbody>
+        <tr><td class="pattern">つ</td><td>Vật nói chung, không cần nêu loại (chỉ 1–10)</td><td>ひとつ・みっつ・むっつ・やっつ・とお</td><td class="counter-example">りんごを三つください。<br>→ Cho tôi ba quả táo.</td></tr>
+        <tr><td class="pattern">個（こ）</td><td>Vật nhỏ, từng cái: trứng, bánh, quả</td><td>いっこ・さんこ・ろっこ・はっこ・じゅっこ</td><td class="counter-example">卵を二個買った。<br>→ Tôi đã mua hai quả trứng.</td></tr>
+        <tr><td class="pattern">枚（まい）</td><td>Vật mỏng/phẳng: giấy, vé, ảnh, áo</td><td>いちまい・さんまい・ろくまい・はちまい・じゅうまい</td><td class="counter-example">紙を一枚ください。<br>→ Cho tôi một tờ giấy.</td></tr>
+        <tr><td class="pattern">本（ほん）</td><td>Vật dài/trụ: chai, lon dài, bút, ô, cây</td><td>いっぽん・さんぼん・ろっぽん・はっぽん・じゅっぽん</td><td class="counter-example">水を二本買いました。<br>→ Tôi đã mua hai chai nước.</td></tr>
+        <tr><td class="pattern">缶（かん）</td><td>Lon đồ uống/đồ hộp</td><td>いっかん・さんかん・ろっかん・はっかん・じゅっかん</td><td class="counter-example">ビールを一缶飲んだ。<br>→ Tôi đã uống một lon bia.</td></tr>
+        <tr><td class="pattern">冊（さつ）</td><td>Sách, vở, tạp chí</td><td>いっさつ・さんさつ・ろくさつ・はっさつ・じゅっさつ</td><td class="counter-example">本を三冊借りた。<br>→ Tôi đã mượn ba quyển sách.</td></tr>
+        <tr><td class="pattern">台（だい）</td><td>Xe và máy móc</td><td>いちだい・さんだい・ろくだい・はちだい・じゅうだい</td><td class="counter-example">車が二台あります。<br>→ Có hai chiếc ô tô.</td></tr>
+        <tr><td class="pattern">杯（はい）</td><td>Đồ uống/cơm trong cốc, ly, bát</td><td>いっぱい・さんばい・ろっぱい・はっぱい・じゅっぱい</td><td class="counter-example">コーヒーを一杯ください。<br>→ Cho tôi một cốc cà phê.</td></tr>
+        <tr><td class="pattern">着（ちゃく）</td><td>Quần áo mặc trên người</td><td>いっちゃく・さんちゃく・ろくちゃく・はっちゃく・じゅっちゃく</td><td class="counter-example">コートを一着買った。<br>→ Tôi đã mua một chiếc áo khoác.</td></tr>
+        <tr><td class="pattern">足（そく）</td><td>Giày, tất: vật đi thành đôi</td><td>いっそく・さんぞく・ろくそく・はっそく・じゅっそく</td><td class="counter-example">靴を一足買いたい。<br>→ Tôi muốn mua một đôi giày.</td></tr>
+        <tr><td class="pattern">組（くみ）</td><td>Một bộ/cặp ghép thành nhóm</td><td>ひとくみ・さんくみ・ろくくみ・はちくみ・じゅっくみ</td><td class="counter-example">二人一組で練習します。<br>→ Luyện tập theo nhóm hai người.</td></tr>
+        <tr><td class="pattern">軒（けん）</td><td>Nhà ở, cửa hàng nhỏ</td><td>いっけん・さんげん・ろっけん・はっけん・じゅっけん</td><td class="counter-example">この道に店が三軒ある。<br>→ Trên đường này có ba cửa hàng.</td></tr>
+        <tr><td class="pattern">階（かい）</td><td>Tầng của tòa nhà</td><td>いっかい・さんがい・ろっかい・はっかい・じゅっかい</td><td class="counter-example">会議室は三階です。<br>→ Phòng họp ở tầng ba.</td></tr>
+        <tr><td class="pattern">棟（とう）</td><td>Tòa/khối nhà</td><td>いっとう・さんとう・ろくとう・はっとう・じゅっとう</td><td class="counter-example">A棟に住んでいます。<br>→ Tôi sống ở tòa A.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <h2>Người, động vật, số lần và đơn vị hay gặp</h2>
+    <table>
+      <thead><tr><th>Trợ số từ</th><th>Dùng để đếm</th><th>Cách đọc quan trọng</th><th>Ví dụ</th></tr></thead>
+      <tbody>
+        <tr><td class="pattern">人（にん）</td><td>Người</td><td>一人 ひとり・二人 ふたり・三人 さんにん</td><td class="counter-example">家族は四人です。<br>→ Gia đình tôi có bốn người.</td></tr>
+        <tr><td class="pattern">匹（ひき）</td><td>Động vật nhỏ: mèo, chó, cá, côn trùng</td><td>いっぴき・さんびき・ろっぴき・はっぴき・じゅっぴき</td><td class="counter-example">猫が二匹います。<br>→ Có hai con mèo.</td></tr>
+        <tr><td class="pattern">頭（とう）</td><td>Động vật lớn: ngựa, bò, voi</td><td>いっとう・さんとう・ろくとう・はっとう・じゅっとう</td><td class="counter-example">牛が一頭います。<br>→ Có một con bò.</td></tr>
+        <tr><td class="pattern">羽（わ）</td><td>Chim, thỏ</td><td>いちわ・さんば・ろっぱ・はっぱ・じゅっぱ</td><td class="counter-example">鳥が二羽飛んでいる。<br>→ Hai con chim đang bay.</td></tr>
+        <tr><td class="pattern">回（かい）</td><td>Số lần</td><td>いっかい・さんかい・ろっかい・はっかい・じゅっかい</td><td class="counter-example">この映画を二回見た。<br>→ Tôi đã xem phim này hai lần.</td></tr>
+        <tr><td class="pattern">件（けん）</td><td>Sự việc, vụ việc, hạng mục</td><td>いっけん・さんけん・ろっけん・はっけん・じゅっけん</td><td class="counter-example">質問が二件あります。<br>→ Có hai câu hỏi/vấn đề.</td></tr>
+        <tr><td class="pattern">番（ばん）</td><td>Thứ tự, số hiệu</td><td>いちばん・さんばん・ろくばん・はちばん・じゅうばん</td><td class="counter-example">三番のバスに乗る。<br>→ Đi xe buýt số 3.</td></tr>
+        <tr><td class="pattern">歳（さい）</td><td>Tuổi</td><td>いっさい・さんさい・ろくさい・はっさい・じゅっさい</td><td class="counter-example">弟は八歳です。<br>→ Em trai tôi 8 tuổi.</td></tr>
+      </tbody>
+    </table>
+    <div class="counter-alert"><strong>Biến âm phải thuộc:</strong> với 本・匹・冊・杯 và nhiều trợ số từ bắt đầu bằng H/P, số <b>1・6・8・10</b> hay thành âm nhỏ: <b>いっぽん・ろっぴき・はっさつ・じゅっぱい</b>. Số <b>3</b> thường hữu thanh: <b>さんぼん・さんびき・さんばい</b>.</div>
+  </div>
+
+  <div class="group-card">
+    <h2>Checklist chọn đúng trợ số từ</h2>
+    <ol class="steps">
+      <li><b>Đang nói về ngày/tháng?</b> → dùng 月 hoặc 日, kiểm tra ngay ngoại lệ của ngày.</li>
+      <li><b>Vật có hình dạng rõ?</b> → mỏng = 枚, dài = 本, cuốn = 冊, lon = 缶.</li>
+      <li><b>Là phương tiện/máy?</b> → 台. Là đồ mặc? → 着. Là cốc/chén đồ uống? → 杯.</li>
+      <li><b>Chưa biết hoặc đồ chung?</b> → dùng つ (1–10) hay 個 cho vật nhỏ; sau đó tra lại nếu vật có trợ số từ riêng.</li>
+      <li><b>Đọc to 1・3・6・8・10.</b> Nếu trợ số từ bắt đầu bằng H/P, kiểm tra có đổi sang っ・ぱ・ば không.</li>
+    </ol>
+    <div class="tip-box"><p class="box-label">Cách học 5 phút/ngày</p>Chọn 5 món trước mặt, nói trọn câu: 「ペンが三本あります」「紙を二枚ください」. Học trợ số từ trong câu giúp bạn nhớ luôn trợ từ <b>が / を</b> và cách phát âm tự nhiên.</div>
+  </div>
 </div>
 
 <div id="chia-the" class="tab-panel active">
