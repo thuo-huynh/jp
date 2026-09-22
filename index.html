@@ -41,6 +41,31 @@
   .tab-btn:hover:not(.active) { color: #44403c; }
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
+  .session-review-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 18px;
+    padding: 12px 14px;
+    background: #f5f1ea;
+    border: 1px solid #e7e2da;
+    border-radius: 10px;
+    font-size: 13px;
+    color: #57534e;
+  }
+  .session-review-toolbar label { font-weight: 700; color: #44403c; }
+  .session-review-toolbar select {
+    min-width: 150px;
+    padding: 7px 10px;
+    border: 1px solid #d6d3d1;
+    border-radius: 6px;
+    background: #fff;
+    color: #292524;
+    font: inherit;
+  }
+  .session-review-toolbar select:focus { outline: 2px solid #fbbf24; outline-offset: 2px; }
+  .session-day { display: none; }
+  .session-day.active { display: block; }
 
   .group-card {
     background: #fff;
@@ -381,6 +406,53 @@
     line-height: 1.6;
     margin-top: 12px;
   }
+  .pdf-study-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .pdf-study-toolbar button {
+    min-width: 34px;
+    padding: 6px 10px;
+    border: 1px solid #d6d3d1;
+    border-radius: 6px;
+    background: #fff;
+    color: #44403c;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .pdf-study-toolbar button:hover { background: #fef3e2; border-color: #d97706; }
+  .pdf-map-selector { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
+  .pdf-map-selector button { background: #fff; border: 1px solid #d6d3d1; border-radius: 7px; color: #44403c; cursor: pointer; font: inherit; font-size: 13px; padding: 7px 10px; }
+  .pdf-map-selector button:hover { background: #fef3e2; border-color: #d97706; }
+  .pdf-map-selector button.active { background: #b45309; border-color: #b45309; color: #fff; }
+  .pdf-study-zoom-label { color: #78716c; font-size: 12px; min-width: 42px; text-align: center; }
+  .pdf-study-frame {
+    width: 100%;
+    height: min(78vh, 920px);
+    min-height: 560px;
+    border: 1px solid #d6d3d1;
+    border-radius: 8px;
+    background: #f5f1ea;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+  }
+  .pdf-study-frame.is-panning { cursor: grabbing; }
+  .pdf-study-canvas {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+  }
+  @media (max-width: 640px) {
+    .pdf-study-frame { height: 68vh; min-height: 480px; }
+  }
+
 </style>
 </head>
 <body>
@@ -401,9 +473,13 @@
   <button class="tab-btn" data-tab="it-vocab">Từ vựng IT/BrSE</button>
   <button class="tab-btn" data-tab="interview">Phỏng vấn IT (N3)</button>
   <button class="tab-btn" data-tab="study-method">Phương pháp học N3→N2</button>
+  <button class="tab-btn" data-tab="n2-p1-map">Sơ đồ ngữ pháp N2</button>
   <button class="tab-btn" data-tab="n2-key-grammar">N2 trọng điểm thi</button>
   <button class="tab-btn" data-tab="mock-roundup">Tổng hợp mock N3/N2</button>
   <button class="tab-btn" data-tab="compare-guess">らしい・っぽい・よう・そう</button>
+  <button class="tab-btn" data-tab="n2-frequent-vocab">127 từ N2 lặp nhiều</button>
+  <button class="tab-btn" data-tab="n2-confusion-vocab">Từ vựng N2 hay nhầm</button>
+  <button class="tab-btn" data-tab="session-review">Ôn tập phiên này</button>
 </div>
 
 <div id="counters" class="tab-panel">
@@ -3163,6 +3239,68 @@ Vì quan tâm đến lời nói, người Nhật cũng thường chơi chữ; đ
 
 </div>
 
+<div id="n2-p1-map" class="tab-panel">
+  <h1>Sơ đồ tư duy ngữ pháp N2</h1>
+  <p class="subtitle">Xem trực tiếp toàn bộ sơ đồ trong Drive. “Vừa khung” luôn hiển thị trọn sơ đồ; lăn chuột để zoom và kéo để xem chi tiết.</p>
+  <div class="group-card">
+    <h2 id="n2-map-viewer-title">N2 P1 — cụm 1–3</h2>
+    <div class="pdf-map-selector" aria-label="Chọn sơ đồ ngữ pháp N2">
+      <button type="button" class="active" data-map-source="p1" data-map-file="assets/n2-p1-mindmap.png" data-map-title="N2 P1 — cụm 1–3">P1 · Cụm 1–3</button>
+      <button type="button" data-map-source="p2" data-map-file="assets/n2-p2-mindmap.png" data-map-title="N2 P2 — cụm 4–5">P2 · Cụm 4–5</button>
+      <button type="button" data-map-source="p3" data-map-file="assets/n2-p3-mindmap.png" data-map-title="N2 P3 — cụm 6">P3 · Cụm 6</button>
+      <button type="button" data-map-source="p4" data-map-file="assets/n2-p4-mindmap.png" data-map-title="N2 P4 — cụm 7–8">P4 · Cụm 7–8</button>
+      <button type="button" data-map-source="full" data-map-file="assets/n2-full-mindmap.png" data-map-title="N2 — sơ đồ ngữ pháp tổng hợp">Tổng hợp</button>
+    </div>
+    <p class="rule">Dùng <b>+</b> và <b>−</b> để phóng to/thu nhỏ; lăn chuột để zoom mượt, kéo chuột để di chuyển đến vùng cần xem.</p>
+    <div class="pdf-study-toolbar" aria-label="Điều khiển phóng to sơ đồ N2 P1">
+      <button type="button" data-p1-zoom="out" aria-label="Thu nhỏ sơ đồ">−</button>
+      <button type="button" data-p1-zoom="reset">Vừa khung</button>
+      <button type="button" data-p1-zoom="in" aria-label="Phóng to sơ đồ">+</button>
+      <span id="p1-zoom-label" class="pdf-study-zoom-label">100%</span>
+    </div>
+    <div id="n2-p1-map-frame" class="pdf-study-frame" aria-label="Sơ đồ ngữ pháp N2: lăn chuột để phóng to, kéo chuột để di chuyển">
+      <canvas id="n2-p1-map-canvas" class="pdf-study-canvas" data-source="assets/n2-p1-mindmap.png" aria-label="Sơ đồ tư duy hệ thống ngữ pháp N2"></canvas>
+    </div>
+  </div>
+  <div class="note"><b>Cách dùng:</b> chọn sơ đồ theo cụm, sau đó zoom vào nhánh đang học. <a href="https://drive.google.com/drive/folders/1FSoJGfiHZg8A3K-O-x0VKN6JH-035d3T" target="_blank" rel="noopener">Mở thư mục PDF gốc</a>.</div>
+
+  <div class="group-card">
+    <h2>Cụm 1 — trợ từ và ngữ pháp liên quan</h2>
+    <table>
+      <tr><th>Điểm</th><th>Chức năng cần nhớ</th><th>Ví dụ ngắn</th></tr>
+      <tr><td class="pattern">は／が／も</td><td>は nêu chủ đề hoặc đối chiếu; が đánh dấu chủ ngữ/thông tin mới; も = cũng, hoặc “đến cả”.</td><td class="jp">私は行きますが、弟は行きません。<br>→ Tôi đi, nhưng em trai thì không.</td></tr>
+      <tr><td class="pattern">に／で／を／と／へ／の</td><td>に: đích đến, thời điểm; で: nơi diễn ra/cách thức/lý do; を: đối tượng trực tiếp; と: cùng/đích dẫn; へ: hướng đi; の: sở hữu hoặc thay cho danh từ.</td><td class="jp">駅で友達と会いました。<br>→ Tôi gặp bạn ở ga.</td></tr>
+      <tr><td class="pattern">尊敬語・謙譲語・丁寧語</td><td>Tôn kính khi nói về hành động của đối phương; khiêm nhường khi nói về mình; lịch sự dùng trong ngữ cảnh cần trang trọng.</td><td class="jp">先生はもうお帰りになりました。<br>→ Thầy/cô đã về rồi.</td></tr>
+      <tr><td class="pattern">～てくれる／もらう／あげる</td><td>Cho–nhận theo hướng lợi ích: ai làm cho tôi; tôi nhận được; tôi làm cho người khác.</td><td class="jp">友達が手伝ってくれました。<br>→ Bạn đã giúp tôi.</td></tr>
+      <tr><td class="pattern">使役・受身・使役受身</td><td>～させる: bắt/cho làm; ～られる: bị/được làm; ～させられる: bị bắt làm.</td><td class="jp">先生に宿題をさせられた。<br>→ Tôi bị thầy/cô bắt làm bài tập.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <h2>Cụm 2 — xin phép, nhờ vả, đề xuất và ước muốn</h2>
+    <table>
+      <tr><th>Mục đích</th><th>Mẫu trọng tâm</th><th>Sắc thái</th></tr>
+      <tr><td>Xin phép / nhờ làm</td><td class="jp">～させてください／～てもらえませんか／～ていただけませんか</td><td>～ていただけませんか lịch sự hơn ～てもらえませんか; ～させてください xin phép cho mình làm.</td></tr>
+      <tr><td>Đề xuất / khuyên</td><td class="jp">～たらどうですか／～てはどうですか／～べきだと思う</td><td>Đưa gợi ý nhẹ nhàng bằng ～たら/てはどうですか; ～べきだ mạnh hơn, mang ý “nên”.</td></tr>
+      <tr><td>Ý kiến có mức độ</td><td class="jp">～と思う／～かもしれない／～そうだ</td><td>Phân biệt ý kiến cá nhân, khả năng không chắc và dấu hiệu/thông tin nghe được.</td></tr>
+      <tr><td>Ước muốn</td><td class="jp">～が欲しい／～たい／～たがる</td><td>～たい: người nói muốn làm; ～たがる: quan sát người khác tỏ ra muốn.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <h2>Cụm 3 — suy đoán, ví von và liên từ sơ cấp</h2>
+    <table>
+      <tr><th>Mẫu</th><th>Phân biệt nhanh</th><th>Ví dụ</th></tr>
+      <tr><td class="pattern">～みたいだ／～らしい／～ようだ</td><td>みたい: khẩu ngữ, “giống như”; らしい: nghe nói/có vẻ đúng chất; ようだ: trang trọng hơn, suy đoán hoặc ví von.</td><td class="jp">雨が降るらしい。<br>→ Nghe nói trời sẽ mưa.</td></tr>
+      <tr><td class="pattern">～そうだ</td><td>Dạng vẻ ngoài: “trông có vẻ”; dạng truyền văn: nghe nói. Phải nhìn dạng nối để phân biệt.</td><td class="jp">このケーキはおいしそうだ。<br>→ Cái bánh này trông ngon.</td></tr>
+      <tr><td class="pattern">～たら／～ば／～なら</td><td>Ba cách nói “nếu”; ～なら thường bám vào thông tin/đề xuất vừa nêu, ～たら dùng tự nhiên cho điều kiện–kết quả.</td><td class="jp">時間があったら、来てください。<br>→ Nếu có thời gian, hãy đến.</td></tr>
+      <tr><td class="pattern">～ても／～のに</td><td>～ても: dù… vẫn…; ～のに: trái kỳ vọng, thường có cảm xúc tiếc/than phiền.</td><td class="jp">雨なのに、出かけた。<br>→ Dù trời mưa, tôi vẫn ra ngoài.</td></tr>
+    </table>
+  </div>
+
+  <div class="note"><b>Tự ôn P1:</b> (1) đổi một câu thường sang kính ngữ; (2) viết một lời nhờ với ～ていただけませんか; (3) đặt ba câu phân biệt みたい・らしい・ようだ; (4) tự tạo một câu bị sai khiến.</div>
+</div>
+
 <div id="n2-key-grammar" class="tab-panel">
 
   <p class="rule">Bộ này ưu tiên các mẫu hay xuất hiện trong bài ngữ pháp, đặc biệt ở dạng chọn câu phù hợp, sắp xếp câu và tìm lỗi ngữ pháp. JLPT không công bố tần suất chính thức, vì vậy hãy dùng tab này làm lộ trình ôn trước — không phải danh sách ngữ pháp N2 đầy đủ.</p>
@@ -3434,9 +3572,751 @@ Vì quan tâm đến lời nói, người Nhật cũng thường chơi chữ; đ
 
 </div>
 
+<div id="n2-frequent-vocab" class="tab-panel">
+  <h1>127 từ vựng JLPT N2 xuất hiện lặp lại</h1>
+  <p class="rule">Bốn bảng nguồn được lưu nguyên thành <b>127 dòng</b>, bao gồm cả những từ lặp lại giữa các bảng. Mỗi mục đều là từ đã được nguồn liệt kê xuất hiện trên 2 lần; dùng số lần trong ảnh để ưu tiên ôn, không xem là thống kê JLPT chính thức.</p>
+  <div class="note"><b>Cách ôn:</b> bắt đầu với nhóm 4 lần, sau đó ôn nhóm 3 lần. Các dòng trùng được giữ lại đúng theo danh sách nguồn để bạn thấy độ lặp của từ.</div>
+  <div class="group-card">
+    <table id="n2-frequent-vocab-table">
+      <tr><th>Ưu tiên</th><th>Từ / cách đọc</th><th>Nghĩa</th><th>Tần suất trong ảnh</th></tr>
+      <tr data-n3-frequent-entry="1"><td>A</td><td class="pattern">努力<br><span class="furigana">どりょく</span></td><td>Nỗ lực</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="2"><td>A</td><td class="pattern">うっかり</td><td>Lơ đễnh, vô ý</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="3"><td>A</td><td class="pattern">きつい</td><td>Chật, khó/vất vả</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="4"><td>A</td><td class="pattern">複雑<br><span class="furigana">ふくざつ</span></td><td>Phức tạp</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="5"><td>A</td><td class="pattern">過去<br><span class="furigana">かこ</span></td><td>Quá khứ</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="6"><td>A</td><td class="pattern">欠点<br><span class="furigana">けってん</span></td><td>Khuyết điểm</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="7"><td>A</td><td class="pattern">断る<br><span class="furigana">ことわる</span></td><td>Từ chối</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="8"><td>A</td><td class="pattern">性格<br><span class="furigana">せいかく</span></td><td>Tính cách</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="9"><td>A</td><td class="pattern">想像<br><span class="furigana">そうぞう</span></td><td>Tưởng tượng</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="10"><td>A</td><td class="pattern">渋滞<br><span class="furigana">じゅうたい</span></td><td>Kẹt xe</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="11"><td>A</td><td class="pattern">規則<br><span class="furigana">きそく</span></td><td>Quy tắc, nội quy</td><td>4 lần</td></tr>
+      <tr data-n3-frequent-entry="12"><td>A</td><td class="pattern">逆<br><span class="furigana">ぎゃく</span></td><td>Ngược lại</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="13"><td>B</td><td class="pattern">包んで<br><span class="furigana">つつんで</span></td><td>Gói, bọc</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="14"><td>B</td><td class="pattern">得意<br><span class="furigana">とくい</span></td><td>Giỏi, sở trường</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="15"><td>B</td><td class="pattern">落ち着く<br><span class="furigana">おちつく</span></td><td>Bình tĩnh, ổn định</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="16"><td>B</td><td class="pattern">清潔<br><span class="furigana">せいけつ</span></td><td>Sạch sẽ</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="17"><td>B</td><td class="pattern">さっそく</td><td>Ngay lập tức</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="18"><td>B</td><td class="pattern">スケジュール</td><td>Lịch trình, kế hoạch</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="19"><td>B</td><td class="pattern">完成<br><span class="furigana">かんせい</span></td><td>Hoàn thành</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="20"><td>B</td><td class="pattern">期待<br><span class="furigana">きたい</span></td><td>Mong đợi, kỳ vọng</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="21"><td>B</td><td class="pattern">空<br><span class="furigana">そら／から</span></td><td>Bầu trời / trống rỗng</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="22"><td>B</td><td class="pattern">活動<br><span class="furigana">かつどう</span></td><td>Hoạt động</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="23"><td>B</td><td class="pattern">経由<br><span class="furigana">けいゆ</span></td><td>Qua cảnh, thông qua</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="24"><td>B</td><td class="pattern">通知<br><span class="furigana">つうち</span></td><td>Thông báo</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="25"><td>B</td><td class="pattern">不安<br><span class="furigana">ふあん</span></td><td>Lo lắng, bất an</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="26"><td>B</td><td class="pattern">だるい</td><td>Mệt mỏi, uể oải</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="27"><td>B</td><td class="pattern">錆<br><span class="furigana">さび</span></td><td>Vàng nhà, gỉ sét</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="28"><td>B</td><td class="pattern">効果<br><span class="furigana">こうか</span></td><td>Hiệu quả</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="29"><td>B</td><td class="pattern">一般的<br><span class="furigana">いっぱんてき</span></td><td>Thông thường, phổ biến</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="30"><td>B</td><td class="pattern">検査<br><span class="furigana">けんさ</span></td><td>Kiểm tra</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="31"><td>B</td><td class="pattern">恋しい<br><span class="furigana">こいしい</span></td><td>Thương nhớ, nhớ</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="32"><td>B</td><td class="pattern">間隔<br><span class="furigana">かんかく</span></td><td>Khoảng cách, khoảng thời gian</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="33"><td>B</td><td class="pattern">平均<br><span class="furigana">へいきん</span></td><td>Trung bình</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="34"><td>B</td><td class="pattern">ぴったり</td><td>Vừa vặn, chính xác</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="35"><td>B</td><td class="pattern">盛ん<br><span class="furigana">さかん</span></td><td>Thịnh hành, phát triển mạnh</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="36"><td>B</td><td class="pattern">反対<br><span class="furigana">はんたい</span></td><td>Phản đối / ngược lại</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="37"><td>B</td><td class="pattern">どきどき</td><td>Hồi hộp, tim đập thình thịch</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="38"><td>B</td><td class="pattern">偶然<br><span class="furigana">ぐうぜん</span></td><td>Ngẫu nhiên, tình cờ</td><td>3 lần</td></tr>
+      <tr data-n3-frequent-entry="39"><td>B</td><td class="pattern">登場<br><span class="furigana">とうじょう</span></td><td>Xuất hiện (sân khấu, phim...)</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="40"><td>B</td><td class="pattern">平均<br><span class="furigana">へいきん</span></td><td>Trung bình</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="41"><td>B</td><td class="pattern">欠点<br><span class="furigana">けってん</span></td><td>Khuyết điểm</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="42"><td>B</td><td class="pattern">ぴったり</td><td>Vừa vặn, vừa khớp</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="43"><td>B</td><td class="pattern">盛ん<br><span class="furigana">さかん</span></td><td>Thịnh hành, phổ biến</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="44"><td>B</td><td class="pattern">渋滞<br><span class="furigana">じゅうたい</span></td><td>Kẹt xe</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="45"><td>B</td><td class="pattern">努力<br><span class="furigana">どりょく</span></td><td>Nỗ lực</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="46"><td>B</td><td class="pattern">検査<br><span class="furigana">けんさ</span></td><td>Kiểm tra</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="47"><td>B</td><td class="pattern">断る<br><span class="furigana">ことわる</span></td><td>Từ chối</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="48"><td>B</td><td class="pattern">うっかり</td><td>Lơ đễnh, không để ý</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="49"><td>B</td><td class="pattern">不安<br><span class="furigana">ふあん</span></td><td>Lo lắng, bất an</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="50"><td>B</td><td class="pattern">性格<br><span class="furigana">せいかく</span></td><td>Tính cách</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="51"><td>B</td><td class="pattern">空<br><span class="furigana">そら／から</span></td><td>Bầu trời / trống rỗng</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="52"><td>B</td><td class="pattern">過去<br><span class="furigana">かこ</span></td><td>Quá khứ</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="53"><td>B</td><td class="pattern">期待<br><span class="furigana">きたい</span></td><td>Kỳ vọng</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="54"><td>B</td><td class="pattern">経由<br><span class="furigana">けいゆ</span></td><td>Qua cảnh, thông qua</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="55"><td>B</td><td class="pattern">平均<br><span class="furigana">へいきん</span></td><td>Bình quân</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="56"><td>B</td><td class="pattern">反対<br><span class="furigana">はんたい</span></td><td>Ngược lại</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="57"><td>B</td><td class="pattern">どきどき</td><td>Hồi hộp</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="58"><td>B</td><td class="pattern">完成<br><span class="furigana">かんせい</span></td><td>Hoàn thành</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="59"><td>B</td><td class="pattern">登場<br><span class="furigana">とうじょう</span></td><td>Sự xuất hiện</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="60"><td>B</td><td class="pattern">スケジュール</td><td>Dự định, kế hoạch</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="61"><td>B</td><td class="pattern">断る<br><span class="furigana">ことわる</span></td><td>Từ chối</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="62"><td>B</td><td class="pattern">恋しい<br><span class="furigana">こいしい</span></td><td>Nhớ, thương nhớ</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="63"><td>B</td><td class="pattern">得意<br><span class="furigana">とくい</span></td><td>Giỏi</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="64"><td>B</td><td class="pattern">複雑<br><span class="furigana">ふくざつ</span></td><td>Phức tạp</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="65"><td>B</td><td class="pattern">想像<br><span class="furigana">そうぞう</span></td><td>Tưởng tượng</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="66"><td>B</td><td class="pattern">制限<br><span class="furigana">せいげん</span></td><td>Hạn chế</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="67"><td>B</td><td class="pattern">きつい</td><td>Chật, khó</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="68"><td>B</td><td class="pattern">活動<br><span class="furigana">かつどう</span></td><td>Hoạt động</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="69"><td>B</td><td class="pattern">盛ん<br><span class="furigana">さかん</span></td><td>Phổ biến</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="70"><td>B</td><td class="pattern">偶然<br><span class="furigana">ぐうぜん</span></td><td>Ngẫu nhiên</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="71"><td>B</td><td class="pattern">期待<br><span class="furigana">きたい</span></td><td>Mong chờ</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="72"><td>B</td><td class="pattern">うっかり</td><td>Lơ đãng</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="73"><td>B</td><td class="pattern">包んで<br><span class="furigana">つつんで</span></td><td>Bọc, gói</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="74"><td>B</td><td class="pattern">さっそく</td><td>Ngay lập tức</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="75"><td>B</td><td class="pattern">間隔<br><span class="furigana">かんかく</span></td><td>Khoảng cách</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="76"><td>B</td><td class="pattern">一般的<br><span class="furigana">いっぱんてき</span></td><td>Thông thường, phổ biến</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="77"><td>B</td><td class="pattern">清潔<br><span class="furigana">せいけつ</span></td><td>Sạch sẽ</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="78"><td>B</td><td class="pattern">どきどき</td><td>Hồi hộp</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="79"><td>B</td><td class="pattern">落ち着く<br><span class="furigana">おちつく</span></td><td>Bình tĩnh, ổn định</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="80"><td>B</td><td class="pattern">錆<br><span class="furigana">さび</span></td><td>Vàng nhà</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="81"><td>B</td><td class="pattern">逆<br><span class="furigana">ぎゃく</span></td><td>Ngược lại</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="82"><td>B</td><td class="pattern">複雑<br><span class="furigana">ふくざつ</span></td><td>Phức tạp</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="83"><td>B</td><td class="pattern">偶然<br><span class="furigana">ぐうぜん</span></td><td>Tình cờ</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="84"><td>B</td><td class="pattern">登場<br><span class="furigana">とうじょう</span></td><td>Xuất hiện</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="85"><td>B</td><td class="pattern">ぴったり</td><td>Vừa vặn, chính xác</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="86"><td>B</td><td class="pattern">きつい</td><td>Vất vả, khắt khe</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="87"><td>B</td><td class="pattern">努力<br><span class="furigana">どりょく</span></td><td>Nỗ lực, cố gắng</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="88"><td>B</td><td class="pattern">過去<br><span class="furigana">かこ</span></td><td>Quá khứ</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="89"><td>B</td><td class="pattern">規則<br><span class="furigana">きそく</span></td><td>Quy tắc</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="90"><td>B</td><td class="pattern">渋滞<br><span class="furigana">じゅうたい</span></td><td>Tắc nghẽn giao thông</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="91"><td>B</td><td class="pattern">効果<br><span class="furigana">こうか</span></td><td>Hiệu quả</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="92"><td>B</td><td class="pattern">欠点<br><span class="furigana">けってん</span></td><td>Khuyết điểm</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="93"><td>B</td><td class="pattern">通知<br><span class="furigana">つうち</span></td><td>Thông báo</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="94"><td>B</td><td class="pattern">性格<br><span class="furigana">せいかく</span></td><td>Tính cách</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="95"><td>B</td><td class="pattern">効果<br><span class="furigana">こうか</span></td><td>Hiệu quả</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="96"><td>B</td><td class="pattern">だるい</td><td>Mệt mỏi, uể oải</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="97"><td>B</td><td class="pattern">包んで<br><span class="furigana">つつんで</span></td><td>Gói, bọc</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="98"><td>B</td><td class="pattern">検査<br><span class="furigana">けんさ</span></td><td>Kiểm tra</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="99"><td>B</td><td class="pattern">盛ん<br><span class="furigana">さかん</span></td><td>Thịnh hành, phát triển mạnh</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="100"><td>B</td><td class="pattern">一般的<br><span class="furigana">いっぱんてき</span></td><td>Thông thường, phổ biến</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="101"><td>B</td><td class="pattern">偶然<br><span class="furigana">ぐうぜん</span></td><td>Ngẫu nhiên, tình cờ</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="102"><td>B</td><td class="pattern">ぴったり</td><td>Vừa vặn, đúng lúc</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="103"><td>B</td><td class="pattern">登場<br><span class="furigana">とうじょう</span></td><td>Xuất hiện</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="104"><td>B</td><td class="pattern">どきどき</td><td>Hồi hộp, tim đập thình thịch</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="105"><td>B</td><td class="pattern">不安<br><span class="furigana">ふあん</span></td><td>Lo lắng, bất an</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="106"><td>B</td><td class="pattern">スケジュール</td><td>Dự định, kế hoạch</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="107"><td>B</td><td class="pattern">錆<br><span class="furigana">さび</span></td><td>Vàng nhà</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="108"><td>B</td><td class="pattern">うっかり</td><td>Vô ý, lơ đãng</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="109"><td>B</td><td class="pattern">恋しい<br><span class="furigana">こいしい</span></td><td>Nhớ nhung</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="110"><td>B</td><td class="pattern">得意<br><span class="furigana">とくい</span></td><td>Giỏi, sở trường</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="111"><td>B</td><td class="pattern">欠点<br><span class="furigana">けってん</span></td><td>Khuyết điểm</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="112"><td>B</td><td class="pattern">渋滞<br><span class="furigana">じゅうたい</span></td><td>Tắc nghẽn</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="113"><td>B</td><td class="pattern">断る<br><span class="furigana">ことわる</span></td><td>Từ chối</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="114"><td>B</td><td class="pattern">空<br><span class="furigana">から</span></td><td>Trống rỗng</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="115"><td>B</td><td class="pattern">想像<br><span class="furigana">そうぞう</span></td><td>Tưởng tượng</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="116"><td>B</td><td class="pattern">制限<br><span class="furigana">せいげん</span></td><td>Hạn chế</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="117"><td>B</td><td class="pattern">だるい</td><td>Mệt mỏi, uể oải</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="118"><td>B</td><td class="pattern">規則<br><span class="furigana">きそく</span></td><td>Quy tắc, nội quy</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="119"><td>B</td><td class="pattern">経由<br><span class="furigana">けいゆ</span></td><td>Qua cảnh, đi qua</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="120"><td>B</td><td class="pattern">さっそく</td><td>Ngay lập tức</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="121"><td>B</td><td class="pattern">完成<br><span class="furigana">かんせい</span></td><td>Hoàn thành</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="122"><td>B</td><td class="pattern">過去<br><span class="furigana">かこ</span></td><td>Quá khứ</td><td>4 lần</td></tr>
+      <tr data-n2-frequent-entry="123"><td>B</td><td class="pattern">逆<br><span class="furigana">ぎゃく</span></td><td>Ngược lại</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="124"><td>B</td><td class="pattern">通知<br><span class="furigana">つうち</span></td><td>Thông báo</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="125"><td>B</td><td class="pattern">活動<br><span class="furigana">かつどう</span></td><td>Hoạt động</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="126"><td>B</td><td class="pattern">落ち着く<br><span class="furigana">おちつく</span></td><td>Bình tĩnh, ổn định</td><td>3 lần</td></tr>
+      <tr data-n2-frequent-entry="127"><td>B</td><td class="pattern">性格<br><span class="furigana">せいかく</span></td><td>Tính cách</td><td>4 lần</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="n2-confusion-vocab" class="tab-panel">
+  <h1>Từ vựng N2 hay nhầm — 71 mục</h1>
+  <p class="rule">Mỗi từ có cách đọc, nghĩa cốt lõi và một câu ngắn để học trong ngữ cảnh. Mục <b>支度</b> xuất hiện hai lần trong nguồn gốc nên vẫn được giữ ở cả số 16 và 53.</p>
+  <div class="group-card">
+    <table id="n2-confusion-vocab-table">
+      <tr><th>STT</th><th>Từ / cách đọc</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr data-n2-confusion-entry="1"><td>1</td><td class="pattern">雪崩<br><span class="furigana">なだれ</span></td><td>Tuyết lở</td><td>雪崩で道路が通れなくなった。<br>→ Đường không thể đi qua vì tuyết lở.</td></tr>
+      <tr data-n2-confusion-entry="2"><td>2</td><td class="pattern">素人<br><span class="furigana">しろうと</span></td><td>Người nghiệp dư</td><td>私は料理の素人です。<br>→ Tôi là người nghiệp dư trong việc nấu ăn.</td></tr>
+      <tr data-n2-confusion-entry="3"><td>3</td><td class="pattern">玄人<br><span class="furigana">くろうと</span></td><td>Người chuyên nghiệp</td><td>彼は写真の玄人だ。<br>→ Anh ấy là người chuyên nghiệp về nhiếp ảnh.</td></tr>
+      <tr data-n2-confusion-entry="4"><td>4</td><td class="pattern">心地<br><span class="furigana">ここち</span></td><td>Cảm giác, tâm trạng</td><td>海の風が心地よい。<br>→ Gió biển đem lại cảm giác dễ chịu.</td></tr>
+      <tr data-n2-confusion-entry="5"><td>5</td><td class="pattern">草履<br><span class="furigana">ぞうり</span></td><td>Dép vải truyền thống</td><td>浴衣に草履を合わせた。<br>→ Tôi phối dép truyền thống với yukata.</td></tr>
+      <tr data-n2-confusion-entry="6"><td>6</td><td class="pattern">芝生<br><span class="furigana">しばふ</span></td><td>Bãi cỏ</td><td>芝生の上で昼ご飯を食べた。<br>→ Tôi ăn trưa trên bãi cỏ.</td></tr>
+      <tr data-n2-confusion-entry="7"><td>7</td><td class="pattern">差し支える<br><span class="furigana">さしつかえる</span></td><td>Gây cản trở, bất tiện</td><td>ご都合が悪ければ、明日にしても差し支えありません。<br>→ Nếu bạn không tiện thì để ngày mai cũng không sao.</td></tr>
+      <tr data-n2-confusion-entry="8"><td>8</td><td class="pattern">音色<br><span class="furigana">ねいろ</span></td><td>Âm sắc</td><td>このピアノは美しい音色がする。<br>→ Cây đàn piano này có âm sắc đẹp.</td></tr>
+      <tr data-n2-confusion-entry="9"><td>9</td><td class="pattern">行儀<br><span class="furigana">ぎょうぎ</span></td><td>Cách cư xử, phép tắc</td><td>食事中は行儀よく座りましょう。<br>→ Hãy ngồi lịch sự trong lúc ăn.</td></tr>
+      <tr data-n2-confusion-entry="10"><td>10</td><td class="pattern">行事<br><span class="furigana">ぎょうじ</span></td><td>Sự kiện</td><td>学校の行事に参加した。<br>→ Tôi đã tham gia sự kiện của trường.</td></tr>
+      <tr data-n2-confusion-entry="11"><td>11</td><td class="pattern">行列<br><span class="furigana">ぎょうれつ</span></td><td>Hàng người, đoàn người</td><td>店の前に長い行列ができている。<br>→ Có một hàng người dài trước cửa hàng.</td></tr>
+      <tr data-n2-confusion-entry="12"><td>12</td><td class="pattern">恩恵<br><span class="furigana">おんけい</span></td><td>Ân huệ, lợi ích</td><td>私たちは自然の恩恵を受けている。<br>→ Chúng ta đang nhận được ân huệ của thiên nhiên.</td></tr>
+      <tr data-n2-confusion-entry="13"><td>13</td><td class="pattern">知恵<br><span class="furigana">ちえ</span></td><td>Trí tuệ</td><td>昔の人の知恵から学ぶことが多い。<br>→ Có nhiều điều để học từ trí tuệ của người xưa.</td></tr>
+      <tr data-n2-confusion-entry="14"><td>14</td><td class="pattern">懸念<br><span class="furigana">けねん</span></td><td>Lo lắng, e ngại</td><td>安全性に懸念があります。<br>→ Có quan ngại về độ an toàn.</td></tr>
+      <tr data-n2-confusion-entry="15"><td>15</td><td class="pattern">平等<br><span class="furigana">びょうどう</span></td><td>Bình đẳng</td><td>すべての人を平等に扱うべきだ。<br>→ Nên đối xử bình đẳng với mọi người.</td></tr>
+      <tr data-n2-confusion-entry="16"><td>16</td><td class="pattern">支度<br><span class="furigana">したく</span></td><td>Chuẩn bị</td><td>出かける支度をしている。<br>→ Tôi đang chuẩn bị ra ngoài.</td></tr>
+      <tr data-n2-confusion-entry="17"><td>17</td><td class="pattern">白米<br><span class="furigana">はくまい</span></td><td>Gạo trắng</td><td>白米より玄米をよく食べます。<br>→ Tôi thường ăn gạo lứt hơn gạo trắng.</td></tr>
+      <tr data-n2-confusion-entry="18"><td>18</td><td class="pattern">規模<br><span class="furigana">きぼ</span></td><td>Quy mô</td><td>この祭りは町で一番規模が大きい。<br>→ Lễ hội này có quy mô lớn nhất thị trấn.</td></tr>
+      <tr data-n2-confusion-entry="19"><td>19</td><td class="pattern">模範<br><span class="furigana">もはん</span></td><td>Mẫu mực, mô phạm</td><td>彼は模範的な学生です。<br>→ Cậu ấy là một học sinh gương mẫu.</td></tr>
+      <tr data-n2-confusion-entry="20"><td>20</td><td class="pattern">願望<br><span class="furigana">がんぼう</span></td><td>Nguyện vọng</td><td>海外で働きたいという願望がある。<br>→ Tôi có nguyện vọng làm việc ở nước ngoài.</td></tr>
+      <tr data-n2-confusion-entry="21"><td>21</td><td class="pattern">無事<br><span class="furigana">ぶじ</span></td><td>Bình an, vô sự</td><td>無事に家に着きました。<br>→ Tôi đã về đến nhà bình an.</td></tr>
+      <tr data-n2-confusion-entry="22"><td>22</td><td class="pattern">相性<br><span class="furigana">あいしょう</span></td><td>Hợp nhau, tương hợp</td><td>このソースは肉と相性がいい。<br>→ Loại sốt này hợp với thịt.</td></tr>
+      <tr data-n2-confusion-entry="23"><td>23</td><td class="pattern">用心<br><span class="furigana">ようじん</span></td><td>Cẩn thận, cảnh giác</td><td>夜道は用心してください。<br>→ Hãy cẩn thận khi đi đường ban đêm.</td></tr>
+      <tr data-n2-confusion-entry="24"><td>24</td><td class="pattern">軽率<br><span class="furigana">けいそつ</span></td><td>Hấp tấp, thiếu suy nghĩ</td><td>軽率な発言は避けるべきだ。<br>→ Nên tránh phát ngôn thiếu suy nghĩ.</td></tr>
+      <tr data-n2-confusion-entry="25"><td>25</td><td class="pattern">率直<br><span class="furigana">そっちょく</span></td><td>Thẳng thắn</td><td>率直な意見を聞かせてください。<br>→ Hãy cho tôi biết ý kiến thẳng thắn của bạn.</td></tr>
+      <tr data-n2-confusion-entry="26"><td>26</td><td class="pattern">衣装<br><span class="furigana">いしょう</span></td><td>Trang phục</td><td>舞台用の衣装を着る。<br>→ Mặc trang phục dùng trên sân khấu.</td></tr>
+      <tr data-n2-confusion-entry="27"><td>27</td><td class="pattern">反応<br><span class="furigana">はんのう</span></td><td>Phản ứng</td><td>新しい商品への反応がよい。<br>→ Phản ứng với sản phẩm mới tốt.</td></tr>
+      <tr data-n2-confusion-entry="28"><td>28</td><td class="pattern">収納<br><span class="furigana">しゅうのう</span></td><td>Cất giữ, lưu trữ</td><td>この箱は収納に便利です。<br>→ Chiếc hộp này tiện cho việc cất giữ.</td></tr>
+      <tr data-n2-confusion-entry="29"><td>29</td><td class="pattern">納品<br><span class="furigana">のうひん</span></td><td>Giao hàng</td><td>商品は明日納品されます。<br>→ Hàng sẽ được giao vào ngày mai.</td></tr>
+      <tr data-n2-confusion-entry="30"><td>30</td><td class="pattern">納税<br><span class="furigana">のうぜい</span></td><td>Nộp thuế</td><td>国民には納税の義務がある。<br>→ Công dân có nghĩa vụ nộp thuế.</td></tr>
+      <tr data-n2-confusion-entry="31"><td>31</td><td class="pattern">証拠<br><span class="furigana">しょうこ</span></td><td>Bằng chứng</td><td>証拠を集めて事実を確かめる。<br>→ Thu thập bằng chứng để xác nhận sự thật.</td></tr>
+      <tr data-n2-confusion-entry="32"><td>32</td><td class="pattern">安易<br><span class="furigana">あんい</span></td><td>Dễ dãi, đơn giản</td><td>安易に結論を出してはいけない。<br>→ Không được dễ dàng đưa ra kết luận.</td></tr>
+      <tr data-n2-confusion-entry="33"><td>33</td><td class="pattern">道端<br><span class="furigana">みちばた</span></td><td>Vệ đường</td><td>道端に花が咲いている。<br>→ Hoa đang nở bên đường.</td></tr>
+      <tr data-n2-confusion-entry="34"><td>34</td><td class="pattern">素直<br><span class="furigana">すなお</span></td><td>Thật thà, ngoan ngoãn</td><td>彼は人の話を素直に聞く。<br>→ Cậu ấy ngoan ngoãn lắng nghe người khác.</td></tr>
+      <tr data-n2-confusion-entry="35"><td>35</td><td class="pattern">遺言<br><span class="furigana">ゆいごん</span></td><td>Di chúc</td><td>祖父は遺言を残した。<br>→ Ông tôi đã để lại di chúc.</td></tr>
+      <tr data-n2-confusion-entry="36"><td>36</td><td class="pattern">下品<br><span class="furigana">げひん</span></td><td>Thô tục</td><td>下品な言葉を使わないでください。<br>→ Xin đừng dùng lời lẽ thô tục.</td></tr>
+      <tr data-n2-confusion-entry="37"><td>37</td><td class="pattern">下旬<br><span class="furigana">げじゅん</span></td><td>Hạ tuần</td><td>九月下旬に旅行する予定です。<br>→ Tôi dự định đi du lịch vào hạ tuần tháng 9.</td></tr>
+      <tr data-n2-confusion-entry="38"><td>38</td><td class="pattern">化粧<br><span class="furigana">けしょう</span></td><td>Trang điểm</td><td>出かける前に化粧をする。<br>→ Tôi trang điểm trước khi ra ngoài.</td></tr>
+      <tr data-n2-confusion-entry="39"><td>39</td><td class="pattern">企画<br><span class="furigana">きかく</span></td><td>Kế hoạch, dự án</td><td>新しいイベントを企画している。<br>→ Tôi đang lên kế hoạch cho sự kiện mới.</td></tr>
+      <tr data-n2-confusion-entry="40"><td>40</td><td class="pattern">計画<br><span class="furigana">けいかく</span></td><td>Kế hoạch</td><td>旅行の計画を立てた。<br>→ Tôi đã lập kế hoạch du lịch.</td></tr>
+      <tr data-n2-confusion-entry="41"><td>41</td><td class="pattern">解熱<br><span class="furigana">げねつ</span></td><td>Giảm sốt</td><td>熱を下げる解熱薬を飲んだ。<br>→ Tôi đã uống thuốc hạ sốt.</td></tr>
+      <tr data-n2-confusion-entry="42"><td>42</td><td class="pattern">解脱<br><span class="furigana">げだつ</span></td><td>Giải thoát (Phật giáo)</td><td>解脱は仏教の重要な考え方です。<br>→ Giải thoát là quan niệm quan trọng của Phật giáo.</td></tr>
+      <tr data-n2-confusion-entry="43"><td>43</td><td class="pattern">外科<br><span class="furigana">げか</span></td><td>Ngoại khoa</td><td>けがをしたので外科へ行った。<br>→ Tôi bị thương nên đã đến khoa ngoại.</td></tr>
+      <tr data-n2-confusion-entry="44"><td>44</td><td class="pattern">世間<br><span class="furigana">せけん</span></td><td>Thế gian, xã hội</td><td>世間の評判を気にしすぎない。<br>→ Đừng quá bận tâm đến đánh giá của xã hội.</td></tr>
+      <tr data-n2-confusion-entry="45"><td>45</td><td class="pattern">お世辞<br><span class="furigana">おせじ</span></td><td>Lời nịnh nọt</td><td>それはお世辞ではなく、本当です。<br>→ Đó không phải lời nịnh nọt, mà là sự thật.</td></tr>
+      <tr data-n2-confusion-entry="46"><td>46</td><td class="pattern">人間<br><span class="furigana">にんげん</span></td><td>Con người</td><td>人間は一人では生きられない。<br>→ Con người không thể sống một mình.</td></tr>
+      <tr data-n2-confusion-entry="47"><td>47</td><td class="pattern">気配<br><span class="furigana">けはい</span></td><td>Cảm giác, linh cảm</td><td>後ろに人の気配を感じた。<br>→ Tôi cảm thấy có người ở phía sau.</td></tr>
+      <tr data-n2-confusion-entry="48"><td>48</td><td class="pattern">強引<br><span class="furigana">ごういん</span></td><td>Cưỡng ép</td><td>強引に話を進めないでください。<br>→ Xin đừng ép buộc tiến hành cuộc nói chuyện.</td></tr>
+      <tr data-n2-confusion-entry="49"><td>49</td><td class="pattern">意図的<br><span class="furigana">いとてき</span></td><td>Có chủ ý, cố tình</td><td>彼は意図的に返事を遅らせた。<br>→ Anh ấy cố tình trả lời muộn.</td></tr>
+      <tr data-n2-confusion-entry="50"><td>50</td><td class="pattern">最寄り<br><span class="furigana">もより</span></td><td>Gần nhất</td><td>最寄り駅は徒歩五分です。<br>→ Ga gần nhất cách năm phút đi bộ.</td></tr>
+      <tr data-n2-confusion-entry="51"><td>51</td><td class="pattern">不器用<br><span class="furigana">ぶきよう</span></td><td>Vụng về</td><td>彼は手先が不器用だ。<br>→ Anh ấy vụng về tay chân.</td></tr>
+      <tr data-n2-confusion-entry="52"><td>52</td><td class="pattern">機嫌<br><span class="furigana">きげん</span></td><td>Tâm trạng</td><td>今日は母の機嫌がいい。<br>→ Hôm nay mẹ tôi có tâm trạng tốt.</td></tr>
+      <tr data-n2-confusion-entry="53"><td>53</td><td class="pattern">支度<br><span class="furigana">したく</span></td><td>Chuẩn bị</td><td>朝の支度に時間がかかる。<br>→ Tôi mất thời gian cho việc chuẩn bị buổi sáng.</td></tr>
+      <tr data-n2-confusion-entry="54"><td>54</td><td class="pattern">統一<br><span class="furigana">とういつ</span></td><td>Thống nhất</td><td>書類の形式を統一してください。<br>→ Hãy thống nhất định dạng của tài liệu.</td></tr>
+      <tr data-n2-confusion-entry="55"><td>55</td><td class="pattern">行方<br><span class="furigana">ゆくえ</span></td><td>Tung tích</td><td>なくした鍵の行方が分からない。<br>→ Không biết chiếc chìa khóa bị mất đang ở đâu.</td></tr>
+      <tr data-n2-confusion-entry="56"><td>56</td><td class="pattern">質素<br><span class="furigana">しっそ</span></td><td>Giản dị</td><td>祖父母は質素な暮らしをしている。<br>→ Ông bà tôi sống giản dị.</td></tr>
+      <tr data-n2-confusion-entry="57"><td>57</td><td class="pattern">見当<br><span class="furigana">けんとう</span></td><td>Ước lượng, phán đoán</td><td>犯人の見当がつかない。<br>→ Không đoán được kẻ phạm tội là ai.</td></tr>
+      <tr data-n2-confusion-entry="58"><td>58</td><td class="pattern">手当<br><span class="furigana">てあて</span></td><td>Trợ cấp / sơ cứu</td><td>けがをした子どもに手当をした。<br>→ Tôi đã sơ cứu cho đứa trẻ bị thương.</td></tr>
+      <tr data-n2-confusion-entry="59"><td>59</td><td class="pattern">目安<br><span class="furigana">めやす</span></td><td>Mục tiêu, tiêu chuẩn</td><td>一日二時間を勉強の目安にしている。<br>→ Tôi lấy hai giờ mỗi ngày làm mốc học tập.</td></tr>
+      <tr data-n2-confusion-entry="60"><td>60</td><td class="pattern">目処<br><span class="furigana">めど</span></td><td>Triển vọng, dự định</td><td>完成の目処が立った。<br>→ Đã có triển vọng hoàn thành.</td></tr>
+      <tr data-n2-confusion-entry="61"><td>61</td><td class="pattern">本音<br><span class="furigana">ほんね</span></td><td>Lời thật lòng</td><td>本音を言える友達がいる。<br>→ Tôi có một người bạn có thể nói thật lòng.</td></tr>
+      <tr data-n2-confusion-entry="62"><td>62</td><td class="pattern">必死<br><span class="furigana">ひっし</span></td><td>Liều mạng, hết sức</td><td>必死に試験勉強をした。<br>→ Tôi đã học thi hết sức.</td></tr>
+      <tr data-n2-confusion-entry="63"><td>63</td><td class="pattern">傷む<br><span class="furigana">いたむ</span></td><td>Hư hỏng</td><td>この果物は暑さで傷んだ。<br>→ Trái cây này đã hỏng vì nóng.</td></tr>
+      <tr data-n2-confusion-entry="64"><td>64</td><td class="pattern">勘定<br><span class="furigana">かんじょう</span></td><td>Tính tiền, thanh toán</td><td>食事の後で勘定を払った。<br>→ Tôi thanh toán sau bữa ăn.</td></tr>
+      <tr data-n2-confusion-entry="65"><td>65</td><td class="pattern">支持<br><span class="furigana">しじ</span></td><td>Ủng hộ</td><td>多くの市民がその案を支持した。<br>→ Nhiều người dân đã ủng hộ đề án đó.</td></tr>
+      <tr data-n2-confusion-entry="66"><td>66</td><td class="pattern">恥<br><span class="furigana">はじ</span></td><td>Sự xấu hổ</td><td>失敗を恥だと思わないで。<br>→ Đừng coi thất bại là điều xấu hổ.</td></tr>
+      <tr data-n2-confusion-entry="67"><td>67</td><td class="pattern">演説<br><span class="furigana">えんぜつ</span></td><td>Bài diễn thuyết</td><td>市長は公園で演説をした。<br>→ Thị trưởng đã diễn thuyết ở công viên.</td></tr>
+      <tr data-n2-confusion-entry="68"><td>68</td><td class="pattern">物騒<br><span class="furigana">ぶっそう</span></td><td>Nguy hiểm, bất an</td><td>最近この町では物騒な事件が多い。<br>→ Gần đây thị trấn này có nhiều vụ việc bất an.</td></tr>
+      <tr data-n2-confusion-entry="69"><td>69</td><td class="pattern">賛否<br><span class="furigana">さんぴ</span></td><td>Tán thành và phản đối</td><td>その計画には賛否が分かれた。<br>→ Ý kiến tán thành và phản đối về kế hoạch đó bị chia rẽ.</td></tr>
+      <tr data-n2-confusion-entry="70"><td>70</td><td class="pattern">口調<br><span class="furigana">くちょう</span></td><td>Giọng điệu</td><td>彼は穏やかな口調で話した。<br>→ Anh ấy nói với giọng điệu ôn hòa.</td></tr>
+      <tr data-n2-confusion-entry="71"><td>71</td><td class="pattern">仕草<br><span class="furigana">しぐさ</span></td><td>Cử chỉ, hành động</td><td>彼女の仕草はとても上品だ。<br>→ Cử chỉ của cô ấy rất thanh lịch.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div id="session-review" class="tab-panel">
+  <div class="session-review-toolbar">
+    <label for="session-date-select">Chọn ngày ôn tập</label>
+    <select id="session-date-select" aria-label="Chọn ngày ôn tập">
+      <option value="2026-09-21" selected>21/09/2026</option>
+      <option value="2026-09-20">20/09/2026</option>
+      <option value="2026-09-19">19/09/2026</option>
+      <option value="2026-09-18">18/09/2026</option>
+      <option value="2026-09-17">17/09/2026</option>
+      <option value="2026-09-16">16/09/2026</option>
+      <option value="2026-09-15">15/09/2026</option>
+    </select>
+  </div>
+
+  <div class="session-day" data-session-date="2026-09-15">
+  <div class="group-card" id="session-review-pronunciation">
+    <h2>Ôn tập phiên này — phát âm</h2>
+    <p class="rule">Khi đọc tiếng Nhật, không thêm thanh điệu tiếng Việt vào âm. Tiếng Nhật không có thanh như tiếng Việt.</p>
+    <table>
+      <tr><th>Tiếng Nhật</th><th>Cách đọc / nghĩa</th><th>Điểm cần nhớ</th></tr>
+      <tr><td class="jp">助詞の音が大きい<br><span class="furigana">じょし の おと が おおきい</span></td><td>Âm của trợ từ lớn.</td><td>Trợ từ phải được nghe rõ, nhưng không kéo hoặc nhấn theo thanh tiếng Việt.</td></tr>
+      <tr><td class="jp">語尾の音が大きい<br><span class="furigana">ごび の おと が おおきい</span></td><td>Âm ở cuối từ/câu lớn.</td><td>Chú ý phát âm rõ đuôi câu.</td></tr>
+      <tr><td class="jp">が / と</td><td><b>ga / to</b></td><td>Không đọc <b>gà</b> hay <b>tồ</b>; đọc đều, không đưa dấu sắc/huyền/nặng vào.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card" id="session-review-grammar">
+    <h2>Ngữ pháp ～がる: người khác “tỏ ra” cảm thấy</h2>
+    <p class="rule"><b>Tính từ -い bỏ い + がる</b>. Dùng chủ yếu với cảm xúc, cảm giác và mong muốn để nói người khác có vẻ/tỏ ra như vậy. Không phải mọi tính từ -い đều ghép được.</p>
+    <table>
+      <tr><th>Mẫu</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+      <tr><td class="pattern">嫌がる<br><span class="furigana">いやがる</span></td><td>Tỏ ra không thích, không muốn.</td><td class="example"><div class="jp-line">子どもは野菜を嫌がります。</div><div class="vn-line">Đứa trẻ tỏ ra không thích rau / không chịu ăn rau.</div></td></tr>
+      <tr><td class="pattern">怖がる<br><span class="furigana">こわがる</span></td><td>Tỏ ra sợ.</td><td>怖がらないで。<br><span class="furigana">こわがらないで</span> — Đừng sợ.</td></tr>
+      <tr><td class="pattern">恥ずかしがる<br><span class="furigana">はずかしがる</span></td><td>Tỏ ra ngại, xấu hổ.</td><td>人前で話すのを恥ずかしがる。<br><span class="furigana">ひとまえで はなす のを はずかしがる</span></td></tr>
+      <tr><td class="pattern">欲しがる<br><span class="furigana">ほしがる</span></td><td>Tỏ ra muốn.</td><td>子どもがおもちゃを欲しがっています。<br><span class="furigana">こどもが おもちゃを ほしがっています</span></td></tr>
+    </table>
+    <div class="note"><b>Phân biệt:</b> 嫌う（きらう）= ghét/không thích; 嫌がる（いやがる）= biểu lộ là không thích.</div>
+  </div>
+
+  <div class="group-card" id="session-review-requests">
+    <h2>Nhờ vả, nhờ giúp đỡ</h2>
+    <table>
+      <tr><th>Từ / mẫu</th><th>Cách dùng</th><th>Ví dụ</th></tr>
+      <tr><td class="pattern">頼む（たのむ）</td><td>Nhờ, yêu cầu.</td><td>友だちに頼む。— Nhờ bạn.</td></tr>
+      <tr><td class="pattern">お願いする（おねがいする）</td><td>Nhờ, xin; lịch sự hơn.</td><td>お願いがあります。— Tôi có một việc muốn nhờ.</td></tr>
+      <tr><td class="pattern">手伝う（てつだう）</td><td>Phụ giúp một công việc.</td><td>宿題を手伝う。— Giúp làm bài tập.</td></tr>
+      <tr><td class="pattern">助ける（たすける）</td><td>Giúp/cứu khi ai đó khó khăn; <b>助けてください</b> dùng khi cần trợ giúp khẩn cấp.</td><td>助けてください。— Hãy giúp/cứu tôi!</td></tr>
+      <tr><td class="pattern">Vてください</td><td>Hãy làm giúp tôi…</td><td>ドアを開けてください。— Hãy mở cửa giúp tôi.</td></tr>
+      <tr><td class="pattern">Vてもらえますか</td><td>Bạn có thể làm giúp tôi không? Lịch sự, tự nhiên.</td><td>この漢字を教えてもらえますか。— Bạn có thể chỉ chữ Hán này không?</td></tr>
+      <tr><td class="pattern">Vていただけますか</td><td>Cách nhờ kính trọng hơn.</td><td>もう一度説明していただけますか。— Anh/chị có thể giải thích lại không?</td></tr>
+      <tr><td class="pattern">Vてくれませんか</td><td>Thân mật hơn, dùng với người ngang hàng.</td><td>ちょっと手伝ってくれませんか。— Bạn giúp tôi một chút được không?</td></tr>
+      <tr><td class="pattern">A に Vてもらう</td><td>Được A làm giúp.</td><td>友だちに宿題を手伝ってもらいました。— Tôi đã nhờ bạn giúp bài tập.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card" id="session-review-vocabulary">
+    <h2>Từ vựng: tính cách, tâm lý và trạng thái</h2>
+    <table>
+      <tr><th>Từ</th><th>Nghĩa</th><th>Ví dụ / ghi chú</th></tr>
+      <tr><td class="pattern">我慢（がまん）</td><td>Chịu đựng, nhịn.</td><td>痛いですが、少し我慢してください。— Dù đau, hãy chịu một chút.</td></tr>
+      <tr><td class="pattern">謙虚（けんきょ）</td><td>Khiêm tốn.</td><td>彼はとても謙虚な人です。— Anh ấy rất khiêm tốn.</td></tr>
+      <tr><td class="pattern">生意気（なまいき）</td><td>Láu cá, hỗn/xấc.</td><td>あの子は少し生意気です。— Đứa bé đó hơi láu cá.</td></tr>
+      <tr><td class="pattern">陽気（ようき）</td><td>Vui vẻ, hoạt bát.</td><td>彼女は陽気で、いつも笑っています。— Cô ấy vui vẻ và luôn cười.</td></tr>
+      <tr><td class="pattern">純粋（じゅんすい）</td><td>Trong sáng, thuần khiết.</td><td>子どもの純粋な笑顔に癒やされました。<br><span class="furigana">こどもの じゅんすいな えがおに いやされました</span><br>→ Tôi được xoa dịu bởi nụ cười trong sáng của đứa trẻ.</td></tr>
+      <tr><td class="pattern">我儘（わがまま）</td><td>Ích kỷ, bướng bỉnh, chỉ theo ý mình.</td><td>子どもが我儘を言っています。— Đứa trẻ đang đòi theo ý mình.</td></tr>
+      <tr><td class="pattern">のんき / のんびり</td><td>のんき = vô tư, không quá lo; のんびり = thong thả, thư giãn.</td><td>週末は家でのんびり過ごします。— Cuối tuần tôi thư giãn ở nhà.</td></tr>
+      <tr><td class="pattern">率直に（そっちょくに）</td><td>Một cách thẳng thắn.</td><td>率直に言うと、その意見には反対です。— Nói thẳng ra, tôi phản đối ý kiến đó.</td></tr>
+      <tr><td class="pattern">心理（しんり）</td><td>Tâm lý.</td><td>人の心理を理解するのは難しいです。— Hiểu tâm lý người khác là khó.</td></tr>
+      <tr><td class="pattern">人に対する感情<br><span class="furigana">ひとに たいする かんじょう</span></td><td>Cảm xúc/tình cảm đối với người khác.</td><td>彼に対する感情が変わりました。— Tình cảm của tôi với anh ấy đã thay đổi.</td></tr>
+      <tr><td class="pattern">どきどきする</td><td>Hồi hộp, tim đập thình thịch.</td><td>初めて人前で話すので、どきどきしています。— Tôi hồi hộp vì lần đầu nói trước mọi người.</td></tr>
+      <tr><td class="pattern">気楽に（きらくに）</td><td>Thoải mái, không căng thẳng.</td><td>気楽に話してください。— Hãy cứ nói chuyện thoải mái.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <h2>Từ vựng: dáng vẻ, cách làm và động từ</h2>
+    <table>
+      <tr><th>Từ</th><th>Nghĩa</th><th>Điểm nhớ</th></tr>
+      <tr><td class="pattern">様子（ようす）</td><td>Tình trạng, dáng vẻ có thể quan sát.</td><td>彼の様子がおかしいです。— Dáng vẻ/tình trạng của anh ấy lạ.</td></tr>
+      <tr><td class="pattern">機嫌（きげん）</td><td>Tâm trạng bên trong tại một thời điểm.</td><td>今日は彼女の機嫌がいいです。— Hôm nay cô ấy tâm trạng tốt.</td></tr>
+      <tr><td class="pattern">様式（ようしき）</td><td>Kiểu mẫu, phong cách, quy cách.</td><td>この建物は伝統的な様式で作られています。— Tòa nhà xây theo phong cách truyền thống.</td></tr>
+      <tr><td class="pattern">清潔（せいけつ）/ 不潔（ふけつ）</td><td>Sạch sẽ, vệ sinh / bẩn, mất vệ sinh.</td><td>部屋を清潔に保ちましょう。— Hãy giữ phòng sạch sẽ.</td></tr>
+      <tr><td class="pattern">そそっかしい</td><td>Hấp tấp, bất cẩn, hay sơ suất.</td><td>Không phải <s>そそっしい</s>. 彼はそそっかしいので、よく忘れ物をします。</td></tr>
+      <tr><td class="pattern">さっさと / そっと</td><td>Nhanh chóng, không chần chừ / khẽ khàng, không gây chú ý.</td><td>宿題をさっさと終わらせましょう。 / ドアをそっと閉めました。</td></tr>
+      <tr><td class="pattern">敬う（うやまう）</td><td>Kính trọng, tôn kính.</td><td>私は両親を敬っています。— Tôi kính trọng bố mẹ.</td></tr>
+      <tr><td class="pattern">恐れる（おそれる）</td><td>Sợ hãi, lo ngại.</td><td>失敗を恐れずに、新しいことに挑戦してください。— Đừng sợ thất bại, hãy thử điều mới.</td></tr>
+      <tr><td class="pattern">預ける（あずける）</td><td>Gửi, giao cho ai trông giữ.</td><td>旅行中、犬を友だちに預けます。— Khi du lịch, tôi gửi chó cho bạn.</td></tr>
+      <tr><td class="pattern">楽しむ（たのしむ）</td><td>Tận hưởng, thưởng thức.</td><td>旅行を楽しんでいます。— Tôi đang tận hưởng chuyến du lịch.</td></tr>
+      <tr><td class="pattern">避ける（さける）</td><td>Tránh, né.</td><td>避 là âm Hán-Việt <b>tị</b>. 危険を避ける。— Tránh nguy hiểm.</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card">
+    <h2>Các cặp dễ nhầm về cảm xúc</h2>
+    <table>
+      <tr><th>Nhóm</th><th>Khác nhau</th><th>Cách đọc</th></tr>
+      <tr><td class="pattern">憎む / 恨む / 睨む</td><td>憎む = căm ghét mạnh; 恨む = oán hận do bị tổn thương/bất công; 睨む = trừng mắt, nhìn chằm chằm giận dữ.</td><td>にくむ = <b>ni-ku-mu</b><br>うらむ = <b>u-ra-mu</b><br>にらむ = <b>ni-ra-mu</b></td></tr>
+      <tr><td class="pattern">憎い / 憎らしい</td><td>憎い = ghét/căm ghét trực tiếp; 憎らしい = thật đáng ghét vì hành vi/dáng vẻ làm bực.</td><td>にくい / にくらしい</td></tr>
+      <tr><td class="pattern">我慢 / 自慢</td><td>我慢 = chịu đựng; 自慢 = tự hào, khoe khoang.</td><td>がまん / じまん</td></tr>
+      <tr><td class="pattern">哀れ / 気の毒だ</td><td>哀れ = đáng thương, hay dùng để miêu tả/văn viết; 気の毒だ = tội nghiệp, bày tỏ sự cảm thông trong hội thoại.</td><td>あわれ / きのどくだ</td></tr>
+    </table>
+  </div>
+
+  <div class="group-card" id="session-review-visit">
+    <h2>“Thăm / viếng” theo tình huống</h2>
+    <table>
+      <tr><th>Từ</th><th>Dùng khi nào</th><th>Ví dụ</th></tr>
+      <tr><td class="pattern">訪ねる（たずねる）</td><td>Đến thăm một người.</td><td>友だちの家を訪ねました。— Tôi đã đến thăm nhà bạn.</td></tr>
+      <tr><td class="pattern">訪問する（ほうもんする）</td><td>Thăm, viếng; trang trọng hơn.</td><td>来週、先生を訪問します。— Tuần sau tôi sẽ đến thăm thầy/cô.</td></tr>
+      <tr><td class="pattern">お見舞いに行く<br><span class="furigana">おみまいに いく</span></td><td>Đi thăm người bệnh hoặc gặp nạn.</td><td>病院にいる友だちのお見舞いに行きました。</td></tr>
+      <tr><td class="pattern">参拝する（さんぱいする）</td><td>Đi lễ/viếng ở đền, chùa.</td><td>神社に参拝しました。— Tôi đi lễ ở đền Thần đạo.</td></tr>
+      <tr><td class="pattern">お墓参りをする<br><span class="furigana">おはかまいりを する</span></td><td>Đi viếng mộ.</td><td>祖父のお墓参りをしました。— Tôi đã viếng mộ ông.</td></tr>
+      <tr><td class="pattern">弔問する（ちょうもんする）</td><td>Đến viếng người đã mất, chia buồn với gia quyến; rất trang trọng.</td><td>彼の家を弔問しました。</td></tr>
+    </table>
+  </div>
+
+  </div>
+
+  <div class="session-day" data-session-date="2026-09-19">
+    <div class="group-card">
+      <h2>Ôn tập ngày 19/09 — nhấn mạnh, nghi thức và thời điểm hành động</h2>
+      <p class="rule">Trọng tâm: phân biệt từ nhấn mạnh, dùng mẫu trang trọng trong văn bản/công việc và nhận diện hành động sắp diễn ra hoặc đang cố thực hiện.</p>
+      <table>
+        <tr><th>Từ</th><th>Nghĩa &amp; cách dùng</th><th>Ví dụ</th></tr>
+        <tr><td class="pattern">まさか</td><td>“Không lẽ nào / thật không ngờ”. Dùng khi phản ứng trước thông tin trái với dự đoán; thường đi với ～なんて／～とは hoặc đứng một mình như câu cảm thán.</td><td>まさか、田中さんが犯人だったなんて。<br><span class="furigana">まさか、たなかさん が はんにん だった なんて。</span><br>→ Không lẽ anh Tanaka lại là thủ phạm.</td></tr>
+        <tr><td class="pattern">まさに</td><td>“Đúng là / chính xác là”. Dùng để xác nhận một sự vật, tình huống hay nhận xét khớp hoàn toàn; sắc thái khẳng định mạnh.</td><td>この景色は、まさに絵のように美しい。<br><span class="furigana">この けしき は、まさに え の ように うつくしい。</span><br>→ Phong cảnh này đúng là đẹp như tranh.</td></tr>
+      </table>
+      <table>
+        <tr><th>Mẫu / từ</th><th>Ý chính</th><th>Ví dụ</th></tr>
+        <tr><td class="pattern">Vる + にあたり<br>～に際し</td><td>“Nhân dịp / khi chuẩn bị làm…”, trang trọng. <b>にあたり</b> sau động từ; <b>に際し</b> thường sau danh từ, hay gặp trong thông báo/hợp đồng.</td><td>新しい仕事を始めるにあたり、自己紹介をさせていただきます。<br>→ Nhân dịp bắt đầu công việc mới, xin phép cho tôi tự giới thiệu.<br><br>契約締結に際し、以下の事項をご確認ください。<br>→ Khi ký kết hợp đồng, vui lòng xác nhận các hạng mục sau.</td></tr>
+        <tr><td class="pattern">V ý chí (よう) + としている</td><td>Đang sắp, đang định hoặc đang cố gắng làm một việc; chọn nghĩa theo ngữ cảnh.</td><td>決勝戦が今、始まろうとしています。<br>→ Trận chung kết sắp bắt đầu.<br><br>ダイエットしようとしているけど、甘い物をやめられない。<br>→ Tôi đang cố ăn kiêng nhưng không bỏ được đồ ngọt.</td></tr>
+        <tr><td class="pattern">V1て、V2</td><td>Thể て nối câu: trình tự “làm V1 rồi V2”, nguyên nhân–kết quả, hoặc liệt kê. Không nhầm với <b>Vる + にあたって</b>.</td><td>朝ご飯を食べて、学校へ行きます。<br>→ Ăn sáng rồi đi học.<br><br>雨が降って、試合が中止になりました。<br>→ Vì mưa nên trận đấu bị hủy.</td></tr>
+        <tr><td class="pattern">申し上げます</td><td>Khiêm nhường ngữ của 言います; dùng khi nói với người trên/khán giả.</td><td>言葉を申し上げます。<br>→ Xin được nói vài lời / xin phát biểu đôi lời.</td></tr>
+      </table>
+      <div class="note"><b>Từ vựng &amp; tiến độ:</b> 契約締結 = ký kết hợp đồng; 以下の事項 = các hạng mục dưới đây; ご確認ください = vui lòng xác nhận. Đã học các mẫu nghi thức và thời điểm hành động qua câu dịch. <b>Tự ôn:</b> đặt 1 câu cho <b>まさか／まさに</b>; viết 1 thông báo dùng <b>～に際し</b>; và chọn nghĩa phù hợp của <b>～ようとしている</b> trong một câu tự tạo.</div>
+    </div>
+  </div>
+
+  <div class="session-day active" data-session-date="2026-09-21">
+    <div class="group-card">
+      <h2>Ôn tập ngày 21/09 — giáo dục, học thuật và hành trình</h2>
+      <p class="rule">Trọng tâm: gom từ vựng theo cụm chủ đề, phân biệt các từ gần nghĩa trong ngữ cảnh và dùng hai cấu trúc diễn tả điều kiện/trạng thái đang diễn ra.</p>
+      <table>
+        <tr><th>Nhóm / từ vựng</th><th>Nghĩa &amp; cách dùng</th><th>Ví dụ</th></tr>
+        <tr><td class="jp">著者／筆者<br><span class="furigana">ちょしゃ／ひっしゃ</span></td><td>著者 = tác giả của cả tác phẩm; 筆者 = người trực tiếp viết văn bản/bài đang đọc, thường để phân tích quan điểm.</td><td class="jp">筆者はこの問題について反対している。<br><span class="furigana">Người viết phản đối vấn đề này.</span></td></tr>
+        <tr><td class="jp">巡る・交通・ラッシュアワー<br><span class="furigana">めぐる・こうつう</span></td><td>巡る: đi vòng quanh/xoay quanh/mùa luân chuyển; 交通: giao thông; ラッシュアワー: giờ cao điểm.</td><td class="jp">この問題を巡って議論する。<br><span class="furigana">Tranh luận xoay quanh vấn đề này.</span></td></tr>
+        <tr><td class="jp">眺める・果実が実る・稲を刈る・吹雪に遭って凍える</td><td>Ngắm cảnh; quả kết/chín; gặt lúa; gặp bão tuyết rồi rét cóng. Nhớ 実る nói về cây cho quả.</td><td class="jp">窓から景色を眺める。<br><span class="furigana">Ngắm phong cảnh từ cửa sổ.</span></td></tr>
+        <tr><td class="jp">国立大学・私立大学・大学院・ゼミ・演習・単位を取る</td><td>Cụm từ môi trường đại học: quốc lập/tư thục, cao học, seminar, buổi thực hành và hoàn thành tín chỉ.</td><td class="jp">ゼミと演習に出て、単位を取る。<br><span class="furigana">Dự seminar và buổi thực hành để lấy tín chỉ.</span></td></tr>
+        <tr><td class="jp">教師／教員・担当する／受け持つ</td><td>教師 là giáo viên trực tiếp dạy; 教員 trang trọng/hành chính hơn. 担当する phụ trách chung; 受け持つ đảm nhiệm trực tiếp lớp/phần việc.</td><td class="jp">田中先生が一年生のクラスを受け持っている。<br><span class="furigana">Thầy Tanaka phụ trách lớp năm nhất.</span></td></tr>
+      </table>
+      <table>
+        <tr><th>Ngữ pháp / mẫu</th><th>Ý nghĩa</th><th>Điểm cần nhớ</th></tr>
+        <tr><td class="jp">～てからでなければ</td><td>Phải làm xong A trước thì mới có thể B; nếu chưa A thì không thể B.</td><td class="jp">家族で話し合ってからでなければ、お返事できません。<br><span class="furigana">Phải bàn với gia đình xong mới có thể trả lời.</span></td></tr>
+        <tr><td class="jp">～している最中</td><td>Đang đúng giữa lúc làm việc gì; không nên ngắt quãng.</td><td class="jp">考え事をしている最中だから、じゃましないほうがいい。<br><span class="furigana">Đang mải suy nghĩ nên tốt hơn đừng làm phiền.</span></td></tr>
+        <tr><td class="jp">決まって</td><td>(1) thể て của 決まる: đã được quyết định; (2) phó từ: luôn luôn, hễ… là.</td><td class="jp">彼は決まって朝コーヒーを飲む。<br><span class="furigana">Anh ấy lúc nào cũng uống cà phê buổi sáng.</span></td></tr>
+      </table>
+      <div class="note"><b>Tiến độ &amp; tự ôn:</b> Đã mở rộng vốn từ bằng các cụm chủ đề thay vì học từ rời: ngành học (<b>物理学・化学・生物学・経済学・政治学・社会学・文学・哲学・言語学</b>), thi cử (<b>中間試験・期末試験・答案を出す</b>), và khái niệm (<b>理念・保証・多数・編集・近代化・決勝戦・出発する</b>). Tự: (1) phân biệt 著者／筆者 bằng hai câu; (2) đặt câu với 巡る hoặc はるかに; (3) viết một câu dùng ～てからでなければ; (4) ôn cặp 教師／教員 và 担当する／受け持つ.</div>
+    </div>
+  </div>
+
+  <div class="session-day" data-session-date="2026-09-20">
+    <div class="group-card">
+      <h2>Ôn tập ngày 20/09 — địa hình, di chuyển và sắc thái từ vựng</h2>
+      <p class="rule">Trọng tâm: từ vựng mô tả địa hình và hành trình, cách dùng vài phó từ thường gặp, cùng phân biệt nội động từ/ngoại động từ của 入る.</p>
+      <table>
+        <tr><th>Từ / cụm từ</th><th>Nghĩa &amp; cách dùng</th><th>Ví dụ</th></tr>
+        <tr><td class="pattern">団体～個人<br><span class="furigana">だんたい～こじん</span></td><td>Từ tổ chức/đoàn thể đến cá nhân; bao quát cả hai đối tượng.</td><td>このサービスは団体から個人まで利用できます。<br>→ Dịch vụ này dùng được từ tổ chức đến cá nhân.</td></tr>
+        <tr><td class="pattern">定期券・回数券を買う<br><span class="furigana">ていきけん・かいすうけん を かう</span></td><td>Mua vé tháng/vé định kỳ; mua vé nhiều lượt.</td><td>通勤のために定期券を買いました。<br>→ Tôi đã mua vé tháng để đi làm.</td></tr>
+        <tr><td class="pattern">なかでも</td><td>Trong số đó, đặc biệt là/nhất là; nêu một mục nổi bật trong một nhóm.</td><td>日本料理のなかでも、寿司がいちばん好きです。<br>→ Trong các món Nhật, tôi thích sushi nhất.</td></tr>
+        <tr><td class="pattern">何とか<br><span class="furigana">なんとか</span></td><td>Bằng cách nào đó; xoay xở được; cũng tạm/ít nhiều.</td><td>何とか間に合いました。<br>→ Bằng cách nào đó tôi cũng kịp giờ.</td></tr>
+        <tr><td class="pattern">たった</td><td>Chỉ, vỏn vẹn; nhấn mạnh số lượng hoặc thời gian ít.</td><td>たった10分で終わりました。<br>→ Chỉ 10 phút là xong.</td></tr>
+        <tr><td class="pattern">列島・半島・岬<br><span class="furigana">れっとう・はんとう・みさき</span></td><td>Quần đảo; bán đảo; mũi đất.</td><td>日本列島は南北に長い。<br>船で半島・岬を回る。<br>→ Quần đảo Nhật Bản dài theo hướng Bắc–Nam; đi thuyền vòng quanh bán đảo và mũi đất.</td></tr>
+        <tr><td class="pattern">山・谷・峡谷・盆地・平野<br><span class="furigana">やま・たに・きょうこく・ぼんち・へいや</span></td><td>Núi; thung lũng; hẻm núi hẹp và sâu; lòng chảo được núi bao quanh; đồng bằng.</td><td>山に囲まれた盆地・平野。<br>谷に滝が流れ落ちる。<br>→ Lòng chảo/đồng bằng được núi bao quanh; thác đổ xuống thung lũng.</td></tr>
+        <tr><td class="pattern">沖・岸・地下水<br><span class="furigana">おき・きし・ちかすい</span></td><td>Ngoài khơi; bờ biển/bờ sông; nước ngầm.</td><td>船が沖に出る。舟が岸に戻る。地下水がわく。<br>→ Tàu ra khơi; thuyền về bờ; nước ngầm trào lên.</td></tr>
+        <tr><td class="pattern">薄暗い・森林・険しい・頂上<br><span class="furigana">うすぐらい・しんりん・けわしい・ちょうじょう</span></td><td>Tối mờ; rừng; hiểm trở; đỉnh núi.</td><td>薄暗い森林へ入る。険しい山の頂上。<br>→ Đi vào khu rừng tối mờ; đỉnh một ngọn núi hiểm trở.</td></tr>
+        <tr><td class="pattern">砂・泥・地盤・凍える・吹雪に遭う<br><span class="furigana">すな・どろ・じばん・こごえる・ふぶきにあう</span></td><td>Cát; bùn; nền đất; rét cóng; gặp bão tuyết (遭う thường đi với điều không may).</td><td>砂・泥ばかりで地盤が弱い。吹雪に遭って凍える。<br>→ Chỉ cát và bùn nên nền đất yếu; gặp bão tuyết và rét cóng.</td></tr>
+        <tr><td class="pattern">入る／入れる<br><span class="furigana">はいる／いれる</span></td><td><b>入る</b> là nội động từ: tự vào/được chứa; <b>入れる</b> là ngoại động từ: cho cái gì vào. <b>入り口</b> thường đọc là いりぐち.</td><td>部屋に入る。部屋に荷物を入れる。<br>→ Vào phòng; đưa hành lý vào phòng.</td></tr>
+      </table>
+      <div class="note"><b>Tiến độ &amp; tự ôn:</b> Đã học một cụm từ vựng theo chủ đề địa hình/di chuyển và các sắc thái <b>なかでも・何とか・たった</b>. Tự: (1) mô tả một cảnh có 谷, 滝 hoặc 森林; (2) đặt câu với 何とか; (3) đối chiếu <b>部屋に入る</b> với <b>荷物を入れる</b>; (4) phân biệt 谷, 峡谷 và 盆地.</div>
+    </div>
+  </div>
+
+  <div class="session-day" data-session-date="2026-09-18">
+    <div class="group-card">
+      <h2>Ôn tập ngày 18/09 — Shinkanzen N2, bài 1</h2>
+      <p class="rule">Trọng tâm là đọc ngắn N2: nắm luận điểm, tìm bằng chứng trong bài và ghi nhớ từ theo ngữ cảnh thay vì dịch từng câu.</p>
+      <table>
+        <tr><th>Từ / cụm từ</th><th>Nghĩa</th><th>Ghi nhớ / ví dụ</th></tr>
+        <tr><td class="pattern">電子会議・発言・思考<br><span class="furigana">でんしかいぎ・はつげん・しこう</span></td><td>Họp điện tử/trực tuyến; phát biểu; tư duy.</td><td>電子会議に参加する。— Tham gia họp trực tuyến. アイデアが浮かぶ = ý tưởng nảy ra bất chợt.</td></tr>
+        <tr><td class="pattern">一般に・いわゆる</td><td>Nói chung; cái gọi là/thường được gọi là.</td><td><b>一般に</b> nói về mặt bằng chung; <b>いわゆる</b> dùng để giới thiệu tên gọi hay khái niệm quen thuộc.</td></tr>
+        <tr><td class="pattern">接する・役割・役目・責任</td><td>Tiếp xúc/tương tác; vai trò; nhiệm vụ; trách nhiệm.</td><td>子供と接する。役目 là việc cần làm; 責任 là trách nhiệm phải gánh chịu.</td></tr>
+        <tr><td class="pattern">固定・分担・境界<br><span class="furigana">こてい・ぶんたん・きょうかい</span></td><td>Cố định; phân chia/đảm nhận phần việc; ranh giới.</td><td>役割分担 = phân chia vai trò/công việc. 境界がなくなる = ranh giới biến mất.</td></tr>
+        <tr><td class="pattern">耳を傾ける・ぼやく・批判</td><td>Lắng nghe kỹ; than phiền/càm ràm; phê phán.</td><td>意見に耳を傾ける。— Lắng nghe ý kiến.</td></tr>
+        <tr><td class="pattern">盛り上がる・空間・知恵・緊張する瞬間</td><td>Sôi nổi; không gian/bầu không khí; kinh nghiệm sống/khôn ngoan; khoảnh khắc căng thẳng.</td><td>敏感に知っている = nhạy bén nhận ra.</td></tr>
+        <tr><td class="pattern">上り電車／下り電車<br><span class="furigana">のぼりでんしゃ／くだりでんしゃ</span></td><td>Tàu về phía Tokyo/trung tâm tuyến; tàu rời Tokyo/đi về cuối tuyến.</td><td>Là quy ước hướng chạy, không phải tàu lên hay xuống dốc.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Ba ý đọc hiểu cần nhớ</h2>
+      <table>
+        <tr><th>Bài</th><th>Ý chính / đáp án then chốt</th></tr>
+        <tr><td class="pattern">TV game và trẻ em</td><td>Trẻ có thể bật game để tránh căng thẳng/ngượng ngùng khi không biết nói gì ở nhà bạn, tương tự người lớn đi karaoke để tránh bầu không khí khó xử. <b>Đáp án: 2.</b></td></tr>
+        <tr><td class="pattern">Vai trò cha mẹ</td><td>Vai trò giới không còn cố định, nhưng bài nêu quan điểm: khi cần nghiêm khắc, cha nên nhận vai trò đó; mẹ quan tâm, nâng đỡ sau đó để việc nuôi dạy thuận lợi hơn.</td></tr>
+        <tr><td class="pattern">Sách và tình yêu</td><td>Sách không thể đảo ngược kết thúc tình yêu hay nỗi đau thất tình, nhưng giúp trải nghiệm lại chúng sâu sắc và trong trẻo hơn.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Ngữ pháp &amp; tự ôn</h2>
+      <table>
+        <tr><th>Mẫu</th><th>Ý nghĩa chính xác</th></tr>
+        <tr><td class="pattern">～ことになる</td><td>Được quyết định/được quy định là…</td></tr>
+        <tr><td class="pattern">～ことがない</td><td>Không có việc/lần nào…; “không cần” thường là ～必要がない.</td></tr>
+        <tr><td class="pattern">～ことなく</td><td>Không làm… mà / không cần làm…</td></tr>
+        <tr><td class="pattern">～ないことはない</td><td>Không phải là không…; vẫn có khả năng/có thể.</td></tr>
+        <tr><td class="pattern">～ことだから</td><td>Vì là người/sự việc đó nên…; phán đoán dựa trên đặc điểm đã biết.</td></tr>
+      </table>
+      <div class="note"><b>Tự ôn:</b> làm lại bài đọc ngắn 1, khoanh câu bằng chứng cho đáp án 2; sau đó tự đặt câu với <b>電子会議・役割分担・耳を傾ける・～ないことはない</b>.</div>
+    </div>
+  </div>
+
+  <div class="session-day" data-session-date="2026-09-17">
+    <div class="group-card">
+      <h2>Ôn tập ngày 17/09 — việc nhà và nấu ăn</h2>
+      <table>
+        <tr><th>Từ / cụm từ</th><th>Nghĩa</th><th>Điểm nhớ</th></tr>
+        <tr><td class="pattern">洗濯物を裏返す<br><span class="furigana">せんたくもの を うらがえす</span></td><td>Lộn trái quần áo.</td><td>シャツを裏返してから洗います。— Lộn trái áo sơ mi rồi giặt.</td></tr>
+        <tr><td class="pattern">干す・乾かす・畳む<br><span class="furigana">ほす・かわかす・たたむ</span></td><td>Phơi; làm/sấy khô; gấp quần áo.</td><td>洗濯物を干して、乾いたら畳みます。— Phơi đồ, khô rồi thì gấp.</td></tr>
+        <tr><td class="pattern">材料をゆでる・蒸す・揚げる・炒る<br><span class="furigana">ざいりょう を ゆでる・むす・あげる・いる</span></td><td>Luộc nguyên liệu; hấp; chiên ngập dầu; rang (ít hoặc không dầu).</td><td>ごまを炒る = rang mè/vừng. 「いる」ở đây viết là <b>炒る</b>.</td></tr>
+        <tr><td class="pattern">倉庫にしまう<br><span class="furigana">そうこ に しまう</span></td><td>Cất vào kho.</td><td>使わない家具を倉庫にしまいます。— Cất đồ nội thất không dùng vào kho.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Cây cối — trồng, mọc và các bộ phận</h2>
+      <table>
+        <tr><th>Từ</th><th>Nghĩa</th><th>Điểm nhớ / ví dụ</th></tr>
+        <tr><td class="pattern">植える（うえる）／生える（はえる）</td><td>Trồng / mọc lên.</td><td><b>植える</b> là hành động chủ động của con người: 庭に木を植えます。<br><b>生える</b> là cây/cỏ tự mọc: 庭に草が生えています。</td></tr>
+        <tr><td class="pattern">草（くさ）</td><td>Cỏ; cây cỏ nói chung.</td><td>草を取ります。— Nhổ cỏ. 木（き） là cây thân gỗ.</td></tr>
+        <tr><td class="pattern">芽・葉・花・つぼみ・実・種<br><span class="furigana">め・は・はな・つぼみ・み・たね</span></td><td>Mầm/chồi; lá; hoa; nụ; quả; hạt giống.</td><td>春になると、木に新しい芽が出ます。— Sang xuân, cây ra chồi mới.</td></tr>
+        <tr><td class="pattern">根・幹・枝・茎・樹皮<br><span class="furigana">ね・みき・えだ・くき・じゅひ</span></td><td>Rễ; thân cây chính; cành; thân/cuống cây; vỏ cây.</td><td>この木は根が深いです。— Cây này có rễ sâu.</td></tr>
+        <tr><td class="pattern">水をやる・肥料・枯れる<br><span class="furigana">みず を やる・ひりょう・かれる</span></td><td>Tưới nước; phân bón; héo/chết khô.</td><td>毎朝、植物に水をやります。— Mỗi sáng tưới cây.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Chăm trẻ — hành động và sự cố thường gặp</h2>
+      <table>
+        <tr><th>Từ / cụm từ</th><th>Nghĩa</th><th>Phân biệt</th></tr>
+        <tr><td class="pattern">子供をなでる<br><span class="furigana">こども を なでる</span></td><td>Vuốt ve, xoa đầu trẻ.</td><td>母は子供の頭をなでました。</td></tr>
+        <tr><td class="pattern">抱く・抱っこする<br><span class="furigana">だく・だっこ する</span></td><td>Ôm/bế; bế trẻ nhỏ.</td><td>赤ちゃんを抱きます。／子供を抱っこしています。</td></tr>
+        <tr><td class="pattern">背負う・おんぶする<br><span class="furigana">せおう・おんぶ する</span></td><td>Cõng trên lưng.</td><td>背負う còn có nghĩa bóng: gánh vác. おんぶする thường dùng khi cõng trẻ.</td></tr>
+        <tr><td class="pattern">子供に構う<br><span class="furigana">こども に かまう</span></td><td>Quan tâm, chăm/chơi cùng trẻ.</td><td>今は忙しいので、子供に構えません。— Bận nên không thể chăm/chơi cùng con.</td></tr>
+        <tr><td class="pattern">子供が暴れる<br><span class="furigana">こども が あばれる</span></td><td>Trẻ quậy phá, giãy giụa, ăn vạ.</td><td>子供が泣いて暴れています。</td></tr>
+        <tr><td class="pattern">ご飯をこぼす／ご飯がこぼれる</td><td>Làm đổ cơm / cơm bị đổ.</td><td><b>をこぼす</b> = ai đó làm đổ; <b>がこぼれる</b> = thứ gì bị đổ. Kanji: 零す／零れる.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Miêu tả, trạng từ và sức khỏe</h2>
+      <table>
+        <tr><th>Từ</th><th>Nghĩa</th><th>Ví dụ / lưu ý</th></tr>
+        <tr><td class="pattern">水玉模様（みずたまもよう）</td><td>Họa tiết chấm bi.</td><td>水玉模様のワンピースを着ています。</td></tr>
+        <tr><td class="pattern">せめて</td><td>Ít nhất thì…, dù sao cũng hãy…</td><td>せめて一日休みたいです。— Ít nhất tôi muốn nghỉ một ngày.</td></tr>
+        <tr><td class="pattern">あらかじめ（予め）</td><td>Trước, từ trước.</td><td>あらかじめ予約してください。— Hãy đặt chỗ trước.</td></tr>
+        <tr><td class="pattern">体調／症状<br><span class="furigana">たいちょう／しょうじょう</span></td><td>Tình trạng sức khỏe nói chung / triệu chứng cụ thể.</td><td>体調が悪くて、頭痛の症状があります。</td></tr>
+        <tr><td class="pattern">体調を崩す<br><span class="furigana">たいちょう を くずす</span></td><td>Sức khỏe sa sút, bị ốm/mệt.</td><td>働きすぎて、体調を崩しました。</td></tr>
+        <tr><td class="pattern">インフルエンザにかかる・骨折する</td><td>Mắc cúm; bị gãy xương.</td><td>転んで足を骨折しました。</td></tr>
+        <tr><td class="pattern">血圧が高い・高血圧・高熱<br><span class="furigana">けつあつ が たかい・こうけつあつ・こうねつ</span></td><td>Huyết áp cao; cao huyết áp; sốt cao.</td><td><b>高熱圧</b> không phải từ thông dụng. 高熱が出ました。= Tôi bị sốt cao.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Thuộc lòng — mùa, hướng và cơ thể</h2>
+      <table>
+        <tr><th>Nhóm</th><th>Kanji và cách đọc</th><th>Nghĩa / mẹo nhớ</th></tr>
+        <tr><td class="pattern">Bốn mùa</td><td>春（はる）・夏（なつ）・秋（あき）・冬（ふゆ）</td><td>Xuân, hạ, thu, đông. 春夏秋冬（しゅんかしゅうとう）= bốn mùa.</td></tr>
+        <tr><td class="pattern">Bốn hướng</td><td>東（ひがし）・西（にし）・南（みなみ）・北（きた）</td><td>Đông, tây, nam, bắc. 東西南北（とうざいなんぼく）= bốn phương.</td></tr>
+        <tr><td class="pattern">Bộ phận bên ngoài</td><td>肩（かた）・腕（うで）・胸（むね）・腹（はら）・腰（こし）・背（せ）・脚（あし）・膝（ひざ）・肘（ひじ）</td><td>Vai, cánh tay, ngực, bụng, eo/hông, lưng, chân, đầu gối, khuỷu tay. Nhiều chữ có bộ 月 bên trái; ở đây thường là bộ “thịt/cơ thể”, không phải mặt trăng.</td></tr>
+        <tr><td class="pattern">Cơ quan bên trong</td><td>心臓（しんぞう）・肝臓（かんぞう）・肺（はい）・胃（い）・腸（ちょう）・腎臓（じんぞう）・脳（のう）</td><td>Tim, gan, phổi, dạ dày, ruột, thận, não. 心臓・肝臓・腎臓 đều có 臓（ぞう） = nội tạng.</td></tr>
+        <tr><td class="pattern">Khác</td><td>血（ち）・血管（けっかん）・骨（ほね）・筋肉（きんにく）・のど</td><td>Máu, mạch máu, xương, cơ bắp, cổ họng.</td></tr>
+      </table>
+      <div class="note"><b>Tự kiểm tra:</b> che cột nghĩa, đọc to toàn bộ từ; sau đó tự nói ba câu: 「庭に木を植えます。」「子供をおんぶします。」「体調が悪いです。」</div>
+    </div>
+
+    <div class="group-card">
+      <h2>Y tế, chấn thương và tư thế</h2>
+      <table>
+        <tr><th>Từ / cụm từ</th><th>Nghĩa</th><th>Điểm nhớ / ví dụ</th></tr>
+        <tr><td class="pattern">白髪が抜ける<br><span class="furigana">しらが が ぬける</span></td><td>Tóc bạc bị rụng.</td><td>抜ける = rụng/tuột ra, không phải “tóc chuyển sang bạc”.</td></tr>
+        <tr><td class="pattern">足首をひねる・捻じる<br><span class="furigana">あしくび を ひねる・ねじる</span></td><td>Bị trẹo/bong gân mắt cá chân; vặn, xoắn.</td><td>足首をひねったので、足に包帯を巻きました。— Vì trẹo mắt cá chân nên tôi quấn băng quanh chân.</td></tr>
+        <tr><td class="pattern">足に包帯を巻く<br><span class="furigana">あし に ほうたい を まく</span></td><td>Quấn băng quanh chân.</td><td>包帯 = băng gạc; 巻く = quấn.</td></tr>
+        <tr><td class="pattern">患者を診る・診察する・診断する<br><span class="furigana">かんじゃ を みる・しんさつ する・しんだん する</span></td><td>Khám/điều trị cho bệnh nhân; khám bệnh; chẩn đoán bệnh.</td><td>医者が患者を診察して、インフルエンザだと診断しました。<br>→ Bác sĩ khám bệnh nhân và chẩn đoán là bị cúm.</td></tr>
+        <tr><td class="pattern">顔が青白い・全身が震える<br><span class="furigana">かお が あおじろい・ぜんしん が ふるえる</span></td><td>Mặt tái nhợt; toàn thân run rẩy.</td><td>青白い = trắng tái, nhợt nhạt; 震える = run, rung.</td></tr>
+        <tr><td class="pattern">内科の医者・外科の医者<br><span class="furigana">ないか の いしゃ・げか の いしゃ</span></td><td>Bác sĩ nội khoa; bác sĩ ngoại khoa/phẫu thuật.</td><td>内科 = điều trị bệnh bên trong cơ thể; 外科 = điều trị bằng phẫu thuật.</td></tr>
+        <tr><td class="pattern">手を消毒する<br><span class="furigana">て を しょうどく する</span></td><td>Khử trùng tay.</td><td>病院に入る前に、手を消毒します。— Khử trùng tay trước khi vào bệnh viện.</td></tr>
+        <tr><td class="pattern">赤ちゃんがはう<br><span class="furigana">あかちゃん が はう</span></td><td>Em bé bò.</td><td>赤ちゃんが床をはい回っています。— Em bé đang bò khắp sàn.</td></tr>
+        <tr><td class="pattern">壁にもたれる・床にしゃがむ<br><span class="furigana">かべ に もたれる・ゆか に しゃがむ</span></td><td>Dựa vào tường; ngồi xổm trên sàn.</td><td>もたれる = dựa vào; しゃがむ = ngồi xổm/cúi thấp người xuống.</td></tr>
+        <tr><td class="pattern">いすに腰掛ける・いすから立ち上がる<br><span class="furigana">いす に こしかける・いす から たちあがる</span></td><td>Ngồi xuống ghế; đứng dậy khỏi ghế.</td><td>腰掛ける = ngồi/perch lên ghế; 立ち上がる = đứng lên.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Đọc hiểu N2 — từ vựng và sắc thái</h2>
+      <table>
+        <tr><th>Từ / mẫu</th><th>Nghĩa</th><th>Điểm nhớ / ví dụ</th></tr>
+        <tr><td class="pattern">削減・削る・除く・解除<br><span class="furigana">さくげん・けずる・のぞく・かいじょ</span></td><td>Cắt giảm; gọt/cắt bớt; loại trừ; gỡ bỏ/hủy bỏ.</td><td>費用を削減する。／日曜日を除いて毎日働く。<br><b>除く</b> khác với 覗く（nhìn vào/nhìn trộm）dù cùng đọc のぞく.</td></tr>
+        <tr><td class="pattern">特定・指定・固定・限定<br><span class="furigana">とくてい・してい・こてい・げんてい</span></td><td>Cụ thể/xác định; chỉ định; cố định; giới hạn.</td><td>特定の時期 = thời điểm cụ thể. 指定席 = ghế chỉ định; 固定した予定 = lịch cố định; 期間限定 = giới hạn thời gian.</td></tr>
+        <tr><td class="pattern">研修・絶えず・投票・抱える<br><span class="furigana">けんしゅう・たえず・とうひょう・かかえる</span></td><td>Đào tạo; không ngừng; bỏ phiếu; ôm/mang, gánh (vấn đề).</td><td>社会は絶えず変化している。／選挙で誰に投票するかまだ決めていない。<br>Phân biệt: 当選（とうせん）= đắc cử.</td></tr>
+        <tr><td class="pattern">暮れ（くれ）</td><td>Cuối năm; lúc chạng vạng/cuối ngày.</td><td>今年の暮れは実家で過ごしたい。 Với cuối truyện, chuyến đi hay buổi học, dùng 終わり tự nhiên hơn.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Nghe và phỏng vấn — nắm ý người nói</h2>
+      <table>
+        <tr><th>Từ / ngữ pháp</th><th>Nghĩa</th><th>Ví dụ / ghi nhớ</th></tr>
+        <tr><td class="pattern">捉える・つかむ<br><span class="furigana">とらえる・つかむ</span></td><td>Nắm bắt toàn bộ bản chất/ý định; nắm điểm quan trọng, thông điệp.</td><td>相手が何を言わんとしているのか、丸ごと捉える。<br>大事なメッセージをしっかりとつかむ。</td></tr>
+        <tr><td class="pattern">言わんとする</td><td>Định/cố muốn nói; cách viết trang trọng của ～ようとする.</td><td>相手が言わんとしていることを聞く。— Lắng nghe điều đối phương muốn diễn đạt.</td></tr>
+        <tr><td class="pattern">～なくてはならない<br>～ことこそが必要だ</td><td>Phải…; chính việc… mới cần thiết.</td><td>準備で得たものをいったん捨てなくてはならない。<br>相手の話を深く聞くことこそが必要だ。</td></tr>
+      </table>
+      <div class="note"><b>Tiến độ &amp; tự ôn:</b> Đã luyện từ vựng đời sống/y tế và các câu chọn kanji–từ vựng N2. Tự làm lại: chọn đúng <b>研修・絶えず・投票・抱えて・特定・暮れ</b>, rồi nói một câu cho mỗi từ. Khi đọc, ưu tiên tóm được ý và thông điệp của người nói thay vì bám vào câu hỏi kế tiếp.</div>
+    </div>
+  </div>
+
+  <div class="session-day" data-session-date="2026-09-16">
+    <div class="group-card">
+      <h2>Ôn tập ngày 16/09 — cảm xúc, bí mật và tin đồn</h2>
+      <p class="rule">Ba cụm từ hôm nay đều có một điểm quan trọng: xác định rõ ai là người chủ động làm hành động, và sắc thái của hành động đó.</p>
+      <table>
+        <tr><th>Cụm từ</th><th>Nghĩa &amp; sắc thái</th><th>Ví dụ</th></tr>
+        <tr><td class="pattern">不平を言う<br><span class="furigana">ふへい を いう</span></td><td>Than phiền, phàn nàn, kêu ca về điều không hài lòng. Sắc thái thường chê ai đó hay kêu ca; nhấn vào sự bất mãn.</td><td>彼はいつも会社のルールに不平を言っている。<br><span class="furigana">かれは いつも かいしゃ の ルール に ふへい を いっている</span><br>→ Anh ấy luôn phàn nàn về các quy định của công ty.</td></tr>
+        <tr><td class="pattern">秘密を隠す<br><span class="furigana">ひみつ を かくす</span></td><td>Che giấu một bí mật. 秘密 = <b>bí mật</b>; 隠 = <b>ẩn</b>.</td><td>彼は家族に秘密を隠している。<br><span class="furigana">かれは かぞく に ひみつ を かくしている</span><br>→ Anh ấy đang giấu một bí mật với gia đình.</td></tr>
+        <tr><td class="pattern">噂を広める<br><span class="furigana">うわさ を ひろめる</span></td><td>Chủ động lan truyền/tung tin đồn. 広 = <b>quảng</b>; 噂 có âm Hán-Việt là <b>tốn</b> nhưng hầu như không dùng trong tiếng Việt hiện đại.</td><td>根拠のないうわさを広めないでください。<br><span class="furigana">こんきょ の ない うわさ を ひろめないで ください</span><br>→ Xin đừng lan truyền những tin đồn không có căn cứ.</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Phân biệt để dùng tự nhiên</h2>
+      <table>
+        <tr><th>Cụm từ</th><th>Khi dùng</th><th>Ví dụ</th></tr>
+        <tr><td class="pattern">秘密にする<br><span class="furigana">ひみつ に する</span></td><td>Quyết định giữ một việc là bí mật, thường là cách nói tự nhiên trong hội thoại.</td><td>このことは二人だけの秘密にしよう。<br>→ Chuyện này hãy giữ làm bí mật chỉ giữa hai chúng ta.</td></tr>
+        <tr><td class="pattern">秘密を守る<br><span class="furigana">ひみつ を まもる</span></td><td>Giữ kín bí mật, không tiết lộ bí mật của ai đó.</td><td>友達の秘密を守らなければならない。<br>→ Tôi phải giữ kín bí mật của bạn.</td></tr>
+        <tr><td class="pattern">事実を隠す<br><span class="furigana">じじつ を かくす</span></td><td>Che giấu sự thật; nhấn mạnh hành động giấu đi.</td><td>彼女は本当の気持ちを隠していた。<br>→ Cô ấy đã che giấu cảm xúc thật của mình.</td></tr>
+        <tr><td class="pattern">噂が広まる<br><span class="furigana">うわさ が ひろまる</span></td><td>Tin đồn tự lan rộng; không nêu người chủ động lan truyền.</td><td>SNSでは、うわさがすぐに広まる。<br>→ Trên mạng xã hội, tin đồn nhanh chóng lan rộng.</td></tr>
+      </table>
+      <div class="note"><b>Mẹo nhớ:</b> ～を広める = “làm cho thứ gì lan rộng” (ngoại động từ); ～が広まる = “thứ gì tự lan rộng” (nội động từ).</div>
+    </div>
+
+    <div class="group-card">
+      <h2>Ngữ pháp trọng tâm — so sánh</h2>
+      <table>
+        <tr><th>Mẫu</th><th>Nghĩa</th><th>Ví dụ</th></tr>
+        <tr><td class="pattern">A は B より ～</td><td>A … hơn B.</td><td>日本語は英語より難しいです。<br>→ Tiếng Nhật khó hơn tiếng Anh.</td></tr>
+        <tr><td class="pattern">A より B のほうが ～</td><td>B … hơn A; <b>cái đứng trước のほうが</b> là bên hơn.</td><td>電車よりバスのほうが安いです。<br>→ Xe buýt rẻ hơn tàu điện.</td></tr>
+        <tr><td class="pattern">A は B ほど～ない</td><td>A không… bằng B. Sau ほど phải là dạng phủ định.</td><td>私は兄ほど背が高くないです。<br>→ Tôi không cao bằng anh trai.</td></tr>
+        <tr><td class="pattern">A と B と、どちらが～？</td><td>Giữa A và B, cái nào… hơn?</td><td>コーヒーとお茶と、どちらが好きですか。</td></tr>
+        <tr><td class="pattern">A の中で／A で B が一番～</td><td>Trong A, B là… nhất. <b>最も</b> là cách nói trang trọng của 一番.</td><td>日本の山の中で富士山が一番高いです。</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <h2>Đọc hiểu N2 — chiến lược và quản lý thời gian</h2>
+      <p class="rule">Mục tiêu là tìm bằng chứng trong bài, không dịch từng câu. Bắt đầu đọc hiểu chậm nhất vào phút <b>42–45</b> của 105 phút phần chữ–từ vựng–ngữ pháp–đọc hiểu.</p>
+      <table>
+        <tr><th>Mốc</th><th>Dạng</th><th>Cách làm</th></tr>
+        <tr><td>42–50</td><td>短文</td><td>Tối đa khoảng 90 giây/câu; không tìm thấy câu chứa bằng chứng thì chọn tạm và đi tiếp.</td></tr>
+        <tr><td>50–70</td><td>中文</td><td>Khoảng 6–7 phút/bài; đọc câu hỏi trước rồi tìm đoạn liên quan.</td></tr>
+        <tr><td>70–76</td><td>統合理解</td><td>Ghi cực ngắn ý A và ý B để không lẫn lập trường.</td></tr>
+        <tr><td>76–87</td><td>主張理解・長文</td><td>Không dịch từng câu; chú ý mở/kết bài và しかし・つまり・一方・～べきだ.</td></tr>
+        <tr><td>87–93</td><td>情報検索</td><td>Đọc yêu cầu trước, gạch điều kiện như giờ, giá, nơi, đối tượng rồi quét thông tin.</td></tr>
+      </table>
+      <div class="note"><b>Từ nối cần gạch:</b> しかし・だが (ý sau quan trọng), つまり・要するに (kết luận), 一方 (đối lập), そのため・したがって (kết quả), 必ずしも～ない (không nhất thiết).</div>
+    </div>
+
+    <div class="group-card">
+      <h2>Bài đọc đã ôn — ý chính cần nhớ</h2>
+      <table>
+        <tr><th>Chủ đề</th><th>Kiến thức / đáp án then chốt</th></tr>
+        <tr><td class="pattern">Mệt mỏi của não</td><td>Não mệt khó hồi phục hơn cơ thể; ngủ là cách tốt nhất. Ở bên động vật, thiên nhiên và cười cũng hữu ích. Làm việc mình thích vẫn có thể mệt, nhưng ham muốn tiếp tục lấn át cảm giác mệt; nếu kéo dài, tín hiệu báo mệt có thể không hoạt động. <b>Đáp án:</b> 脳の疲れのほうが体の疲れより取りにくい。</td></tr>
+        <tr><td class="pattern">使い捨てカイロ</td><td>Bột sắt tiếp xúc ôxy sẽ tỏa nhiệt (酸化). Cấu tạo: nguyên liệu trong túi cho không khí đi qua, rồi đặt vào túi kín khí; lấy túi trong ra thì sắt gặp ôxy và nóng. Loại dán lên quần áo ra đời vì tiện hơn. <b>Từ:</b> 酸化, さびる, 主流, 貼り付ける, 発明.</td></tr>
+        <tr><td class="pattern">婚活 ở quán có chó/mèo</td><td>Người thích thú cưng có chủ đề chung; khi cuộc trò chuyện ngắt quãng có thể chơi với thú cưng nên bớt ngượng. <b>話がまとまらない</b> = việc kết hôn không thành/không được quyết định.</td></tr>
+        <tr><td class="pattern">Ẩm thực Nhật lan tỏa</td><td>昆布 và かつおぶし được đưa vào món nước khác, kể cả Pháp; đồng thời ẩm thực Nhật cũng chịu ảnh hưởng bên ngoài và xuất hiện 創作日本料理. <b>制限していない</b> = không hạn chế, vẫn sử dụng nguyên liệu kiểu món Tây.</td></tr>
+      </table>
+      <div class="tip-box"><p class="box-label">Cách dịch đã thống nhất</p>Với đoạn văn: tách từng câu bằng <b>[cụm bổ nghĩa]</b> và <b>【cụm/câu chính】</b>; chỉ rõ cụm bổ nghĩa cho từ nào rồi mới dịch tự nhiên. Với câu ngắn, chỉ cần dịch bình thường.</div>
+    </div>
+
+    <div class="group-card">
+      <h2>Từ vựng ôn trong phiên</h2>
+      <table>
+        <tr><th>Từ</th><th>Nghĩa / phân biệt nhanh</th></tr>
+        <tr><td class="pattern">行列（ぎょうれつ）</td><td>Hàng người, hàng dài. 行列に並ぶ = xếp vào hàng.</td></tr>
+        <tr><td class="pattern">柄（がら）／模様（もよう）</td><td>柄: mẫu in trên quần áo/vải; 模様: hoa văn hoặc hình dạng nói chung.</td></tr>
+        <tr><td class="pattern">羨む（うらやむ）／羨ましい</td><td>羨む là động từ “ghen tị/ngưỡng mộ”; 羨ましい là tính từ “đáng ghen tị”.</td></tr>
+        <tr><td class="pattern">だらしない</td><td>Luộm thuộm, thiếu chỉn chu/kỷ luật; dùng cho ăn mặc, lối sống hoặc tiền bạc.</td></tr>
+        <tr><td class="pattern">どのよう（な／に）</td><td>“Như thế nào”; trang trọng hơn どんな／どういう. どのような＋N, どのように＋V.</td></tr>
+        <tr><td class="pattern">疲れ（つかれ）</td><td>Sự mệt mỏi; động từ là 疲れる. 疲れを取る = xua tan cơn mệt.</td></tr>
+        <tr><td class="pattern">制限（せいげん）／商品（しょうひん）</td><td>制限 = giới hạn, hạn chế; 商品 = hàng hóa/sản phẩm để bán, khác 製品 (sản phẩm được sản xuất).</td></tr>
+        <tr><td class="pattern">日傘・日かげ</td><td>日傘 = ô che nắng; 日かげ = bóng râm. 日かげを歩くことにした = quyết định đi ở chỗ có bóng râm.</td></tr>
+        <tr><td class="pattern">ドリンクバー・おかわり</td><td>ドリンクバー = quầy đồ uống tự phục vụ; おかわり = lấy thêm/refill. 何回でもおかわりできる = có thể lấy thêm bao nhiêu lần cũng được.</td></tr>
+        <tr><td class="pattern">～たことを後悔する</td><td>Hối hận vì đã làm… Ví dụ: 抹茶ラテを持ってきたことを後悔しました。</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
 <script>
   const tabButtons = document.querySelectorAll('.tab-btn');
   const tabPanels = document.querySelectorAll('.tab-panel');
+  const p1MapCanvas = document.getElementById('n2-p1-map-canvas');
+  const p1ZoomLabel = document.getElementById('p1-zoom-label');
+  const p1MapFrame = document.getElementById('n2-p1-map-frame');
+  const p1MapTitle = document.getElementById('n2-map-viewer-title');
+  if (p1MapCanvas && p1ZoomLabel && p1MapFrame) {
+    const p1MapContext = p1MapCanvas.getContext('2d');
+    const p1MapSource = new Image();
+    let p1Scale = 1;
+    let p1MinScale = 1;
+    let p1OffsetX = 0;
+    let p1OffsetY = 0;
+    let p1RenderQueued = false;
+    let panStart = null;
+    const getP1Size = () => ({ width: p1MapFrame.clientWidth, height: p1MapFrame.clientHeight });
+    const constrainP1Pan = () => {
+      const { width: frameWidth, height: frameHeight } = getP1Size();
+      const imageWidth = p1MapSource.naturalWidth * p1Scale;
+      const imageHeight = p1MapSource.naturalHeight * p1Scale;
+      if (imageWidth <= frameWidth) {
+        p1OffsetX = (frameWidth - imageWidth) / 2;
+      } else {
+        p1OffsetX = Math.min(0, Math.max(frameWidth - imageWidth, p1OffsetX));
+      }
+      if (imageHeight <= frameHeight) {
+        p1OffsetY = (frameHeight - imageHeight) / 2;
+      } else {
+        p1OffsetY = Math.min(0, Math.max(frameHeight - imageHeight, p1OffsetY));
+      }
+    };
+    const renderP1Map = () => {
+      p1RenderQueued = false;
+      if (!p1MapSource.complete || !p1MapSource.naturalWidth) return;
+      const { width: frameWidth, height: frameHeight } = getP1Size();
+      const pixelRatio = window.devicePixelRatio || 1;
+      const canvasWidth = Math.round(frameWidth * pixelRatio);
+      const canvasHeight = Math.round(frameHeight * pixelRatio);
+      if (p1MapCanvas.width !== canvasWidth || p1MapCanvas.height !== canvasHeight) {
+        p1MapCanvas.width = canvasWidth;
+        p1MapCanvas.height = canvasHeight;
+      }
+      p1MapContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+      p1MapContext.clearRect(0, 0, frameWidth, frameHeight);
+      p1MapContext.drawImage(p1MapSource, p1OffsetX, p1OffsetY, p1MapSource.naturalWidth * p1Scale, p1MapSource.naturalHeight * p1Scale);
+      p1ZoomLabel.textContent = `${Math.round((p1Scale / p1MinScale) * 100)}%`;
+    };
+    const queueP1Render = () => {
+      if (!p1RenderQueued) {
+        p1RenderQueued = true;
+        requestAnimationFrame(renderP1Map);
+      }
+    };
+    const fitP1Map = () => {
+      const { width: frameWidth, height: frameHeight } = getP1Size();
+      p1MinScale = Math.min(frameWidth / p1MapSource.naturalWidth, frameHeight / p1MapSource.naturalHeight);
+      p1Scale = p1MinScale;
+      p1OffsetX = (frameWidth - p1MapSource.naturalWidth * p1Scale) / 2;
+      p1OffsetY = (frameHeight - p1MapSource.naturalHeight * p1Scale) / 2;
+      constrainP1Pan();
+      queueP1Render();
+    };
+    const zoomP1MapAt = (nextScale, x, y) => {
+      const previousScale = p1Scale;
+      p1Scale = Math.min(p1MinScale * 4, Math.max(p1MinScale, nextScale));
+      p1OffsetX = x - ((x - p1OffsetX) / previousScale) * p1Scale;
+      p1OffsetY = y - ((y - p1OffsetY) / previousScale) * p1Scale;
+      constrainP1Pan();
+      queueP1Render();
+    };
+    document.querySelectorAll('[data-p1-zoom]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = button.dataset.p1Zoom;
+        const { width, height } = getP1Size();
+        if (action === 'reset') fitP1Map();
+        else zoomP1MapAt(p1Scale * (action === 'in' ? 1.15 : 1 / 1.15), width / 2, height / 2);
+      });
+    });
+    document.querySelectorAll('[data-map-source]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.classList.contains('active')) return;
+        document.querySelectorAll('[data-map-source]').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        if (p1MapTitle) p1MapTitle.textContent = button.dataset.mapTitle;
+        p1MapSource.src = button.dataset.mapFile;
+      });
+    });
+    p1MapFrame.addEventListener('wheel', (event) => {
+      event.preventDefault();
+      const bounds = p1MapFrame.getBoundingClientRect();
+      zoomP1MapAt(p1Scale * Math.exp(-event.deltaY * 0.0015), event.clientX - bounds.left, event.clientY - bounds.top);
+    }, { passive: false });
+    p1MapFrame.addEventListener('pointerdown', (event) => {
+      panStart = { x: event.clientX, y: event.clientY, offsetX: p1OffsetX, offsetY: p1OffsetY };
+      p1MapFrame.classList.add('is-panning');
+      p1MapFrame.setPointerCapture(event.pointerId);
+    });
+    p1MapFrame.addEventListener('pointermove', (event) => {
+      if (!panStart) return;
+      p1OffsetX = panStart.offsetX + event.clientX - panStart.x;
+      p1OffsetY = panStart.offsetY + event.clientY - panStart.y;
+      constrainP1Pan();
+      queueP1Render();
+    });
+    const endP1Pan = (event) => {
+      panStart = null;
+      p1MapFrame.classList.remove('is-panning');
+      if (p1MapFrame.hasPointerCapture(event.pointerId)) p1MapFrame.releasePointerCapture(event.pointerId);
+    };
+    p1MapFrame.addEventListener('pointerup', endP1Pan);
+    p1MapFrame.addEventListener('pointercancel', endP1Pan);
+    p1MapSource.addEventListener('load', fitP1Map);
+    p1MapSource.src = p1MapCanvas.dataset.source;
+    new ResizeObserver(() => {
+      if (!p1MapSource.naturalWidth) return;
+      fitP1Map();
+    }).observe(p1MapFrame);
+  }
   tabButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       tabButtons.forEach(b => b.classList.remove('active'));
@@ -3450,6 +4330,24 @@ Vì quan tâm đến lời nói, người Nhật cũng thường chơi chữ; đ
   if (saved && document.getElementById(saved)) {
     tabButtons.forEach(b => b.classList.toggle('active', b.dataset.tab === saved));
     tabPanels.forEach(p => p.classList.toggle('active', p.id === saved));
+  }
+
+  // Session review: show the notes for the chosen study date and remember it.
+  const sessionDateSelect = document.getElementById('session-date-select');
+  const sessionDays = document.querySelectorAll('.session-day');
+  if (sessionDateSelect && sessionDays.length) {
+    const savedSessionDate = localStorage.getItem('sessionReviewDate');
+    if (savedSessionDate && Array.from(sessionDateSelect.options).some(option => option.value === savedSessionDate)) {
+      sessionDateSelect.value = savedSessionDate;
+    }
+
+    const showSessionDay = (date) => {
+      sessionDays.forEach(day => day.classList.toggle('active', day.dataset.sessionDate === date));
+      localStorage.setItem('sessionReviewDate', date);
+    };
+
+    showSessionDay(sessionDateSelect.value);
+    sessionDateSelect.addEventListener('change', () => showSessionDay(sessionDateSelect.value));
   }
 
   // Keigo term dropdown: click to show example, click again / mouseleave / click elsewhere to hide
